@@ -1,9 +1,10 @@
+# Chapter-4\_Engineering\_for\_Equity
 
 **CHAPTER 4**
 
-# Engineering for Equity
+## Engineering for Equity
 
-# 第四章 公平工程
+## 第四章 公平工程
 
 **Written by Demma Rodriguez**
 
@@ -25,7 +26,7 @@ Just picking up this book means that you likely aspire to be an exceptional engi
 
 只要拿起这本书，就意味着你可能立志成为一名出色的工程师。你想解决问题。你渴望建造产品，为最广泛的人群，包括最难接触的人，打造一个能带来积极成果的产品。要做到这一点，你需要考虑如何利用你建造的工具来改变人类的轨迹，希望是为了获得更好的发展。
 
-## Bias Is the Default 偏见是默认的
+### Bias Is the Default 偏见是默认的
 
 When engineers do not focus on users of different nationalities, ethnicities, races, genders, ages, socioeconomic statuses, abilities, and belief systems, even the most talented staff will inadvertently fail their users. Such failures are often unintentional; all people have certain biases, and social scientists have recognized over the past several decades that most people exhibit unconscious bias, enforcing and promulgating existing stereotypes. Unconscious bias is insidious and often more difficult to mitigate than intentional acts of exclusion. Even when we want to do the right thing, we might not recognize our own biases. By the same token, our organizations must also recognize that such bias exists and work to address it in their workforces, product development, and user outreach.
 
@@ -35,29 +36,31 @@ Because of bias, Google has at times failed to represent users equitably within 
 
 由于偏见，谷歌有时未能在其产品中公平地代表用户，在过去几年中推出的产品没有足够关注代表性不足的群体。许多用户将我们在这些情况下缺乏意识归咎于这样一个事实，即我们的工程人员大多数是男性，大多数是白人或亚洲人，当然不能代表所有使用我们产品的人群。这类用户在我们的员工队伍中缺乏代表性，这意味着我们往往不具备必要的多样性，无法理解使用我们的产品会如何影响代表性不足或弱势的用户。
 
-------
+***
 
-#### Case Study: Google Misses the Mark on Racial Inclusion  案例研究：谷歌在种族包容方面的失误
+**Case Study: Google Misses the Mark on Racial Inclusion 案例研究：谷歌在种族包容方面的失误**
 
 In 2015, software engineer Jacky Alciné pointed out[^2] that the image recognition algorithms in Google Photos were classifying his black friends as “gorillas.” Google was slow to respond to these mistakes and incomplete in addressing them.
 
 2015年，软件工程师Jacky Alciné指出，谷歌照片中的图像识别算法将他的黑人朋友归为 "大猩猩"。谷歌对这些错误的反应很慢，解决起来也不彻底。
 
 What caused such a monumental failure? Several things:
-- Image recognition algorithms depend on being supplied a “proper” (often meaning “complete”) dataset. The photo data fed into Google’s image recognition algorithm was clearly incomplete. In short, the data did not represent the population.
-- Google itself (and the tech industry in general) did not (and does not) have much black representation,[^3] and that affects decisions subjective in the design of such algorithms and the collection of such datasets. The unconscious bias of the organization itself likely led to a more representative product being left on the table.
-- Google’s target market for image recognition did not adequately include such underrepresented groups. Google’s tests did not catch these mistakes; as a result, our users did, which both embarrassed Google and harmed our users.
+
+* Image recognition algorithms depend on being supplied a “proper” (often meaning “complete”) dataset. The photo data fed into Google’s image recognition algorithm was clearly incomplete. In short, the data did not represent the population.
+* Google itself (and the tech industry in general) did not (and does not) have much black representation, and that affects decisions subjective in the design of such algorithms and the collection of such datasets. The unconscious bias of the organization itself likely led to a more representative product being left on the table.
+* Google’s target market for image recognition did not adequately include such underrepresented groups. Google’s tests did not catch these mistakes; as a result, our users did, which both embarrassed Google and harmed our users.
 
 是什么导致了这样一个巨大的失误？有几件事：
-- 图像识别算法取决于是否提供了一个 "适当的"（通常意味着 "完整的"）数据集。送入谷歌图像识别算法的照片数据显然是不完整的。简而言之，这些数据并不代表所有人口。
-- 谷歌本身（以及整个科技行业）过去没有（现在也没有）很多黑人代表，这影响了设计这种算法和收集这种数据集的主观决定。组织本身无意识的偏见很可能导致更具代表性的产品被搁置。
-- 谷歌的图像识别目标市场并没有充分包括这种代表性不足的群体。谷歌的测试没有发现这些错误；结果是我们的用户发现了，这既让谷歌感到尴尬，也伤害了我们的用户。
 
-As late as 2018, Google still had not adequately addressed the underlying problem.[^4]
+* 图像识别算法取决于是否提供了一个 "适当的"（通常意味着 "完整的"）数据集。送入谷歌图像识别算法的照片数据显然是不完整的。简而言之，这些数据并不代表所有人口。
+* 谷歌本身（以及整个科技行业）过去没有（现在也没有）很多黑人代表，这影响了设计这种算法和收集这种数据集的主观决定。组织本身无意识的偏见很可能导致更具代表性的产品被搁置。
+* 谷歌的图像识别目标市场并没有充分包括这种代表性不足的群体。谷歌的测试没有发现这些错误；结果是我们的用户发现了，这既让谷歌感到尴尬，也伤害了我们的用户。
+
+As late as 2018, Google still had not adequately addressed the underlying problem.
 
 直到2018年，谷歌仍然没有彻底地解决这些潜在的问题。
 
-------
+***
 
 In this example, our product was inadequately designed and executed, failing to properly consider all racial groups, and as a result, failed our users and caused Google bad press. Other technology suffers from similar failures: autocomplete can return offensive or racist results. Google’s Ad system could be manipulated to show racist or offensive ads. YouTube might not catch hate speech, though it is technically outlawed on that platform.
 
@@ -71,37 +74,27 @@ How could this happen? After all, Google hires technologists with impeccable edu
 
 这怎么会发生呢？毕竟，谷歌雇用的技术专家拥有无可挑剔的教育和/或专业经验——卓越的程序员，他们编写最好的代码并测试他们的功能。"为每个人而建 "是谷歌的品牌宣言，但事实是，在宣称我们做到这一点之前，我们仍有很长的路要走。解决这些问题的方法之一是帮助软件工程组织本身变得像我们为其建造产品的人群。
 
-> [^1]:    Google’s 2019 Diversity Report.
-> 1 谷歌的2019年多样性报告。
 >
-> [^2]:    @jackyalcine. 2015. “Google Photos, Y’all Fucked up. My Friend’s Not a Gorilla.” Twitter, June 29, 2015.https://twitter.com/jackyalcine/status/615329515909156865.
-> 2 @jackyalcine. 2015. "谷歌照片，你们都搞砸了。我的朋友不是大猩猩"。Twitter，2015年6月29日。https://twitter.com/jackyalcine/status/615329515909156865
->
-> [^3]:    Many reports in 2018–2019 pointed to a lack of diversity across tech. Some notables include the National Center for Women & Information Technology, and Diversity in Tech./
-> 3  2018-2019年的许多报告指出，整个科技界缺乏多样性。一些著名的报告包括国家妇女和信息技术中心，以及科技领域的多样性。
->
-> [^4]:    Tom Simonite, “When It Comes to Gorillas, Google Photos Remains Blind,” Wired, January 11, 2018.
-> 4    Tom Simonite，"当涉及到大猩猩时，谷歌照片仍然是盲目的，"《连线》，2018年1月11日。
 
-## Understanding the Need for Diversity 了解多样性的必要性
+### Understanding the Need for Diversity 了解多样性的必要性
 
 At Google, we believe that being an exceptional engineer requires that you also focus on bringing diverse perspectives into product design and implementation. It also means that Googlers responsible for hiring or interviewing other engineers must contribute to building a more representative workforce. For example, if you interview other engineers for positions at your company, it is important to learn how biased outcomes happen in hiring. There are significant prerequisites for understanding how to anticipate harm and prevent it. To get to the point where we can build for everyone, we first must understand our representative populations. We need to encourage engineers to have a wider scope of educational training.
 
 在谷歌，我们相信，作为一名出色的工程师，你还需要专注于将不同的视角引入到产品设计和实施中。这也意味着，负责招聘或面试其他工程师的谷歌人必须致力于打造更具代表性的团队。例如，如果你为公司的职位面试其他工程师，了解招聘过程中的偏差结果是如何发生，这是很重要的。了解如何预测和预防伤害有重要的先决条件。为了达到我们能够为每个人而建的目的，我们首先必须了解我们的代表人群。了解招聘过程中的偏差结果是如何发生的是很重要的。
 
-The first order of business is to disrupt the notion that as a person with a computer science degree and/or work experience, you have all the skills you need to become an exceptional engineer. A computer science degree is often a necessary foundation. However, the degree alone (even when coupled with work experience) will not make you an engineer. It is also important to disrupt the idea that only people with computer science degrees can design and build products. Today, [most programmers do have a computer science degree](https://oreil.ly/2Bu0H); they are successful at building code, establishing theories of change, and applying methodologies for problem solving. However, as the aforementioned examples demonstrate, *this approach is insufficient for inclusive and* *equitable engineering*.
+The first order of business is to disrupt the notion that as a person with a computer science degree and/or work experience, you have all the skills you need to become an exceptional engineer. A computer science degree is often a necessary foundation. However, the degree alone (even when coupled with work experience) will not make you an engineer. It is also important to disrupt the idea that only people with computer science degrees can design and build products. Today, [most programmers do have a computer science degree](https://oreil.ly/2Bu0H); they are successful at building code, establishing theories of change, and applying methodologies for problem solving. However, as the aforementioned examples demonstrate, _this approach is insufficient for inclusive and_ _equitable engineering_.
 
-首要的任务是打破这样的观念：作为一个拥有计算机科学学位或且工作经验的人，你拥有成为一名出色工程师所需的所有技能。计算机科学学位通常是一个必要的基础。然而，单凭学位（即使再加上工作经验）并不能使你成为一名工程师。打破只有拥有计算机科学学位的人才能设计和建造产品的想法也很重要。今天，大多数程序员确实拥有计算机科学学位；他们在构建代码、建立变化理论和应用解决问题的方法方面都很成功。然而，正如上述例子所表明的，*这种方法不足以实现包容性和公平工程*。
+首要的任务是打破这样的观念：作为一个拥有计算机科学学位或且工作经验的人，你拥有成为一名出色工程师所需的所有技能。计算机科学学位通常是一个必要的基础。然而，单凭学位（即使再加上工作经验）并不能使你成为一名工程师。打破只有拥有计算机科学学位的人才能设计和建造产品的想法也很重要。今天，大多数程序员确实拥有计算机科学学位；他们在构建代码、建立变化理论和应用解决问题的方法方面都很成功。然而，正如上述例子所表明的，_这种方法不足以实现包容性和公平工程_。
 
 Engineers should begin by focusing all work within the framing of the complete ecosystem they seek to influence. At minimum, they need to understand the population demographics of their users. Engineers should focus on people who are different than themselves, especially people who might attempt to use their products to cause harm. The most difficult users to consider are those who are disenfranchised by the processes and the environment in which they access technology. To address this challenge, engineering teams need to be representative of their existing and future users. In the absence of diverse representation on engineering teams, individual engineers need to learn how to build for all users.
 
 工程师应首先关注他们试图影响的完整生态系统框架内的所有工作。至少，他们需要了解用户的人群统计数据。工程师应该关注与自己不同的人，特别是那些试图使用他们的产品而受伤的人。最难考虑的用户是那些被他们获取技术的过程和环境所剥夺了权益的人。为了应对这一挑战，工程团队需要代表其现有和未来的用户。在工程团队缺乏多元化代表的情况下，每个工程师需要学习如何为所有用户构建。
 
-## Building Multicultural Capacity 构建多元化能力
+### Building Multicultural Capacity 构建多元化能力
 
-One mark of an exceptional engineer is the ability to understand how products can advantage and disadvantage different groups of human beings. Engineers are expected to have technical aptitude, but they should also have the *discernment* to know when to build something and when not to. Discernment includes building the capacity to identify and reject features or products that drive adverse outcomes. This is a lofty and difficult goal, because there is an enormous amount of individualism that goes into being a high-performing engineer. Yet to succeed, we must extend our focus beyond our own communities to the next billion users or to current users who might be disenfranchised or left behind by our products.
+One mark of an exceptional engineer is the ability to understand how products can advantage and disadvantage different groups of human beings. Engineers are expected to have technical aptitude, but they should also have the _discernment_ to know when to build something and when not to. Discernment includes building the capacity to identify and reject features or products that drive adverse outcomes. This is a lofty and difficult goal, because there is an enormous amount of individualism that goes into being a high-performing engineer. Yet to succeed, we must extend our focus beyond our own communities to the next billion users or to current users who might be disenfranchised or left behind by our products.
 
-卓越的工程师的一个标志是能够理解产品对不同的人群的好处和坏处。工程师应该有技术能力，但他们也应该有*敏锐的判断力*，知道什么时候该造什么，什么时候不该造。判断力包括建立识别和拒绝那些导致不良结果的功能或产品的能力。这是一个崇高而艰难的目标，因为要成为一名出色的工程师，需要有大量的个人主义。然而，想要成功，我们必须扩大我们的关注范围，关注我们当前用户之外的未来十亿的用户，哪怕是可能被我们的产品剥夺权利或遗弃的现有用户。
+卓越的工程师的一个标志是能够理解产品对不同的人群的好处和坏处。工程师应该有技术能力，但他们也应该有_敏锐的判断力_，知道什么时候该造什么，什么时候不该造。判断力包括建立识别和拒绝那些导致不良结果的功能或产品的能力。这是一个崇高而艰难的目标，因为要成为一名出色的工程师，需要有大量的个人主义。然而，想要成功，我们必须扩大我们的关注范围，关注我们当前用户之外的未来十亿的用户，哪怕是可能被我们的产品剥夺权利或遗弃的现有用户。
 
 Over time, you might build tools that billions of people use daily—tools that influence how people think about the value of human lives, tools that monitor human activity, and tools that capture and persist sensitive data, such as images of their children and loved ones, as well as other types of sensitive data. As an engineer, you might wield more power than you realize: the power to literally change society. It’s critical that on your journey to becoming an exceptional engineer, you understand the innate responsibility needed to exercise power without causing harm. The first step is to recognize the default state of your bias caused by many societal and educational factors. After you recognize this, you’ll be able to consider the often-forgotten use cases or users who can benefit or be harmed by the products you build.
 
@@ -123,7 +116,7 @@ Currently, AI-driven facial-recognition software continues to disadvantage peopl
 
 目前，人工智能驱动的面部识别软件仍然对有色人种或少数族裔不利。我们的研究还不够全面，没有包括足够多的肤色。如果训练数据和创建软件的人都只代表一小部分人，我们就不能指望输出是有效的。在这种情况下，我们应该愿意推迟开发，以获得更完整、更准确的数据，以及更全面、更包容的产品。
 
-Data science itself is challenging for humans to evaluate, however. Even when we do have representation, a training set can still be biased and produce invalid results. A study completed in 2016 found that more than 117 million American adults are in a law enforcement facial recognition database.[^5] Due to the disproportionate policing of Black communities and disparate outcomes in arrests, there could be racially biased error rates in utilizing such a database in facial recognition. Although the software is being developed and deployed at ever-increasing rates, the independent testing is not. To correct for this egregious misstep, we need to have the integrity to slow down and ensure that our inputs contain as little bias as possible. Google now offers statistical training within the context of AI to help ensure that datasets are not intrinsically biased.
+Data science itself is challenging for humans to evaluate, however. Even when we do have representation, a training set can still be biased and produce invalid results. A study completed in 2016 found that more than 117 million American adults are in a law enforcement facial recognition database. Due to the disproportionate policing of Black communities and disparate outcomes in arrests, there could be racially biased error rates in utilizing such a database in facial recognition. Although the software is being developed and deployed at ever-increasing rates, the independent testing is not. To correct for this egregious misstep, we need to have the integrity to slow down and ensure that our inputs contain as little bias as possible. Google now offers statistical training within the context of AI to help ensure that datasets are not intrinsically biased.
 
 然而，数据科学本身对人类的评估是具有挑战性的。即使我们有表示，训练集仍然可能有偏见，产生无效的结果。2016年完成的一项研究发现，执法部门的面部识别数据库中有1.17亿以上的美国成年人。由于黑人社区的警察比例过高，逮捕的结果也不尽相同，因此在面部识别中使用该数据库可能存在种族偏见错误率。尽管该软件的开发和部署速度不断提高，但独立测试却并非如此。为了纠正这一令人震惊的错误，我们需要有诚信，放慢脚步，确保我们的输入尽可能不包含偏见。谷歌现在在人工智能的范围内提供统计培训，以帮助确保数据集没有内在的偏见。
 
@@ -131,12 +124,9 @@ Therefore, shifting the focus of your industry experience to include more compre
 
 因此，将你的行业经验的重点转移到更全面的、多文化的、种族和性别研究的教育，不仅是你的责任，也是你雇主的责任。科技公司必须确保他们的员工不断接受专业发展，而且这种发展是全面和多学科的。要求不是个体独自承担起学习其他文化或其他人口统计学的任务。变革要求我们每个人，无论是个人还是团队的领导者，都要投资于持续的专业发展，不仅要培养我们的软件开发和领导技能，还要培养我们理解全人类不同经验的能力。
 
-> [^5]:    Stephen Gaines and Sara Williams. “The Perpetual Lineup: Unregulated Police Face Recognition in America.”
->
-> 5    斯蒂芬·盖恩斯和莎拉·威廉姆斯。“永远的阵容：美国不受监管的警察面孔识别。”
-乔治敦法律学院隐私与技术中心，2016年10月18日。
+> 5 斯蒂芬·盖恩斯和莎拉·威廉姆斯。“永远的阵容：美国不受监管的警察面孔识别。” 乔治敦法律学院隐私与技术中心，2016年10月18日。
 
-## Making Diversity Actionable 让多样性成为现实
+### Making Diversity Actionable 让多样性成为现实
 
 Systemic equity and fairness are attainable if we are willing to accept that we are all accountable for the systemic discrimination we see in the technology sector. We are accountable for the failures in the system. Deferring or abstracting away personal accountability is ineffective, and depending on your role, it could be irresponsible. It is also irresponsible to fully attribute dynamics at your specific company or within your team to the larger societal issues that contribute to inequity. A favorite line among diversity proponents and detractors alike goes something like this: “We are working hard to fix (insert systemic discrimination topic), but accountability is hard. How do we combat (insert hundreds of years) of historical discrimination?” This line of inquiry is a detour to a more philosophical or academic conversation and away from focused efforts to improve work conditions or outcomes. Part of building multicultural capacity requires a more comprehensive understanding of how systems of inequality in society impact the workplace, especially in the technology sector.
 
@@ -146,7 +136,7 @@ If you are an engineering manager working on hiring more people from underrepres
 
 如果你是一名工程经理，致力于雇用更多来自代表性不足的群体的人，推崇世界上歧视的历史影响是一项有益的学术活动。然而，关键是要超越学术交流，把重点放在可量化和可操作的步骤上，以推动公平和公正。例如，作为招聘软件工程师经理，你有责任确保你的候选人名单是均衡的。在候选人的审查中是否有女性或其他代表性不足的群体？雇佣员工后，你提供了哪些成长机会，机会分配是否公平？每个技术领导或软件工程经理都有办法在他们的团队中增加平等。重要的是，我们要承认，尽管存在着重大的系统性挑战，但我们都是这个系统的一部分。这是我们要解决的问题。
 
-## Reject Singular Approaches 摒弃单一方法
+### Reject Singular Approaches 摒弃单一方法
 
 We cannot perpetuate solutions that present a single philosophy or methodology for fixing inequity in the technology sector. Our problems are complex and multifactorial. Therefore, we must disrupt singular approaches to advancing representation in the workplace, even if they are promoted by people we admire or who have institutional power.
 
@@ -172,7 +162,7 @@ Designing for the user who is least like you is not just wise, it’s a best pra
 
 为最不喜欢你的用户设计不仅是明智的，而且是最佳实践。所有的技术专家，无论在哪个领域，在开发产品时都应该考虑一些实用的和直接的步骤，以避免对用户造成不利影响或代表不足。它从更全面的用户体验研究开始。这项研究应该针对多语言、多文化、跨多个国家、社会经济阶层、能力和年龄范围的用户群体进行。首先关注最困难或最不典型的用例。
 
-## Challenge Established Processes 挑战既定流程
+### Challenge Established Processes 挑战既定流程
 
 Challenging yourself to build more equitable systems goes beyond designing more inclusive product specifications. Building equitable systems sometimes means challenging established processes that drive invalid results.
 
@@ -184,15 +174,15 @@ Consider a recent case evaluated for equity implications. At Google, several eng
 
 On its face, expediting the evaluation process and helping job seekers save time is a great goal. So where is the potential equity concern? The following equity questions were raised:
 
-- Are developmental assessments a predictive measure of performance?
-- Are the performance assessments being presented to prospective managers free of individual bias?
-- •Are performance assessment scores standardized across organizations?
+* Are developmental assessments a predictive measure of performance?
+* Are the performance assessments being presented to prospective managers free of individual bias?
+* •Are performance assessment scores standardized across organizations?
 
 从表面上看，加快评估过程和帮助求职者节省时间是一个伟大的目标。那么，潜在的公平问题在哪里？以下是提出的公平问题:
 
-- 发展评估是否是绩效的预测指标？
-- 向潜在经理提交的绩效评估是否没有个人偏见？
-- 绩效评估的分数在不同的组织中是标准化的吗？
+* 发展评估是否是绩效的预测指标？
+* 向潜在经理提交的绩效评估是否没有个人偏见？
+* 绩效评估的分数在不同的组织中是标准化的吗？
 
 If the answer to any of these questions is “no,” presenting performance ratings could still drive inequitable, and therefore invalid, results.
 
@@ -206,7 +196,7 @@ This analysis definitely took up significant project time, but the positive trad
 
 这一分析无疑占用了大量的项目时间，但积极的权衡是一个更公平的内部流动过程。
 
-## Values Versus Outcomes 价值观与成果
+### Values Versus Outcomes 价值观与成果
 
 Google has a strong track record of investing in hiring. As the previous example illustrates, we also continually evaluate our processes in order to improve equity and inclusion. More broadly, our core values are based on respect and an unwavering commitment to a diverse and inclusive workforce. Yet, year after year, we have also missed our mark on hiring a representative workforce that reflects our users around the globe. The struggle to improve our equitable outcomes persists despite the policies and programs in place to help support inclusion initiatives and promote excellence in hiring and progression. The failure point is not in the values, intentions, or investments of the company, but rather in the application of those policies at the implementation level.
 
@@ -232,7 +222,7 @@ So, what’s the way out?
 4. 不要假设公平；**衡量整个系统的公平性**。认识到决策者也会有偏见，而且可能对不平等的原因认识不足。你可能不具备识别或衡量公平问题的范围的专业知识。迎合单个用户群可能意味着剥夺另一个用户群的权利；这些权衡可能很难发现，也不可能逆转。与作为多元化主题专家的个人或团队合作，公平、平等和包容。
 5. 改变是可能的。我们今天所面临的技术问题，从监视到虚假信息再到在线骚扰，确实是令人难以承受的。我们不能用过去失败的方法或只用我们已有的技能来解决这些问题。我们需要改变。
 
-## Stay Curious, Push Forward 保持好奇心，勇往直前
+### Stay Curious, Push Forward 保持好奇心，勇往直前
 
 The path to equity is long and complex. However, we can and should transition from simply building tools and services to growing our understanding of how the products we engineer impact humanity. Challenging our education, influencing our teams and managers, and doing more comprehensive user research are all ways to make progress. Although change is uncomfortable and the path to high performance can be painful, it is possible through collaboration and creativity.
 
@@ -242,20 +232,23 @@ Lastly, as future exceptional engineers, we should focus first on the users most
 
 最后，作为未来的杰出工程师，我们应该首先关注受偏见和歧视影响最大的用户。通过共同努力，我们可以通过专注于持续改进和承认失败来加速进步。成为一名工程师是一个复杂而持续的过程。目标是在不进一步剥夺弱势群体权利的情况下，做出推动人类前进的变革。作为未来杰出的工程师，我们有信心能够防止未来系统的失败。
 
-## Conclusion 总结
+### Conclusion 总结
 
 Developing software, and developing a software organization, is a team effort. As a software organization scales, it must respond and adequately design for its user base, which in the interconnected world of computing today involves everyone, locally and around the world. More effort must be made to make both the development teams that design software and the products that they produce reflect the values of such a diverse and encompassing set of users. And, if an engineering organization wants to scale, it cannot ignore underrepresented groups; not only do such engineers from these groups augment the organization itself, they provide unique and necessary perspectives for the design and implementation of software that is truly useful to the world at large.
 
 开发软件和开发软件组织是一项团队工作。随着软件组织规模的扩大，它必须对其用户群做出响应并进行充分设计，在当今互联的计算世界中，用户群涉及到本地和世界各地的每个人。必须做出更多的努力，使设计软件的开发团队和他们生产的产品都能反映出这样一个多样化的、包含了所有用户的价值观。而且，如果一个工程组织想要扩大规模，它不能忽视代表性不足的群体；这些来自这些群体的工程师不仅能增强组织本身，还能为设计和实施对整个世界真正有用的软件提供独特而必要的视角。
 
-## TL;DRs  内容提要
+### TL;DRs 内容提要
 
-- Bias is the default.
-- Diversity is necessary to design properly for a comprehensive user base.
-- Inclusivity is critical not just to improving the hiring pipeline for underrepresented groups, but to providing a truly supportive work environment for all people.
-- Product velocity must be evaluated against providing a product that is truly useful to all users. It’s better to slow down than to release a product that might cause harm to some users.
+* Bias is the default.
+* Diversity is necessary to design properly for a comprehensive user base.
+* Inclusivity is critical not just to improving the hiring pipeline for underrepresented groups, but to providing a truly supportive work environment for all people.
+* Product velocity must be evaluated against providing a product that is truly useful to all users. It’s better to slow down than to release a product that might cause harm to some users.
+* 偏见是默认的。
+* 多样性是正确设计综合用户群所必需的。
+* 包容性不仅对于改善代表不足的群体的招聘渠道至关重要，而且对于为所有人提供一个真正支持性的工作环境也至关重要。
+* 产品速度必须根据提供对所有用户真正有用的产品来评估。与其发布一个可能对某些用户造成伤害的产品，还不如放慢速度。
 
-- 偏见是默认的。
-- 多样性是正确设计综合用户群所必需的。
-- 包容性不仅对于改善代表不足的群体的招聘渠道至关重要，而且对于为所有人提供一个真正支持性的工作环境也至关重要。
-- 产品速度必须根据提供对所有用户真正有用的产品来评估。与其发布一个可能对某些用户造成伤害的产品，还不如放慢速度。
+[^1]: Google’s 2019 Diversity Report. 1 谷歌的2019年多样性报告。
+
+[^2]: @jackyalcine. 2015. “Google Photos, Y’all Fucked up. My Friend’s Not a Gorilla.” Twitter, June 29, 2015.https://twitter.com/jackyalcine/status/615329515909156865. 2 @jackyalcine. 2015. "谷歌照片，你们都搞砸了。我的朋友不是大猩猩"。Twitter，2015年6月29日。https://twitter.com/jackyalcine/status/615329515909156865

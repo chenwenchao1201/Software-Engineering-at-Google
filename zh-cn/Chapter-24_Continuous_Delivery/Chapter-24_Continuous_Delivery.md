@@ -1,9 +1,10 @@
+# Chapter-24\_Continuous\_Delivery
 
 **CHAPTER 24**
 
-# Continuous Delivery
+## Continuous Delivery
 
-# 第二十四章 持续交付
+## 第二十四章 持续交付
 
 **Written by adha Narayan, Bobbi Jones, Sheri Shipe, and David Owens**
 
@@ -21,63 +22,55 @@ Work that stays in progress for a long time before delivering user value is high
 
 在交付用户价值之前进行很长时间的工作是高风险和高成本的，甚至可能会消耗士气。在谷歌，我们努力做到早期和经常发布，或者说 "发布和迭代"，以使团队能够迅速看到他们工作的影响，并更快地适应不断变化的市场。代码的价值不是在提交时实现的，而是在你的用户可以使用的功能时实现的。缩短 "代码完成"和用户反馈之间的时间，可以将正在进行中的工作的成本降到最低。
 
-    You get extraordinary outcomes by realizing that the launch *never lands* but that it begins a learning cycle where you then fix the next most important thing, measure how it went, fix the next thing, etc.—and it is *never complete*.
-    —David Weekly, Former Google product manager
+```
+You get extraordinary outcomes by realizing that the launch *never lands* but that it begins a learning cycle where you then fix the next most important thing, measure how it went, fix the next thing, etc.—and it is *never complete*.
+—David Weekly, Former Google product manager
 
-    当你意识到发射从未着陆，但它开始了一个学习周期，然后你修复下一个最重要的事情，衡量它如何进行，修复下一个事情，等等——而且它永远不会完成。
-    -David Weekly，前谷歌产品经理
+当你意识到发射从未着陆，但它开始了一个学习周期，然后你修复下一个最重要的事情，衡量它如何进行，修复下一个事情，等等——而且它永远不会完成。
+-David Weekly，前谷歌产品经理
+```
 
 At Google, the practices we describe in this book allow hundreds (or in some cases thousands) of engineers to quickly troubleshoot problems, to independently work on new features without worrying about the release, and to understand the effectiveness of new features through A/B experimentation. This chapter focuses on the key levers of rapid innovation, including managing risk, enabling developer velocity at scale, and understanding the cost and value trade-off of each feature you launch.
 
 在谷歌，我们在本书中描述的做法使数百名（或在某些情况下数千名）工程师能够快速解决问题，独立完成新功能而不必担心发布问题，并通过A/B实验了解新功能的有效性。本章重点关注快速创新的关键措施，包括管理风险、实现大规模的开发者速度，以及了解你推出的每个功能的成本和价值权衡。
 
-## Idioms of Continuous Delivery at Google 谷歌持续交付的习惯用法
+### Idioms of Continuous Delivery at Google 谷歌持续交付的习惯用法
 
-A core tenet of Continuous Delivery (CD) as well as of Agile methodology is that over time, smaller batches of changes result in higher quality; in other words, *faster is safer*. This can seem deeply controversial to teams at first glance, especially if the prerequisites for setting up CD—for example, Continuous Integration (CI) and testing— are not yet in place. Because it might take a while for all teams to realize the ideal of CD, we focus on developing various aspects that deliver value independently en route to the end goal. Here are some of these:
+A core tenet of Continuous Delivery (CD) as well as of Agile methodology is that over time, smaller batches of changes result in higher quality; in other words, _faster is safer_. This can seem deeply controversial to teams at first glance, especially if the prerequisites for setting up CD—for example, Continuous Integration (CI) and testing— are not yet in place. Because it might take a while for all teams to realize the ideal of CD, we focus on developing various aspects that deliver value independently en route to the end goal. Here are some of these:
 
-- *Agility*  
-    Release frequently and in small batches
-
-- *Automation*  
-​    Reduce or remove repetitive overhead of frequent releases
-
-- *Isolation*  
-​    Strive for modular architecture to isolate changes and make troubleshooting easier
-
-- *Reliability*  
-​    Measure key health indicators like crashes or latency and keep improving them
-
-- *Data-driven* *decision* *making*  
-​    Use A/B testing on health metrics to ensure quality
-
-- *Phased* *rollout*  
-​    Roll out changes to a few users before shipping to everyone
+* _Agility_\
+  Release frequently and in small batches
+* _Automation_\
+  ​ Reduce or remove repetitive overhead of frequent releases
+* _Isolation_\
+  ​ Strive for modular architecture to isolate changes and make troubleshooting easier
+* _Reliability_\
+  ​ Measure key health indicators like crashes or latency and keep improving them
+* _Data-driven_ _decision_ _making_\
+  ​ Use A/B testing on health metrics to ensure quality
+* _Phased_ _rollout_\
+  ​ Roll out changes to a few users before shipping to everyone
 
 持续交付（CD）以及敏捷方法论的一个核心原则是，随着时间的推移，较小的变更批次能够产生更高的质量；换句话说，越快越安全。乍一看，这似乎对团队有很大的争议，尤其是当建立CD的前提条件--例如，持续集成（CI）和测试--还没有到位的时候。因为所有团队可能需要一段时间才能实现CD的理想，所以我们将重点放在开发能够在实现最终目标的过程中独立交付价值的各个方面。下面是其中的一些：
 
-- *敏捷性*  
-​    频繁地、较小的变更批次地发布。
-
-- *自动化*  
-​    减少或消除频繁发布的重复性开销。
-
-- *隔离性*  
-​    努力实现模块化体系结构，以隔离更改并使故障排除更加容易。
-
-- *可靠性*  
-​    衡量关键的健康指标，如崩溃或延迟，并不断改善它们。
-
-- *数据驱动的决策*  
-​    在健康指标上使用A/B测试以确保质量。
-
-- *分阶段推出*  
-​    在向所有人发送之前，先在少数用户中推广变更。
+* _敏捷性_\
+  ​ 频繁地、较小的变更批次地发布。
+* _自动化_\
+  ​ 减少或消除频繁发布的重复性开销。
+* _隔离性_\
+  ​ 努力实现模块化体系结构，以隔离更改并使故障排除更加容易。
+* _可靠性_\
+  ​ 衡量关键的健康指标，如崩溃或延迟，并不断改善它们。
+* _数据驱动的决策_\
+  ​ 在健康指标上使用A/B测试以确保质量。
+* _分阶段推出_\
+  ​ 在向所有人发送之前，先在少数用户中推广变更。
 
 At first, releasing new versions of software frequently might seem risky. As your userbase grows, you might fear the backlash from angry users if there are any bugs that you didn’t catch in testing, and you might quite simply have too much new code in your product to test exhaustively. But this is precisely where CD can help. Ideally, there are so few changes between one release and the next that troubleshooting issues is trivial. In the limit, with CD, every change goes through the QA pipeline and is automatically deployed into production. This is often not a practical reality for many teams, and so there is often work of culture change toward CD as an intermediate step, during which teams can build their readiness to deploy at any time without actually doing so, building up their confidence to release more frequently in the future.
 
- 起初，频繁发布新版本的软件可能看起来很冒险。随着用户群的增长，如果在测试中发现任何错误，你可能会担心用户的反弹，而且你的产品中可能有太多新代码，无法彻底测试。但这恰恰是CD可以帮助的地方。理想情况下，一个版本和下一个版本之间的变化非常少，排除问题是非常简单的。在极限情况下，有了CD，每个变化都会通过QA管道，并自动部署到生产中。对于许多团队来说，这通常不是一个实际的现实，因此往往需要进行向CD文化的转变工作作为中间步骤，团队可以在不实际部署的情况下建立部署准备性，增强未来更频繁发布的信心。
+起初，频繁发布新版本的软件可能看起来很冒险。随着用户群的增长，如果在测试中发现任何错误，你可能会担心用户的反弹，而且你的产品中可能有太多新代码，无法彻底测试。但这恰恰是CD可以帮助的地方。理想情况下，一个版本和下一个版本之间的变化非常少，排除问题是非常简单的。在极限情况下，有了CD，每个变化都会通过QA管道，并自动部署到生产中。对于许多团队来说，这通常不是一个实际的现实，因此往往需要进行向CD文化的转变工作作为中间步骤，团队可以在不实际部署的情况下建立部署准备性，增强未来更频繁发布的信心。
 
-## Velocity Is a Team Sport: How to Break Up a Deployment into Manageable Pieces   速度是一项团队运动：如何将部署工作分解成可管理的部分
+### Velocity Is a Team Sport: How to Break Up a Deployment into Manageable Pieces 速度是一项团队运动：如何将部署工作分解成可管理的部分
 
 When a team is small, changes come into a codebase at a certain rate. We’ve seen an antipattern emerge as a team grows over time or splits into subteams: a subteam branches off its code to avoid stepping on anyone’s feet, but then struggles, later, with integration and culprit finding. At Google, we prefer that teams continue to develop at head in the shared codebase and set up CI testing, automatic rollbacks, and culprit finding to identify issues quickly. This is discussed at length in Chapter 23.
 
@@ -87,17 +80,17 @@ One of our codebases, YouTube, is a large, monolithic Python application. The re
 
 我们的一个代码库，YouTube，是一个大型的、单体的Python应用程序。发布过程很费劲，有Build Cops、发布经理和其他志愿者。每个发布版本都需要多次 cherry-pick（选择性合并）代码变更和重新打包等过程。此外，还有需要由远程QA团队运行的50小时手工回归测试周期。当一个发布的操作成本如此之高时，就会形成一个循环，在这个循环中，你要等待测试更多，才能推出发布版本。与此同时，有人想再增加一个几乎已经准备好的功能，很快你就有了一个费力、容易出错和缓慢的发布过程。最糟糕的是，上次做发布工作的专家已经精疲力尽，离开了团队，现在甚至没有人知道如何解决那些当你试图发布更新时发生的奇怪崩溃，让你一想到要按下那个按钮就感到恐慌。
 
-If your releases are costly and sometimes risky, the *instinct* is to slow down your release cadence and increase your stability period. However, this only provides short- term stability gains, and over time it slows velocity and frustrates teams and users. The *answer* is to reduce cost, increase discipline, and make the risks more incremental, but it is critical to resist the obvious operational fixes and invest in long-term architectural changes. The obvious operational fixes to this problem lead to a few traditional approaches: reverting to a traditional planning model that leaves little room for learning or iteration, adding more governance and oversight to the development process, and implementing risk reviews or rewarding low-risk (and often low-value) features.
+If your releases are costly and sometimes risky, the _instinct_ is to slow down your release cadence and increase your stability period. However, this only provides short- term stability gains, and over time it slows velocity and frustrates teams and users. The _answer_ is to reduce cost, increase discipline, and make the risks more incremental, but it is critical to resist the obvious operational fixes and invest in long-term architectural changes. The obvious operational fixes to this problem lead to a few traditional approaches: reverting to a traditional planning model that leaves little room for learning or iteration, adding more governance and oversight to the development process, and implementing risk reviews or rewarding low-risk (and often low-value) features.
 
-如果你的发布是昂贵的，有时是有风险的，那么*本能*的反应是放慢你的发布节奏，增加你的稳定期。然而，这只能提供短期的稳定性收益，随着时间的推移，它会减慢速度，使团队和用户感到沮丧。答案是降低成本，增加纪律，使风险更加渐进式，但关键是要抵制明显的操作修复，投资于长期的架构变化。对这个问题的明显的操作性修正导致了一些传统的方法：恢复到传统的计划模式，为学习或迭代留下很少的空间，为开发过程增加更多的治理和监督，以及实施风险审查或奖励低风险（通常是低价值）的功能。
+如果你的发布是昂贵的，有时是有风险的，那么_本能_的反应是放慢你的发布节奏，增加你的稳定期。然而，这只能提供短期的稳定性收益，随着时间的推移，它会减慢速度，使团队和用户感到沮丧。答案是降低成本，增加纪律，使风险更加渐进式，但关键是要抵制明显的操作修复，投资于长期的架构变化。对这个问题的明显的操作性修正导致了一些传统的方法：恢复到传统的计划模式，为学习或迭代留下很少的空间，为开发过程增加更多的治理和监督，以及实施风险审查或奖励低风险（通常是低价值）的功能。
 
 The investment with the best return, though, is migrating to a microservice architecture, which can empower a large product team with the ability to remain scrappy and innovative while simultaneously reducing risk. In some cases, at Google, the answer has been to rewrite an application from scratch rather than simply migrating it, establishing the desired modularity into the new architecture. Although either of these options can take months and is likely painful in the short term, the value gained in terms of operational cost and cognitive simplicity will pay off over an application’s lifespan of years.
 
 不过，回报率最高的投资是迁移到微服务架构，这可以使一个大型产品团队有能力保持活力和创新，同时降低风险。在某些情况下，在谷歌，答案是从头开始重写一个应用程序，而不是简单地迁移它，在新的架构中建立所需的模块化。尽管这两种选择都需要几个月的时间，而且在短期内可能是痛苦的，但在运营成本和认知的简单性方面获得的价值将在应用程序多年的生命周期中得到回报。
 
-## Evaluating Changes in Isolation: Flag-Guarding Features 评估隔离中的更改：标志保护功能
+### Evaluating Changes in Isolation: Flag-Guarding Features 评估隔离中的更改：标志保护功能
 
-A key to reliable continuous releases is to make sure engineers “flag guard” *all changes*. As a product grows, there will be multiple features under various stages of development coexisting in a binary. Flag guarding can be used to control the inclusion or expression of feature code in the product on a feature-by-feature basis and can be expressed differently for release and development builds. A feature flag disabled for a build should allow build tools to strip the feature from the build if the language permits it. For instance, a stable feature that has already shipped to customers might be enabled for both development and release builds. A feature under development might be enabled only for development, protecting users from an unfinished feature. New feature code lives in the binary alongside the old codepath—both can run, but the new code is guarded by a flag. If the new code works, you can remove the old codepath and launch the feature fully in a subsequent release. If there’s a problem, the flag value can be updated independently from the binary release via a dynamic config update.
+A key to reliable continuous releases is to make sure engineers “flag guard” _all changes_. As a product grows, there will be multiple features under various stages of development coexisting in a binary. Flag guarding can be used to control the inclusion or expression of feature code in the product on a feature-by-feature basis and can be expressed differently for release and development builds. A feature flag disabled for a build should allow build tools to strip the feature from the build if the language permits it. For instance, a stable feature that has already shipped to customers might be enabled for both development and release builds. A feature under development might be enabled only for development, protecting users from an unfinished feature. New feature code lives in the binary alongside the old codepath—both can run, but the new code is guarded by a flag. If the new code works, you can remove the old codepath and launch the feature fully in a subsequent release. If there’s a problem, the flag value can be updated independently from the binary release via a dynamic config update.
 
 可靠的连续发布的关键是确保工程师“通过标志保护”所有更改。随着产品的发展，在二进制文件中，将有处于不同开发阶段的多种功能共存。以单个功能为单位，标志保护位决定了功能的代码在产品中是否被包含或如何呈现，并可在发布和开发版本中以不同方式表达。如果编程语言允许，打上”禁用”标志的功能标志位会使得构建工具从对应的版本构建中剥离该功能。例如，一个已经提供给客户的稳定特性可能会在开发版本和发布版本中启用。正在开发的功能可能仅为开发而启用，从而保护用户不受未完成功能的影响。新的特性代码与旧的代码路径一起存在于二进制文件中，两者都可以运行，但新代码由一个标志保护。如果新代码有效，你可以删除旧代码路径，并在后续版本中完全启动该功能。如果出现问题，可以通过动态配置更新独立于二进制版本更新标志值。
 
@@ -105,11 +98,11 @@ In the old world of binary releases, we had to time press releases closely with 
 
 在过去的二进制发布的世界里，我们必须将新闻发布时间与二进制发布时间紧密协调。在发布关于新功能或新功能的新闻稿之前，我们必须进行成功的发布。这意味着该功能将在发布之前就已经公开，提前被发现的风险是非常现实的。
 
-This is where the beauty of the flag guard comes to play. If the new code has a flag, the flag can be updated to turn your feature on immediately before the press release, thus minimizing the risk of leaking a feature. Note that flag-guarded code is not a *perfect* safety net for truly sensitive features. Code can still be scraped and analyzed if it’s not well obfuscated, and not all features can be hidden behind flags without adding a lot of complexity. Moreover, even flag configuration changes must be rolled out with care. Turning on a flag for 100% of your users all at once is not a great idea, so a configuration service that manages safe configuration rollouts is a good investment. Nevertheless, the level of control and the ability to decouple the destiny of a particular feature from the overall product release are powerful levers for long-term sustainability of the application.
+This is where the beauty of the flag guard comes to play. If the new code has a flag, the flag can be updated to turn your feature on immediately before the press release, thus minimizing the risk of leaking a feature. Note that flag-guarded code is not a _perfect_ safety net for truly sensitive features. Code can still be scraped and analyzed if it’s not well obfuscated, and not all features can be hidden behind flags without adding a lot of complexity. Moreover, even flag configuration changes must be rolled out with care. Turning on a flag for 100% of your users all at once is not a great idea, so a configuration service that manages safe configuration rollouts is a good investment. Nevertheless, the level of control and the ability to decouple the destiny of a particular feature from the overall product release are powerful levers for long-term sustainability of the application.
 
 这就是标志守卫的优势所在。如果新的代码有一个标志，标在发布新功能之前可以立即更新该标志，从而最大限度地减少泄露功能的风险。请注意，对于真正敏感的功能，有标志的代码并不是一个完美的安全网。如果代码没有被很好地混淆，它仍然可以被抓取和分析，而且不是所有的功能都可以隐藏在标志后面而不增加太多复杂性。此外，即使是标志配置的改变，也必须谨慎地推出。一次性为100%的用户打开一个标志并不是一个好主意，所以一个能管理安全配置推出的配置服务是一个很好的投资。尽管如此，对于长期可持续性的应用程序而言，控制的水平和将特定功能的命运与整体产品发布分离的能力是强大的杠杆作用。
 
-## Striving for Agility: Setting Up a Release Train 为敏捷而奋斗：建立一个发布序列
+### Striving for Agility: Setting Up a Release Train 为敏捷而奋斗：建立一个发布序列
 
 Google’s Search binary is its first and oldest. Large and complicated, its codebase can be tied back to Google’s origin—a search through our codebase can still find code written at least as far back as 2003, often earlier. When smartphones began to take off, feature after mobile feature was shoehorned into a hairball of code written primarily for server deployment. Even though the Search experience was becoming more vibrant and interactive, deploying a viable build became more and more difficult. At one point, we were releasing the Search binary into production only once per week, and even hitting that target was rare and often based on luck.
 
@@ -127,11 +120,11 @@ What were the trade-offs we made to get predictability in our release cycle? The
 
 为了在发布周期中获得可预测性，我们做了哪些权衡？他们把我们融入系统的两个主要想法归纳了下来。
 
-### No Binary Is Perfect 没有完美的二进制包
+#### No Binary Is Perfect 没有完美的二进制包
 
-The first is that *no binary is perfect*, especially for builds that are incorporating the work of tens or hundreds of developers independently developing dozens of major features. Even though it’s impossible to fix every bug, we constantly need to weigh questions such as: If a line has been moved two pixels to the left, will it affect an ad display and potential revenue? What if the shade of a box has been altered slightly? Will it make it difficult for visually impaired users to read the text? The rest of this book is arguably about minimizing the set of unintended outcomes for a release, but in the end we must admit that software is fundamentally complex. There is no perfect binary—decisions and trade-offs have to be made every time a new change is released into production. Key performance indicator metrics with clear thresholds allow features to launch even if they aren’t perfect[^1] and can also create clarity in otherwise contentious launch decisions.
+The first is that _no binary is perfect_, especially for builds that are incorporating the work of tens or hundreds of developers independently developing dozens of major features. Even though it’s impossible to fix every bug, we constantly need to weigh questions such as: If a line has been moved two pixels to the left, will it affect an ad display and potential revenue? What if the shade of a box has been altered slightly? Will it make it difficult for visually impaired users to read the text? The rest of this book is arguably about minimizing the set of unintended outcomes for a release, but in the end we must admit that software is fundamentally complex. There is no perfect binary—decisions and trade-offs have to be made every time a new change is released into production. Key performance indicator metrics with clear thresholds allow features to launch even if they aren’t perfect[^1] and can also create clarity in otherwise contentious launch decisions.
 
-首先，*没有一个二进制包是完美的*，，尤其是对于包含数十个或数百个独立开发几十个主要功能的开发人员的工作的构建。尽管不可能修复每个bug，但我们需要不断权衡这样的问题：如果一条线向左移动了两个像素，它会影响广告显示和潜在收入吗？如果盒子的颜色稍微改变了怎么办？这是否会让视障用户难以阅读文本？本书的其余部分可以说是关于最小化发布的一系列意外结果，但最终我们必须承认软件从根本上来说是复杂的。没有完美的二进制包--每当有新的变化发布到生产中时，就必须做出决定和权衡。具有明确阈值的关键性能指标允许功能在不完美的情况下推出，也可以在其他有争议的发布决策中创造清晰的思路。
+首先，_没有一个二进制包是完美的_，，尤其是对于包含数十个或数百个独立开发几十个主要功能的开发人员的工作的构建。尽管不可能修复每个bug，但我们需要不断权衡这样的问题：如果一条线向左移动了两个像素，它会影响广告显示和潜在收入吗？如果盒子的颜色稍微改变了怎么办？这是否会让视障用户难以阅读文本？本书的其余部分可以说是关于最小化发布的一系列意外结果，但最终我们必须承认软件从根本上来说是复杂的。没有完美的二进制包--每当有新的变化发布到生产中时，就必须做出决定和权衡。具有明确阈值的关键性能指标允许功能在不完美的情况下推出，也可以在其他有争议的发布决策中创造清晰的思路。
 
 One bug involved a rare dialect spoken on only one island in the Philippines. If a user asked a search question in this dialect, instead of an answer to their question, they would get a blank web page. We had to determine whether the cost of fixing this bug was worth delaying the release of a major new feature.
 
@@ -141,25 +134,23 @@ We ran from office to office trying to determine how many people actually spoke 
 
 我们奔走于各个办公室，试图确定究竟有多少人讲这种语言，是否每次用户用这种语言搜索时都会出现这种情况，以及这些人是否经常使用谷歌。每个与我们交谈的质量工程师都把我们推给更高级别的人。最后，数据在手，我们把问题交给了搜索部的高级副总裁。我们是否应该推迟一个重要的版本来修复一个只影响到菲律宾一个很小的岛屿的错误？事实证明，无论你的岛有多小，你都应该得到可靠和准确的搜索结果：我们推迟了发布，并修复了这个错误。
 
-> [^1]:  Remember the SRE “error-budget” formulation: perfection is rarely the best goal. Understand how much room for error is acceptable and how much of that budget has been spent recently and use that to adjust the trade-off between velocity and stability.
->
 > 1 记住SRE的 "错误预算 "表述：完美很少是最佳目标。了解多少误差空间是可以接受的，以及该预算最近花了多少，并利用这一点来调整速度和稳定性之间的权衡。
 
-### Meet Your Release Deadline 满足你的发布期限
+#### Meet Your Release Deadline 满足你的发布期限
 
-The second idea is that *if you’re late for the release train, it will leave without you*. There’s something to be said for the adage, “deadlines are certain, life is not.” At some point in the release timeline, you must put a stake in the ground and turn away developers and their new features. Generally speaking, no amount of pleading or begging will get a feature into today’s release after the deadline has passed.
+The second idea is that _if you’re late for the release train, it will leave without you_. There’s something to be said for the adage, “deadlines are certain, life is not.” At some point in the release timeline, you must put a stake in the ground and turn away developers and their new features. Generally speaking, no amount of pleading or begging will get a feature into today’s release after the deadline has passed.
 
-第二个想法是，*如果你赶不上发布列车，它就会丢下你离开*。有一句格言值得一提，“最后期限是确定的，而生活不是。”在发布时间表的某个时刻，你必须立木取信，拒绝开发人员及其新功能。一般来说，在截止日期过后，无论多少恳求或乞求都不会在今天的版本中出现。
+第二个想法是，_如果你赶不上发布列车，它就会丢下你离开_。有一句格言值得一提，“最后期限是确定的，而生活不是。”在发布时间表的某个时刻，你必须立木取信，拒绝开发人员及其新功能。一般来说，在截止日期过后，无论多少恳求或乞求都不会在今天的版本中出现。
 
-There is the *rare* exception. The situation usually goes like this. It’s late Friday evening and six software engineers come storming into the release manager’s cube in a panic. They have a contract with the NBA and finished the feature moments ago. But it must go live before the big game tomorrow. The release must stop and we must cherry- pick the feature into the binary or we’ll be in breach of contract! A bleary-eyed release engineer shakes their head and says it will take four hours to cut and test a new binary. It’s their kid’s birthday and they still need to pick up the balloons.
+There is the _rare_ exception. The situation usually goes like this. It’s late Friday evening and six software engineers come storming into the release manager’s cube in a panic. They have a contract with the NBA and finished the feature moments ago. But it must go live before the big game tomorrow. The release must stop and we must cherry- pick the feature into the binary or we’ll be in breach of contract! A bleary-eyed release engineer shakes their head and says it will take four hours to cut and test a new binary. It’s their kid’s birthday and they still need to pick up the balloons.
 
-有一个*罕见的例外*。这种情况通常是这样的。周五晚间，六名软件工程师惊慌失措地冲进发布经理的办公室。他们与NBA签订了合同，并在不久前完成了这个功能。但它必须在明天的大比赛之前上线。发布必须停止，我们必须将该特性插入二进制包，否则我们将违反合同！"。一个目光呆滞的发布工程师摇摇头，说切割和测试一个新的二进制文件需要四个小时。今天是他们孩子的生日，他们还需要带着气球回家。
+有一个_罕见的例外_。这种情况通常是这样的。周五晚间，六名软件工程师惊慌失措地冲进发布经理的办公室。他们与NBA签订了合同，并在不久前完成了这个功能。但它必须在明天的大比赛之前上线。发布必须停止，我们必须将该特性插入二进制包，否则我们将违反合同！"。一个目光呆滞的发布工程师摇摇头，说切割和测试一个新的二进制文件需要四个小时。今天是他们孩子的生日，他们还需要带着气球回家。
 
 A world of regular releases means that if a developer misses the release train, they’ll be able to catch the next train in a matter of hours rather than days. This limits developer panic and greatly improves work–life balance for release engineers.
 
 定期发布的世界意味着，如果开发人员错过了发版班车，他们将能够在几个小时而不是几天内赶上下一班班车。这限制了开发人员的恐慌，并大大改善了发布工程师的工作与生活平衡。
 
-## Quality and User-Focus: Ship Only What Gets Used 质量和用户关注点：只提供使用的产品
+### Quality and User-Focus: Ship Only What Gets Used 质量和用户关注点：只提供使用的产品
 
 Bloat is an unfortunate side effect of most software development life cycles, and the more successful a product becomes, the more bloated its code base typically becomes. One downside of a speedy, efficient release train is that this bloat is often magnified and can manifest in challenges to the product team and even to the users. Especially if the software is delivered to the client, as in the case of mobile apps, this can mean the user’s device pays the cost in terms of space, download, and data costs, even for features they never use, whereas developers pay the cost of slower builds, complex deployments, and rare bugs. In this section, we’ll talk about how dynamic deployments allow you to ship only what is used, forcing necessary trade-offs between user value and feature cost. At Google, this often means staffing dedicated teams to improve the efficiency of the product on an ongoing basis.
 
@@ -169,9 +160,9 @@ Whereas some products are web-based and run on the cloud, many are client applic
 
 有些产品是基于网络并在云上运行的，而许多产品是客户端应用程序，使用用户设备上的共享资源--手机或平板电脑。这种选择本身就展示了原生应用之间的权衡，原生应用可以有更高的性能，对不稳定的连接有弹性，但也更难更新，更容易受到平台问题的影响。反对原生应用频繁、持续部署的一个常见论点是，用户不喜欢频繁的更新，而且必须为数据成本和中断付费。可能还有其他限制因素，如访问网络或限制渗透更新所需的重新启动。
 
-Even though there is a trade-off to be made in terms of how frequently to update a product, the goal is to *have these choices be intentional*. With a smooth, well-running CD process, how often a viable release is *created* can be separated from how often a user *receives* it. You might achieve the goal of being able to deploy weekly, daily, or hourly, without actually doing so, and you should intentionally choose release processes in the context of your users’ specific needs and the larger organizational goals, and determine the staffing and tooling model that will best support the long-term sustainability of your product.
+Even though there is a trade-off to be made in terms of how frequently to update a product, the goal is to _have these choices be intentional_. With a smooth, well-running CD process, how often a viable release is _created_ can be separated from how often a user _receives_ it. You might achieve the goal of being able to deploy weekly, daily, or hourly, without actually doing so, and you should intentionally choose release processes in the context of your users’ specific needs and the larger organizational goals, and determine the staffing and tooling model that will best support the long-term sustainability of your product.
 
-即使在更新产品的频率方面需要做出权衡，但目标是*让这些选择是有意的决策*。有了一个平滑、运行良好的CD流程，创建一个可行版本的频率可以与用户收到它的频率分开。你可能会实现每周、每天或每小时部署一次的目标，但实际上并没有这样做。你应该根据用户的具体需求和更大的组织目标有意识地选择发布流程，并确定最能支持产品长期可持续性的人员配置和工具模型。
+即使在更新产品的频率方面需要做出权衡，但目标是_让这些选择是有意的决策_。有了一个平滑、运行良好的CD流程，创建一个可行版本的频率可以与用户收到它的频率分开。你可能会实现每周、每天或每小时部署一次的目标，但实际上并没有这样做。你应该根据用户的具体需求和更大的组织目标有意识地选择发布流程，并确定最能支持产品长期可持续性的人员配置和工具模型。
 
 Earlier in the chapter, we talked about keeping your code modular. This allows for dynamic, configurable deployments that allow better utilization of constrained resources, such as the space on a user’s device. In the absence of this practice, every user must receive code they will never use to support translations they don’t need or architectures that were meant for other kinds of devices. Dynamic deployments allow apps to maintain small sizes while only shipping code to a device that brings its users value, and A/B experiments allow for intentional trade-offs between a feature’s cost and its value to users and your business.
 
@@ -181,45 +172,43 @@ There is an upfront cost to setting up these processes, and identifying and remo
 
 建立这些流程是有前期成本的，识别和消除使发布频率低于理想水平的阻力是一个艰苦的工作。但是，在风险管理、开发者速度和实现快速创新方面的长期胜利是如此之高，以至于这些初始成本是值得的。
 
-## Shifting Left: Making Data-Driven Decisions Earlier 左移：提前做出数据驱动的决策
+### Shifting Left: Making Data-Driven Decisions Earlier 左移：提前做出数据驱动的决策
 
 If you’re building for all users, you might have clients on smart screens, speakers, or Android and iOS phones and tablets, and your software may be flexible enough to allow users to customize their experience. Even if you’re building for only Android devices, the sheer diversity of the more than two billion Android devices can make the prospect of qualifying a release overwhelming. And with the pace of innovation, by the time someone reads this chapter, whole new categories of devices might have bloomed.
 
 如果你是为所有用户建立应用程序，你可能在智能屏幕、扬声器或Android和iOS手机和平板电脑上有客户，你的软件可能足够灵活，允许用户定制他们的体验。即使你只为安卓设备构建，超过20亿的安卓设备的多样性也会使一个版本的场景变得不堪重负。随着创新的步伐，当有人读到这一章时，全新的设备类别可能已经出现。
 
-One of our release managers shared a piece of wisdom that turned the situation around when he said that the diversity of our client market was not a *problem*, but a *fact*. After we accepted that, we could switch our release qualification model in the following ways:
+One of our release managers shared a piece of wisdom that turned the situation around when he said that the diversity of our client market was not a _problem_, but a _fact_. After we accepted that, we could switch our release qualification model in the following ways:
 
-- If *comprehensive* testing is practically infeasible, aim for *representative* testing instead.
-- Staged rollouts to slowly increasing percentages of the userbase allow for fast fixes.
-- Automated A/B releases allow for statistically significant results proving a release’s quality, without tired humans needing to look at dashboards and make decisions.
+* If _comprehensive_ testing is practically infeasible, aim for _representative_ testing instead.
+* Staged rollouts to slowly increasing percentages of the userbase allow for fast fixes.
+* Automated A/B releases allow for statistically significant results proving a release’s quality, without tired humans needing to look at dashboards and make decisions.
 
 我们的一位发布经理分享了一条智慧，他说我们客户市场的多样性不是问题，而是事实，这扭转了局面。在我们接受后，我们可以通过以下方式切换我们的发布资格模型：
 
-- 如果*全面*的测试实际上是不可行的，就以*代表性*的测试为目标。
-- 分阶段向用户群中慢慢增加的百分比进行发布，可以快速修复问题。
-- 自动的A/B发布允许统计学上有意义的结果来证明一个版本的质量，而无需疲惫的人去看仪表盘和做决定。
+* 如果_全面_的测试实际上是不可行的，就以_代表性_的测试为目标。
+* 分阶段向用户群中慢慢增加的百分比进行发布，可以快速修复问题。
+* 自动的A/B发布允许统计学上有意义的结果来证明一个版本的质量，而无需疲惫的人去看仪表盘和做决定。
 
 When it comes to developing for Android clients, Google apps use specialized testing tracks and staged rollouts to an increasing percentage of user traffic, carefully monitoring for issues in these channels. Because the Play Store offers unlimited testing tracks, we can also set up a QA team in each country in which we plan to launch, allowing for a global overnight turnaround in testing key features.
 
 在为Android客户端开发时，谷歌应用程序使用专门的测试轨道和分阶段推出，以增加用户流量的百分比，仔细监控这些渠道中的问题。由于Play Store提供无限的测试轨道，我们还可以在我们计划推出的每个国家/地区建立一个QA团队，允许在全球范围内一夜之间完成关键功能的测试。
 
-One issue we noticed when doing deployments to Android was that we could expect a statistically significant change in user metrics *simply from pushing an update*. This meant that even if we made no changes to our product, pushing an update could affect device and user behavior in ways that were difficult to predict. As a result, although canarying the update to a small percentage of user traffic could give us good information about crashes or stability problems, it told us very little about whether the newer version of our app was in fact better than the older one.
+One issue we noticed when doing deployments to Android was that we could expect a statistically significant change in user metrics _simply from pushing an update_. This meant that even if we made no changes to our product, pushing an update could affect device and user behavior in ways that were difficult to predict. As a result, although canarying the update to a small percentage of user traffic could give us good information about crashes or stability problems, it told us very little about whether the newer version of our app was in fact better than the older one.
 
 我们在Android部署时注意到的一个问题是，仅仅通过推送更新，我们就可以预期用户指标会发生统计上的显著变化。这意味着，即使我们没有对产品进行任何更改，推动更新也可能以难以预测的方式影响设备和用户行为。因此，尽管对一小部分用户流量进行更新可以为我们提供关于崩溃或稳定性问题的良好信息，但它几乎没有告诉我们更新版本的应用程序是否比旧版本更好。
 
-Dan Siroker and Pete Koomen have already discussed the value of A/B testing[^2] your features, but at Google, some of our larger apps also A/B test their *deployments*. This means sending out two versions of the product: one that is the desired update, with the baseline being a placebo (your old version just gets shipped again). As the two versions roll out simultaneously to a large enough base of similar users, you can compare one release against the other to see whether the latest version of your software is in fact an improvement over the previous one. With a large enough userbase, you should be able to get statistically significant results within days, or even hours. An automated metrics pipeline can enable the fastest possible release by pushing forward a release to more traffic as soon as there is enough data to know that the guardrail metrics will not be affected.
+Dan Siroker and Pete Koomen have already discussed the value of A/B testing[^2] your features, but at Google, some of our larger apps also A/B test their _deployments_. This means sending out two versions of the product: one that is the desired update, with the baseline being a placebo (your old version just gets shipped again). As the two versions roll out simultaneously to a large enough base of similar users, you can compare one release against the other to see whether the latest version of your software is in fact an improvement over the previous one. With a large enough userbase, you should be able to get statistically significant results within days, or even hours. An automated metrics pipeline can enable the fastest possible release by pushing forward a release to more traffic as soon as there is enough data to know that the guardrail metrics will not be affected.
 
-Dan Siroker和Pete Koomen已经讨论了A/B测试的价值，但在Google，我们的一些大型应用也对其*部署*进行A/B测试。这意味着发送两个版本的产品：一个是所需的更新，基线是一个安慰剂（你的旧版本只是被再次发送）。当这两个版本同时向足够多的类似用户推出时，你可以将一个版本与另一个版本进行比较，看看你的软件的最新版本是否真的比以前的版本有所改进。有了足够大的用户群，你应该能够在几天内，甚至几小时内得到统计学上的显著结果。一个自动化的指标管道可以实现最快的发布，只要有足够的数据知道护栏指标不会受到影响，就可以将一个版本推到更多的流量。
+Dan Siroker和Pete Koomen已经讨论了A/B测试的价值，但在Google，我们的一些大型应用也对其_部署_进行A/B测试。这意味着发送两个版本的产品：一个是所需的更新，基线是一个安慰剂（你的旧版本只是被再次发送）。当这两个版本同时向足够多的类似用户推出时，你可以将一个版本与另一个版本进行比较，看看你的软件的最新版本是否真的比以前的版本有所改进。有了足够大的用户群，你应该能够在几天内，甚至几小时内得到统计学上的显著结果。一个自动化的指标管道可以实现最快的发布，只要有足够的数据知道护栏指标不会受到影响，就可以将一个版本推到更多的流量。
 
 Obviously, this method does not apply to every app and can be a lot of overhead when you don’t have a large enough userbase. In these cases, the recommended best practice is to aim for change-neutral releases. All new features are flag guarded so that the only change being tested during a rollout is the stability of the deployment itself.
 
 显然，这种方法并不适用于每个应用程序，当你没有足够大的用户群时，可能会有很多开销。在这种情况下，推荐的最佳做法是以变化中立的发布为目标。所有的新功能都有标志保护，这样在发布过程中测试的唯一变化就是部署本身的稳定性。
 
-> [^2]:  Dan Siroker and Pete Koomen, *A/B Testing: The Most Powerful Way to Turn Clicks Into Customers* (Hoboken: Wiley, 2013).
->
-> 2   Dan Siroker和Pete Koomen，《A/B测试：将点击转化为客户的最有效方式》（Hoboken:Wiley，2013）。
+> 2 Dan Siroker和Pete Koomen，《A/B测试：将点击转化为客户的最有效方式》（Hoboken:Wiley，2013）。
 
-## Changing Team Culture: Building Discipline into Deployment 改变团队文化：在部署中建立规则
+### Changing Team Culture: Building Discipline into Deployment 改变团队文化：在部署中建立规则
 
 Although “Always Be Deploying” helps address several issues affecting developer velocity, there are also certain practices that address issues of scale. The initial team launching a product can be fewer than 10 people, each taking turns at deployment and production-monitoring responsibilities. Over time, your team might grow to hundreds of people, with subteams responsible for specific features. As this happens and the organization scales up, the number of changes in each deployment and the amount of risk in each release attempt is increasing superlinearly. Each release contains months of sweat and tears. Making the release successful becomes a high-touch and labor-intensive effort. Developers can often be caught trying to decide which is worse: abandoning a release that contains a quarter’s worth of new features and bug fixes, or pushing out a release without confidence in its quality.
 
@@ -241,28 +230,31 @@ When making trade-offs, the passion and urgency a developer feels about launchin
 
 在进行权衡时，开发人员对推出新功能的热情和紧迫感永远不能超过对现有产品的用户体验。这意味着，新功能必须通过具有强大契约的接口、关注点分离、严格测试、早期和经常的沟通以及新功能验收的惯例，与其他组件隔离。
 
-## Conclusion 总结
+### Conclusion 总结
 
-Over the years and across all of our software products, we’ve found that, counterintuitively, faster is safer. The health of your product and the speed of development are not actually in opposition to each other, and products that release more frequently and in small batches have better quality outcomes. They adapt faster to bugs encountered in the wild and to unexpected market shifts. Not only that, faster is *cheaper*, because having a predictable, frequent release train forces you to drive down the cost of each release and makes the cost of any abandoned release very low.
+Over the years and across all of our software products, we’ve found that, counterintuitively, faster is safer. The health of your product and the speed of development are not actually in opposition to each other, and products that release more frequently and in small batches have better quality outcomes. They adapt faster to bugs encountered in the wild and to unexpected market shifts. Not only that, faster is _cheaper_, because having a predictable, frequent release train forces you to drive down the cost of each release and makes the cost of any abandoned release very low.
 
-多年来，在我们所有的软件产品中，我们发现，相反，更快更安全。你的产品的健康状况和开发速度实际上并不是相互对立的，更频繁和小批量发布的产品具有更好的质量结果。它们能更快地适应在野外遇到的错误和意外的市场变化。不仅如此，更快就是*便宜*，因为有一个可预测的、频繁的发版班车，迫使你降低每个版本的成本，并使任何被放弃的发布的成本非常低。
+多年来，在我们所有的软件产品中，我们发现，相反，更快更安全。你的产品的健康状况和开发速度实际上并不是相互对立的，更频繁和小批量发布的产品具有更好的质量结果。它们能更快地适应在野外遇到的错误和意外的市场变化。不仅如此，更快就是_便宜_，因为有一个可预测的、频繁的发版班车，迫使你降低每个版本的成本，并使任何被放弃的发布的成本非常低。
 
-Simply having the structures in place that *enable* continuous deployment generates the majority of the value, *even if you don’t actually push those releases out to users*. What do we mean? We don’t actually release a wildly different version of Search, Maps, or YouTube every day, but to be able to do so requires a robust, well- documented continuous deployment process, accurate and real-time metrics on user satisfaction and product health, and a coordinated team with clear policies on what makes it in or out and why. In practice, getting this right often also requires binaries that can be configured in production, configuration managed like code (in version control), and a toolchain that allows safety measures like dry-run verification, rollback/rollforward mechanisms, and reliable patching.
+Simply having the structures in place that _enable_ continuous deployment generates the majority of the value, _even if you don’t actually push those releases out to users_. What do we mean? We don’t actually release a wildly different version of Search, Maps, or YouTube every day, but to be able to do so requires a robust, well- documented continuous deployment process, accurate and real-time metrics on user satisfaction and product health, and a coordinated team with clear policies on what makes it in or out and why. In practice, getting this right often also requires binaries that can be configured in production, configuration managed like code (in version control), and a toolchain that allows safety measures like dry-run verification, rollback/rollforward mechanisms, and reliable patching.
 
-仅仅拥有*能够*持续部署的结构，就能产生大部分的价值，*即使你没有真正把这些版本推送给用户*。我们的意思是什么呢？我们实际上并不是每天都发布一个完全不同的搜索、地图或YouTube的版本，但要做到这一点，就需要一个健壮的、有良好文档记录的连续部署过程、关于用户满意度和产品健康状况的准确实时指标，以及一个协调一致的团队，该团队拥有明确的策略，以确定成功与否以及原因。在实践中，要做到这一点，往往还需要可以在生产中配置的二进制包，像代码一样管理的配置（在版本控制中），以及一个可以采取安全措施的工具链，如干运行验证、回滚/前滚机制和可靠的补丁。
+仅仅拥有_能够_持续部署的结构，就能产生大部分的价值，_即使你没有真正把这些版本推送给用户_。我们的意思是什么呢？我们实际上并不是每天都发布一个完全不同的搜索、地图或YouTube的版本，但要做到这一点，就需要一个健壮的、有良好文档记录的连续部署过程、关于用户满意度和产品健康状况的准确实时指标，以及一个协调一致的团队，该团队拥有明确的策略，以确定成功与否以及原因。在实践中，要做到这一点，往往还需要可以在生产中配置的二进制包，像代码一样管理的配置（在版本控制中），以及一个可以采取安全措施的工具链，如干运行验证、回滚/前滚机制和可靠的补丁。
 
-## TL;DRs  内容提要
+### TL;DRs 内容提要
 
-- *Velocity is a team sport*: The optimal workflow for a large team that develops code collaboratively requires modularity of architecture and near-continuous integration.
-- Evaluate changes in isolation: Flag guard any features to be able to isolate prob‐ lems early.
-- Make reality your benchmark: Use a staged rollout to address device diversity and the breadth of the userbase. Release qualification in a synthetic environment that isn’t similar to the production environment can lead to late surprises.
-- Ship only what gets used: Monitor the cost and value of any feature in the wild to know whether it’s still relevant and delivering sufficient user value.
-- Shift left: Enable faster, more data-driven decision making earlier on all changes through CI and continuous deployment.
-- Faster is safer: Ship early and often and in small batches to reduce the risk of each release and to minimize time to market.
+* _Velocity is a team sport_: The optimal workflow for a large team that develops code collaboratively requires modularity of architecture and near-continuous integration.
+* Evaluate changes in isolation: Flag guard any features to be able to isolate prob‐ lems early.
+* Make reality your benchmark: Use a staged rollout to address device diversity and the breadth of the userbase. Release qualification in a synthetic environment that isn’t similar to the production environment can lead to late surprises.
+* Ship only what gets used: Monitor the cost and value of any feature in the wild to know whether it’s still relevant and delivering sufficient user value.
+* Shift left: Enable faster, more data-driven decision making earlier on all changes through CI and continuous deployment.
+* Faster is safer: Ship early and often and in small batches to reduce the risk of each release and to minimize time to market.
+* _速度是一项团队运动_。协作开发代码的大型团队的最佳工作流程需要架构的模块化和近乎连续的集成。
+* 孤立地评估变化。对任何功能进行标记，以便能够尽早隔离问题。
+* 让现实成为你的基准。使用分阶段推出的方式来解决设备的多样性和用户群的广泛性。在一个与生产环境不相似的合成环境中进行发布鉴定，会导致后期的意外。
+* 只发布被使用的东西。监控任何功能的成本和价值，以了解它是否仍有意义，是否能提供足够的用户价值。
+* 向左移动。通过CI和持续部署，使所有的变化更快，更多的数据驱动的决策更早。
+* 更快是更安全的。尽早地、经常地、小批量地发布，以减少每次发布的风险，并尽量缩短上市时间。
 
-- *速度是一项团队运动*。协作开发代码的大型团队的最佳工作流程需要架构的模块化和近乎连续的集成。
-- 孤立地评估变化。对任何功能进行标记，以便能够尽早隔离问题。
-- 让现实成为你的基准。使用分阶段推出的方式来解决设备的多样性和用户群的广泛性。在一个与生产环境不相似的合成环境中进行发布鉴定，会导致后期的意外。
-- 只发布被使用的东西。监控任何功能的成本和价值，以了解它是否仍有意义，是否能提供足够的用户价值。
-- 向左移动。通过CI和持续部署，使所有的变化更快，更多的数据驱动的决策更早。
-- 更快是更安全的。尽早地、经常地、小批量地发布，以减少每次发布的风险，并尽量缩短上市时间。
+[^1]: Remember the SRE “error-budget” formulation: perfection is rarely the best goal. Understand how much room for error is acceptable and how much of that budget has been spent recently and use that to adjust the trade-off between velocity and stability.
+
+[^2]: Dan Siroker and Pete Koomen, _A/B Testing: The Most Powerful Way to Turn Clicks Into Customers_ (Hoboken: Wiley, 2013).

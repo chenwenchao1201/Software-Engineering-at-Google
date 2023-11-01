@@ -1,9 +1,10 @@
+# Chapter-13\_Test\_Doubles
 
 **CHAPTER 13**
 
-# Test Doubles
+## Test Doubles
 
-# 第十三章 测试替代
+## 第十三章 测试替代
 
 **Written by Andrew Trenk and Dillon Bly**
 
@@ -29,31 +30,31 @@ The previous two chapters introduced the concept of small tests and discussed wh
 
 前两章介绍了小型测试的概念，并讨论了为什么它们应该包括测试套件中的大多数测试。然而，由于跨多个进程或机器的通信，生产代码往往不适合小型测试的约束。测试替代可以比真正的实现更轻量级，允许你写许多小测试，快速执行，并且不易出错。
 
-## The Impact of Test Doubles on Software Development  测试替代对软件开发的影响
+### The Impact of Test Doubles on Software Development 测试替代对软件开发的影响
 
 The use of test doubles introduces a few complications to software development that require some trade-offs to be made. The concepts introduced here are discussed in more depth throughout this chapter:
 
-*Testability*  
-    To use test doubles, a codebase needs to be designed to be testable—it should be possible for tests to swap out real implementations with test doubles. For example, code that calls a database needs to be flexible enough to be able to use a test double in place of a real database. If the codebase isn’t designed with testing in mind and you later decide that tests are needed, it can require a major commitment to refactor the code to support the use of test doubles.
+_Testability_\
+To use test doubles, a codebase needs to be designed to be testable—it should be possible for tests to swap out real implementations with test doubles. For example, code that calls a database needs to be flexible enough to be able to use a test double in place of a real database. If the codebase isn’t designed with testing in mind and you later decide that tests are needed, it can require a major commitment to refactor the code to support the use of test doubles.
 
-*Applicability*  
-    Although proper application of test doubles can provide a powerful boost to engineering velocity, their improper use can lead to tests that are brittle, complex, and less effective. These downsides are magnified when test doubles are used improperly across a large codebase, potentially resulting in major losses in productivity for engineers. In many cases, test doubles are not suitable and engineers should prefer to use real implementations instead.
+_Applicability_\
+Although proper application of test doubles can provide a powerful boost to engineering velocity, their improper use can lead to tests that are brittle, complex, and less effective. These downsides are magnified when test doubles are used improperly across a large codebase, potentially resulting in major losses in productivity for engineers. In many cases, test doubles are not suitable and engineers should prefer to use real implementations instead.
 
-*Fidelity*  
-    Fidelity refers to how closely the behavior of a test double resembles the behavior of the real implementation that it’s replacing. If the behavior of a test double significantly differs from the real implementation, tests that use the test double likely wouldn’t provide much value—for example, imagine trying to write a test with a test double for a database that ignores any data added to the database and always returns empty results. But perfect fidelity might not be feasible; test doubles often need to be vastly simpler than the real implementation in order to be suitable for use in tests. In many situations, it is appropriate to use a test double even without perfect fidelity. Unit tests that use test doubles often need to be supplemented by larger-scope tests that exercise the real implementation.
+_Fidelity_\
+Fidelity refers to how closely the behavior of a test double resembles the behavior of the real implementation that it’s replacing. If the behavior of a test double significantly differs from the real implementation, tests that use the test double likely wouldn’t provide much value—for example, imagine trying to write a test with a test double for a database that ignores any data added to the database and always returns empty results. But perfect fidelity might not be feasible; test doubles often need to be vastly simpler than the real implementation in order to be suitable for use in tests. In many situations, it is appropriate to use a test double even without perfect fidelity. Unit tests that use test doubles often need to be supplemented by larger-scope tests that exercise the real implementation.
 
 测试替代的使用给软件开发带来了一些复杂的问题，需要做出一些权衡。本章将更深入地讨论此处介绍的概念：
 
-*可测试性*  
-    为了使用测试替代，需要将代码库设计成可测试的--测试应该可以用测试替代替换实际实现。例如，调用数据库的代码需要足够灵活，以便能够使用测试替代来代替真正的数据库。如果代码库在设计时没有考虑到测试，而你后来决定需要测试，那么可能需要进行大量的提交来重构代码，以支持使用测试替代。
+_可测试性_\
+为了使用测试替代，需要将代码库设计成可测试的--测试应该可以用测试替代替换实际实现。例如，调用数据库的代码需要足够灵活，以便能够使用测试替代来代替真正的数据库。如果代码库在设计时没有考虑到测试，而你后来决定需要测试，那么可能需要进行大量的提交来重构代码，以支持使用测试替代。
 
-*适用性*  
-    尽管适当地应用测试替代可以极大地提高工程速度，但其使用不当会导致测试变得脆弱、复杂且低效。当测试替代在大型代码库中使用不当时，这些缺点就会被放大，这可能会导致工程师在生产效率方面的重大损失。在许多情况下，测试替代是不合适的，工程师应该倾向于使用真实的实现。
+_适用性_\
+尽管适当地应用测试替代可以极大地提高工程速度，但其使用不当会导致测试变得脆弱、复杂且低效。当测试替代在大型代码库中使用不当时，这些缺点就会被放大，这可能会导致工程师在生产效率方面的重大损失。在许多情况下，测试替代是不合适的，工程师应该倾向于使用真实的实现。
 
-*仿真度*  
-    仿真度是指测试替代的行为与它所替代的真实实现的行为有多大的相似性。如果测试替代的行为与真正的实现有很大的不同，那么使用测试替代的测试可能不会提供太多的价值——例如，想象一下，尝试用测试替代为一个数据库写一个测试，这个数据库忽略了添加到数据库的任何数据，总是返回空结果。这样做是完美的仿真度不能接受的；测试替代通常需要比实际的实现简单得多，以便适合在测试中使用。在许多情况下，即使没有完美的仿真度，使用测试替代也是合适的。使用测试替代的单元测试通常需要由执行实际实现的更大范围的测试来支持。
+_仿真度_\
+仿真度是指测试替代的行为与它所替代的真实实现的行为有多大的相似性。如果测试替代的行为与真正的实现有很大的不同，那么使用测试替代的测试可能不会提供太多的价值——例如，想象一下，尝试用测试替代为一个数据库写一个测试，这个数据库忽略了添加到数据库的任何数据，总是返回空结果。这样做是完美的仿真度不能接受的；测试替代通常需要比实际的实现简单得多，以便适合在测试中使用。在许多情况下，即使没有完美的仿真度，使用测试替代也是合适的。使用测试替代的单元测试通常需要由执行实际实现的更大范围的测试来支持。
 
-## Test Doubles at Google 谷歌的测试替代
+### Test Doubles at Google 谷歌的测试替代
 
 At Google, we’ve seen countless examples of the benefits to productivity and software quality that test doubles can bring to a codebase, as well as the negative impact they can cause when used improperly. The practices we follow at Google have evolved over time based on these experiences. Historically, we had few guidelines on how to effectively use test doubles, but best practices evolved as we saw common patterns and antipatterns arise in many teams’ codebases.
 
@@ -67,19 +68,19 @@ Even though the practices discussed in this chapter are generally agreed upon at
 
 尽管本章中讨论的实践在谷歌公司得到普遍认可，但实际应用情况因团队而异。这种差异源于工程师对这些实践的认识差异，现有代码库中的习惯不符合这些实践，或者团队只做短期内最容易的事情而不考虑长期影响。
 
-## Basic Concepts 基本概念
+### Basic Concepts 基本概念
 
 Before we dive into how to effectively use test doubles, let’s cover some of the basic concepts related to them. These build the foundation for best practices that we will discuss later in this chapter.
 
 在我们深入研究如何有效地使用测试替代之前，让我们先介绍一些与之相关的基本概念。这些为我们在本章后面讨论的最佳实践奠定了基础。
 
-### An Example Test Double 测试替代的示例
+#### An Example Test Double 测试替代的示例
 
-Imagine an ecommerce site that needs to process credit card payments. At its core, it might have something like the code shown in [Example 13-1](#_bookmark1068).
+Imagine an ecommerce site that needs to process credit card payments. At its core, it might have something like the code shown in [Example 13-1](Chapter-13\_Test\_Doubles.md#\_bookmark1068).
 
 想象一个需要处理信用卡支付的电子商务网站。在其核心部分，它可能有类似于例13-1中所示的代码。
 
-*Example* *13-1.* *A* *credit* *card* *service*
+_Example_ _13-1._ _A_ _credit_ _card_ _service_
 
 ```java
 class PaymentProcessor {
@@ -94,11 +95,11 @@ class PaymentProcessor {
 
 ```
 
-It would be infeasible to use a real credit card service in a test (imagine all the transaction fees from running the test!), but a test double could be used in its place to *simulate* the behavior of the real system. The code in Example 13-2 shows an extremely simple test double.
+It would be infeasible to use a real credit card service in a test (imagine all the transaction fees from running the test!), but a test double could be used in its place to _simulate_ the behavior of the real system. The code in Example 13-2 shows an extremely simple test double.
 
-在测试中使用真正的信用卡服务是不可行的（想象一下运行测试所产生的所有交易费用！），但是可以用一个测试用的替代来*模拟*真实系统的行为。例13-2中的代码展示了一个非常简单的测试替代。
+在测试中使用真正的信用卡服务是不可行的（想象一下运行测试所产生的所有交易费用！），但是可以用一个测试用的替代来_模拟_真实系统的行为。例13-2中的代码展示了一个非常简单的测试替代。
 
-*Example 13-2. A trivial test double*
+_Example 13-2. A trivial test double_
 
 ```java
 class TestDoubleCreditCardService implements CreditCardService {
@@ -113,7 +114,7 @@ Although this test double doesn’t look very useful, using it in a test still a
 
 虽然这个测试替代看起来不是很有用，但在测试中使用它仍然可以让我们测试makePayment()方法中的一些逻辑。例如，在例13-3中，我们可以验证该方法在信用卡过期时的行为是否正确，因为测试执行的代码路径不依赖于信用卡服务的行为。
 
-*Example 13-3. Using the test double*
+_Example 13-3. Using the test double_
 
 ```java
 @Test public void cardIsExpired_returnFalse() {
@@ -126,25 +127,25 @@ The following sections in this chapter will discuss how to make use of test doub
 
 本章下面的章节将讨论如何在比这更复杂的情况下使用测试替代。
 
-### Seams
+#### Seams
 
 ```txt
 Seams是可以更改程序中的行为而无需在指定位置进行编辑的地方。
 ```
 
-Code is said to be [*testable* ](https://oreil.ly/yssV2)if it is written in a way that makes it possible to write unit tests for the code. A [*seam* ](https://oreil.ly/pFSFf)is a way to make code testable by allowing for the use of test doubles—it makes it possible to use different dependencies for the system under test rather than the dependencies used in a production environment.
+Code is said to be [_testable_ ](https://oreil.ly/yssV2)if it is written in a way that makes it possible to write unit tests for the code. A [_seam_ ](https://oreil.ly/pFSFf)is a way to make code testable by allowing for the use of test doubles—it makes it possible to use different dependencies for the system under test rather than the dependencies used in a production environment.
 
-如果代码的编写方式能够使代码的单元测试成为可能，那么代码就被称为[*可测试代码*](https://oreil.ly/yssV2)。[*seam*](https://oreil.ly/pFSFf)是一种通过允许使用测试替代使代码可测试的方法——它使被测系统可以使用不同的依赖项，而不是生产环境中使用的依赖项。
+如果代码的编写方式能够使代码的单元测试成为可能，那么代码就被称为[_可测试代码_](https://oreil.ly/yssV2)。[_seam_](https://oreil.ly/pFSFf)是一种通过允许使用测试替代使代码可测试的方法——它使被测系统可以使用不同的依赖项，而不是生产环境中使用的依赖项。
 
-[*Dependency* *injection* ](https://oreil.ly/og9p9)is a common technique for introducing seams. In short, when a class utilizes dependency injection, any classes it needs to use (i.e., the class’s *dependencies*) are passed to it rather than instantiated directly, making it possible for these dependencies to be substituted in tests.
+[_Dependency_ _injection_ ](https://oreil.ly/og9p9)is a common technique for introducing seams. In short, when a class utilizes dependency injection, any classes it needs to use (i.e., the class’s _dependencies_) are passed to it rather than instantiated directly, making it possible for these dependencies to be substituted in tests.
 
-[*依赖注入*](https://oreil.ly/og9p9)是一种引入seams的常见技术。简而言之，当一个类利用依赖注入时，它需要使用的任何类（即该类的*依赖*）被传递给它，而不是直接实例化，从而使这些依赖项可以在测试中被替换。
+[_依赖注入_](https://oreil.ly/og9p9)是一种引入seams的常见技术。简而言之，当一个类利用依赖注入时，它需要使用的任何类（即该类的_依赖_）被传递给它，而不是直接实例化，从而使这些依赖项可以在测试中被替换。
 
-[Example 13-4 ](#_bookmark1074)shows an example of dependency injection. Rather than the constructor creating an instance of CreditCardService, it accepts an instance as a parameter.
+[Example 13-4 ](Chapter-13\_Test\_Doubles.md#\_bookmark1074)shows an example of dependency injection. Rather than the constructor creating an instance of CreditCardService, it accepts an instance as a parameter.
 
 示例13-4显示了依赖项注入的示例。它接受实例作为参数，而不是创建CreditCardService实例的构造函数。
 
-*Example* *13-4.* *Dependency* *injection*
+_Example_ _13-4._ _Dependency_ _injection_
 
 ```java
 class PaymentProcessor {
@@ -158,11 +159,11 @@ class PaymentProcessor {
 
 ```
 
-The code that calls this constructor is responsible for creating an appropriate Credit CardService instance. Whereas the production code can pass in an implementation of CreditCardService that communicates with an external server, the test can pass in a test double, as demonstrated in [Example 13-5](#_bookmark1075).
+The code that calls this constructor is responsible for creating an appropriate Credit CardService instance. Whereas the production code can pass in an implementation of CreditCardService that communicates with an external server, the test can pass in a test double, as demonstrated in [Example 13-5](Chapter-13\_Test\_Doubles.md#\_bookmark1075).
 
 调用这个构造函数的代码负责创建一个合适的CreditCardService实例。生产代码可以传入一个与外部服务器通信的CreditCardService的实现，而测试可以传入一个测试用的替代，如例13-5所示。
 
-*Example 13-5. Passing in a test double*
+_Example 13-5. Passing in a test double_
 
 ```java
 PaymentProcessor paymentProcessor =
@@ -181,17 +182,17 @@ Writing testable code requires an upfront investment. It is especially critical 
 
 编写可测试代码需要前期投入。在代码库生命周期的早期，这一点尤其重要，因为越晚考虑可测试性，就越难应用到代码库中。在没有考虑到测试的情况下编写的代码通常需要重构或重写，然后才可以添加适当的测试。
 
-### Mocking Frameworks 模拟框架
+#### Mocking Frameworks 模拟框架
 
-A *mocking framework* is a software library that makes it easier to create test doubles within tests; it allows you to replace an object with a *mock*, which is a test double whose behavior is specified inline in a test. The use of mocking frameworks reduces boilerplate because you don’t need to define a new class each time you need a test double.
+A _mocking framework_ is a software library that makes it easier to create test doubles within tests; it allows you to replace an object with a _mock_, which is a test double whose behavior is specified inline in a test. The use of mocking frameworks reduces boilerplate because you don’t need to define a new class each time you need a test double.
 
-一个*mocking框架*是一个软件库，它使得在测试中创建测试替代更加容易；它允许您将对象替换为模拟对象，模拟对象是在测试中内联指定其行为的测试替代。模拟框架的使用减少了模板代码，因为你不需要在每次需要测试时定义一个新类。
+一个_mocking框架_是一个软件库，它使得在测试中创建测试替代更加容易；它允许您将对象替换为模拟对象，模拟对象是在测试中内联指定其行为的测试替代。模拟框架的使用减少了模板代码，因为你不需要在每次需要测试时定义一个新类。
 
 Example 13-6 demonstrates the use of [Mockito](https://site.mockito.org/), a mocking framework for Java. Mockito creates a test double for CreditCardService and instructs it to return a specific value.
 
- 例13-6演示了[Mockito](https://site.mockito.org/)的使用，这是一个Java的模拟框架。Mockito为CreditCardService创建了一个测试替代，并指定它返回一个特定的值。
+例13-6演示了[Mockito](https://site.mockito.org/)的使用，这是一个Java的模拟框架。Mockito为CreditCardService创建了一个测试替代，并指定它返回一个特定的值。
 
-*Example 13-6. Mocking frameworks*
+_Example 13-6. Mocking frameworks_
 
 ```java
 class PaymentProcessorTest {
@@ -227,7 +228,7 @@ Although mocking frameworks facilitate easier usage of test doubles, they come w
 
 尽管模拟框架有助于更容易地使用测试替代，但它们也有一些重要的注意事项，因为过度使用它们往往会使代码库更难维护。我们将在本章的后面介绍其中的一些问题。
 
-## Techniques for Using Test Doubles 测试替代的使用技巧
+### Techniques for Using Test Doubles 测试替代的使用技巧
 
 There are three primary techniques for using test doubles. This section presents a brief introduction to these techniques to give you a quick overview of what they are and how they differ. Later sections in this chapter go into more details on how to effectively apply them.
 
@@ -237,13 +238,13 @@ An engineer who is aware of the distinctions between these techniques is more li
 
 知道到这些技术之间区别的工程师更有可能在面临需要使用测试替代时知道使用哪种适当的技术。
 
-### Faking 伪造
+#### Faking 伪造
 
-A [*fake*](https://oreil.ly/rymnI) is a lightweight implementation of an API that behaves similar to the real implementation but isn’t suitable for production; for example, an in-memory database. Example 13-7presents an example of faking.
+A [_fake_](https://oreil.ly/rymnI) is a lightweight implementation of an API that behaves similar to the real implementation but isn’t suitable for production; for example, an in-memory database. Example 13-7presents an example of faking.
 
- [*fake*](https://oreil.ly/rymnI)是一个API的轻量级实现，其行为类似于真实实现，但不适合生产；例如，一个内存数据库。例13-7介绍了一个伪造的例子。
+[_fake_](https://oreil.ly/rymnI)是一个API的轻量级实现，其行为类似于真实实现，但不适合生产；例如，一个内存数据库。例13-7介绍了一个伪造的例子。
 
-*Example 13-7. A simple* *fake*
+_Example 13-7. A simple_ _fake_
 
 ```java
 // Creating the fake is fast and easy.
@@ -264,17 +265,17 @@ Using a fake is often the ideal technique when you need to use a test double, bu
 
 当你需要使用测试替代时，使用伪造通常是理想的技术，但是对于你需要在测试中使用的对象，伪造可能不存在，编写伪造可能是一项挑战，因为你需要确保它在现在和将来具有与真实实现类似的行为。
 
-### Stubbing 打桩
+#### Stubbing 打桩
 
-[*Stubbing*](https://oreil.ly/gmShS)is the process of giving behavior to a function that otherwise has no behavior on its own—you specify to the function exactly what values to return (that is, you *stub* the return values).
+[_Stubbing_](https://oreil.ly/gmShS)is the process of giving behavior to a function that otherwise has no behavior on its own—you specify to the function exactly what values to return (that is, you _stub_ the return values).
 
 打桩是指将行为赋予一个函数的过程，如果该函数本身没有行为，则你可以为该函数指定要返回的值（即打桩返回值）。
 
-[Example 13-8](#_bookmark1093) illustrates stubbing. The when(...).thenReturn(...) method calls from the Mockito mocking framework specify the behavior of the lookupUser() method.
+[Example 13-8](Chapter-13\_Test\_Doubles.md#\_bookmark1093) illustrates stubbing. The when(...).thenReturn(...) method calls from the Mockito mocking framework specify the behavior of the lookupUser() method.
 
 例13-8演示了打桩的使用。来自Mockito模拟框架的when(...).thenReturn(...)方法调用指定了lookupUser()方法的行为。
 
-*Example* *13-8.* *Stubbing*
+_Example_ _13-8._ _Stubbing_
 
 ```java
 // Pass in a test double that was created by a mocking framework.
@@ -297,9 +298,9 @@ Although stubbing can be a quick and simple technique to apply, it has limitatio
 
 虽然打桩是一种快速而简单的应用技术，但它也有局限性，我们将在本章后面讨论。
 
-### Interaction Testing 交互测试
+#### Interaction Testing 交互测试
 
-[*Interaction testing*](https://oreil.ly/zGfFn)is a way to validate *how* a function is called without actually calling the implementation of the function. A test should fail if a function isn’t called the correct way—for example, if the function isn’t called at all, it’s called too many times, or it’s called with the wrong arguments.
+[_Interaction testing_](https://oreil.ly/zGfFn)is a way to validate _how_ a function is called without actually calling the implementation of the function. A test should fail if a function isn’t called the correct way—for example, if the function isn’t called at all, it’s called too many times, or it’s called with the wrong arguments.
 
 交互测试是一种在不实际调用函数实现的情况下验证函数调用方式的方法。如果函数没有正确调用，测试应该失败。例如，如果函数根本没有被调用，调用次数太多，或者调用参数错误。
 
@@ -307,7 +308,7 @@ Example 13-9 presents an instance of interaction testing. The verify(...) method
 
 例13-9展示了一个交互测试的实例。来自Mockito 模拟框架的verify(...)方法被用来验证lookupUser()是否按预期调用。
 
-*Example* *13-9. Interaction testing*
+_Example_ _13-9. Interaction testing_
 
 ```java
 // Pass in a test double that was created by a mocking framework.
@@ -324,7 +325,7 @@ Similar to stubbing, interaction testing is typically done through mocking frame
 
 与打桩类似，交互测试通常是通过模拟框架完成的。与手动创建包含代码的新类以跟踪函数调用频率和传入参数相比，这减少了模板文件。
 
-Interaction testing is sometimes called [*mocking*](https://oreil.ly/IfMoR). We avoid this terminology in this chapter because it can be confused with mocking frameworks, which can be used for stubbing as well as for interaction testing.
+Interaction testing is sometimes called [_mocking_](https://oreil.ly/IfMoR). We avoid this terminology in this chapter because it can be confused with mocking frameworks, which can be used for stubbing as well as for interaction testing.
 
 交互测试有时被称为模拟。我们在本章中避免使用这个术语，因为它可能与模拟框架混淆，模拟框架既可用于打桩，也可用于交互测试。
 
@@ -332,7 +333,7 @@ As discussed later in this chapter, interaction testing is useful in certain sit
 
 正如本章后面所讨论的，交互测试在某些情况下很有用，但应尽可能避免，因为过度使用很容易导致脆性测试。
 
-### Real Implementations 真实实现
+#### Real Implementations 真实实现
 
 Although test doubles can be invaluable testing tools, our first choice for tests is to use the real implementations of the system under test’s dependencies; that is, the same implementations that are used in production code. Tests have higher fidelity when they execute code as it will be executed in production, and using real implementations helps accomplish this.
 
@@ -342,11 +343,11 @@ At Google, the preference for real implementations developed over time as we saw
 
 在谷歌，对真实实现的偏好随着时间的推移而发展，因为我们看到过度使用模拟框架有一种倾向，即使用与真实实现不同步的重复代码污染测试，从而使重构变得困难。我们将在本章后面更详细地讨论这个主题。
 
-Preferring real implementations in tests is known as [*classical testing*](https://oreil.ly/OWw7h). There is also a style of testing known as *mockist testing*, in which the preference is to use mocking frameworks instead of real implementations. Even though some people in the software industry practice mockist testing (including the [creators of the first mocking](https://oreil.ly/_QWy7) [frameworks](https://oreil.ly/_QWy7)), at Google, we have found that this style of testing is difficult to scale. It requires engineers to follow [strict guidelines when designing the system under test](http://jmock.org/oopsla2004.pdf), and the default behavior of most engineers at Google has been to write code in a way that is more suitable for the classical testing style.
+Preferring real implementations in tests is known as [_classical testing_](https://oreil.ly/OWw7h). There is also a style of testing known as _mockist testing_, in which the preference is to use mocking frameworks instead of real implementations. Even though some people in the software industry practice mockist testing (including the [creators of the first mocking](https://oreil.ly/\_QWy7) [frameworks](https://oreil.ly/\_QWy7)), at Google, we have found that this style of testing is difficult to scale. It requires engineers to follow [strict guidelines when designing the system under test](http://jmock.org/oopsla2004.pdf), and the default behavior of most engineers at Google has been to write code in a way that is more suitable for the classical testing style.
 
-在测试中更倾向于使用真实实现被称为[*经典测试*](https://oreil.ly/OWw7h)。还有一种测试风格被称为*模拟测试*，其中倾向于使用模拟框架而不是真实实现。尽管软件行业的一些人在进行模拟测试（包括[第一个模拟框架](https://oreil.ly/_QWy7)的创造者），但在谷歌，我们发现这种测试风格很难扩展。它要求工程师遵循[设计被测系统时的严格准则](http://jmock.org/oopsla2004.pdf)，而谷歌大多数工程师的默认行为是以一种更适合经典测试风格的方式来编写代码。
+在测试中更倾向于使用真实实现被称为[_经典测试_](https://oreil.ly/OWw7h)。还有一种测试风格被称为_模拟测试_，其中倾向于使用模拟框架而不是真实实现。尽管软件行业的一些人在进行模拟测试（包括[第一个模拟框架](https://oreil.ly/\_QWy7)的创造者），但在谷歌，我们发现这种测试风格很难扩展。它要求工程师遵循[设计被测系统时的严格准则](http://jmock.org/oopsla2004.pdf)，而谷歌大多数工程师的默认行为是以一种更适合经典测试风格的方式来编写代码。
 
-### Prefer Realism Over Isolation 倾向于现实主义而不是孤立主义
+#### Prefer Realism Over Isolation 倾向于现实主义而不是孤立主义
 
 Using real implementations for dependencies makes the system under test more realistic given that all code in these real implementations will be executed in the test. In contrast, a test that utilizes test doubles isolates the system under test from its dependencies so that the test does not execute code in the dependencies of the system under test.
 
@@ -360,13 +361,13 @@ Replacing all dependencies of a class with test doubles arbitrarily isolates the
 
 将一个类的所有依赖项替换为测试替代项可以任意地将被测系统与作者直接放入类中的实现隔离开来，并排除恰好位于不同类中的实现。然而，一个好的测试应该独立于实现，它应该根据API编写正在进行测试，而不是根据实现的结构进行测试。
 
-Using real implementations can cause your test to fail if there is a bug in the real implementation. This is good! You *want* your tests to fail in such cases because it indicates that your code won’t work properly in production. Sometimes, a bug in a real implementation can cause a cascade of test failures because other tests that use the real implementation might fail, too. But with good developer tools, such as a Continuous Integration (CI) system, it is usually easy to track down the change that caused the failure.
+Using real implementations can cause your test to fail if there is a bug in the real implementation. This is good! You _want_ your tests to fail in such cases because it indicates that your code won’t work properly in production. Sometimes, a bug in a real implementation can cause a cascade of test failures because other tests that use the real implementation might fail, too. But with good developer tools, such as a Continuous Integration (CI) system, it is usually easy to track down the change that caused the failure.
 
 如果真实实现中存在错误，使用真实的实现会导致你的测试失败。这是很好的。你希望你的测试在这种情况下失败，因为它表明你的代码在生产中不能正常工作。有时，真实实现中的一个错误会导致一连串的测试失败，因为其他使用真实实现的测试也可能失败。但是有了好的开发者工具，如持续集成（CI）系统，通常很容易追踪到导致失败的变化。
 
------
+***
 
-#### Case Study: @DoNotMock 案例研究：@DoNotMock
+**Case Study: @DoNotMock 案例研究：@DoNotMock**
 
 At Google, we’ve seen enough tests that over-rely on mocking frameworks to motivate the creation of the @DoNotMock annotation in Java, which is available as part of the [ErrorProne](https://github.com/google/error-prone)static analysis tool. This annotation is a way for API owners to declare, “this type should not be mocked because better alternatives exist.”
 
@@ -376,7 +377,7 @@ If an engineer attempts to use a mocking framework to create an instance of a cl
 
 如果工程师试图使用模拟框架来创建一个被注解为@DoNotMock的类或接口的实例，如例13-10所示，他们会看到一个错误，指示他们使用更合适的测试策略，如真实的实现或伪造。这个注解最常用于那些简单到可以按原样使用的值对象，以及那些有精心设计的伪造的API。
 
-*Example* *13-10. The @DoNotMock annotation*
+_Example_ _13-10. The @DoNotMock annotation_
 
 ```java
 @DoNotMock("Use SimpleQuery.create() instead of mocking.")
@@ -393,19 +394,19 @@ When the API owner wants to change their API, they might find that it has been m
 
 当API所有者想要改变他们的API时，他们可能会发现它已经在整个Google的代码库中被模拟了数千次甚至上万次！这些测试替代很可能表现出违反被模拟类型的API契约的行为——例如，为一个永远不能返回null的方法返回null。如果测试使用的是真正的实现或伪造，API所有者可以对他们的实现进行修改，而不需要先修复成千上万的有缺陷的测试。
 
------
+***
 
-### How to Decide When to Use a Real Implementation 如何决定何时使用真实实现
+#### How to Decide When to Use a Real Implementation 如何决定何时使用真实实现
 
-A real implementation is preferred if it is fast, deterministic, and has simple dependencies. For example, a real implementation should be used for a [*value object*](https://oreil.ly/UZiXP). Examples include an amount of money, a date, a geographical address, or a collection class such as a list or a map.
+A real implementation is preferred if it is fast, deterministic, and has simple dependencies. For example, a real implementation should be used for a [_value object_](https://oreil.ly/UZiXP). Examples include an amount of money, a date, a geographical address, or a collection class such as a list or a map.
 
-如果真实实现速度快、确定性强且依赖性简单，则首选真实实现。例如，一个真实实现应该被用于[*值对象*](https://oreil.ly/UZiXP)。例子包括一笔钱、一个日期、一个地理位置，或者一个集合类，如列表或地图。
+如果真实实现速度快、确定性强且依赖性简单，则首选真实实现。例如，一个真实实现应该被用于[_值对象_](https://oreil.ly/UZiXP)。例子包括一笔钱、一个日期、一个地理位置，或者一个集合类，如列表或地图。
 
 However, for more complex code, using a real implementation often isn’t feasible. There might not be an exact answer on when to use a real implementation or a test double given that there are trade-offs to be made, so you need to take the following considerations into account.
 
 然而，对于更复杂的代码，使用真实实现通常是不可行的。考虑到需要进行权衡，可能没有关于何时使用真实实现或测试替代的确切答案，因此需要考虑以下因素。
 
-#### Execution time 执行时间
+**Execution time 执行时间**
 
 One of the most important qualities of unit tests is that they should be fast—you want to be able to continually run them during development so that you can get quick feedback on whether your code is working (and you also want them to finish quickly when run in a CI system). As a result, a test double can be very useful when the real implementation is slow.
 
@@ -419,7 +420,7 @@ There is no exact answer here—it can depend on whether engineers feel a loss i
 
 这里没有确切的答案——它可能取决于工程师是否感到生产率下降，以及有多少测试正在使用实际实现（如果有5个测试用例，每个测试用例多一秒钟可能是合理的，但如果有500个测试用例就不一样了）。对于临界情况，通常更容易使用实际实现，直到它变得太慢而无法使用，此时可以更新测试以使用测试替代。
 
-Parellelization of tests can also help reduce execution time. At Google, our test infrastructure makes it trivial to split up tests in a test suite to be executed across multiple servers. This increases the cost of CPU time, but it can provide a large savings in developer time. We discuss this more in [Chapter 18](#_bookmark1596).
+Parellelization of tests can also help reduce execution time. At Google, our test infrastructure makes it trivial to split up tests in a test suite to be executed across multiple servers. This increases the cost of CPU time, but it can provide a large savings in developer time. We discuss this more in [Chapter 18](Chapter-13\_Test\_Doubles.md#\_bookmark1596).
 
 测试的并行化也有助于减少执行时间。在谷歌，我们的测试基础设施使得将测试套件中的测试拆分到多个服务器上执行变得非常简单。这增加了CPU的成本，但它可以为开发人员节省大量时间。我们在第18章中对此有更多的讨论。
 
@@ -427,11 +428,11 @@ Another trade-off to be aware of: using a real implementation can result in incr
 
 另一个需要注意的权衡：使用一个真实实现会导致构建时间的增加，因为测试需要构建真实实现以及它的所有依赖。使用像[Bazel](https://bazel.build/)这样的高度可扩展的构建系统会有帮助，因为它缓存了未改变的构建构件。
 
-#### Determinism 确定性
+**Determinism 确定性**
 
-A test is [*deterministic*](https://oreil.ly/brxJl)if, for a given version of the system under test, running the test always results in the same outcome; that is, the test either always passes or always fails. In contrast, a test is [*nondeterministic*](https://oreil.ly/5pG0f)if its outcome can change, even if the system under test remains unchanged.
+A test is [_deterministic_](https://oreil.ly/brxJl)if, for a given version of the system under test, running the test always results in the same outcome; that is, the test either always passes or always fails. In contrast, a test is [_nondeterministic_](https://oreil.ly/5pG0f)if its outcome can change, even if the system under test remains unchanged.
 
-如果对于被测系统的给定版本，运行测试的结果总是相同的，也就是说，测试要么总是通过，要么总是失败，那么这个测试就是[*确定性*](https://oreil.ly/brxJl)。相反，如果一个测试的结果可以改变，即使被测系统保持不变，那么它就是[*非确定性*](https://oreil.ly/5pG0f)。
+如果对于被测系统的给定版本，运行测试的结果总是相同的，也就是说，测试要么总是通过，要么总是失败，那么这个测试就是[_确定性_](https://oreil.ly/brxJl)。相反，如果一个测试的结果可以改变，即使被测系统保持不变，那么它就是[_非确定性_](https://oreil.ly/5pG0f)。
 
 [Nondeterminism in tests ](https://oreil.ly/71OFU)can lead to flakiness—tests can occasionally fail even when there are no changes to the system under test. As discussed in Chapter 11, flakiness harms the health of a test suite if developers start to distrust the results of the test and ignore failures. If use of a real implementation rarely causes flakiness, it might not warrant a response, because there is little disruption to engineers. But if flakiness hap‐pens often, it might be time to replace a real implementation with a test double because doing so will improve the fidelity of the test.
 
@@ -441,7 +442,7 @@ A real implementation can be much more complex compared to a test double, which 
 
 与测试替代相比，真正实现可能要复杂得多，这增加了它不确定性的概率。例如，如果被测系统的输出因线程的执行顺序不同而不同，利用多线程的真实实现可能偶尔会导致测试失败。
 
-A common cause of nondeterminism is code that is not [hermetic](https://oreil.ly/aes__); that is, it has dependencies on external services that are outside the control of a test. For example, a test that tries to read the contents of a web page from an HTTP server might fail if the server is overloaded or if the web page contents change. Instead, a test double should be used to prevent the test from depending on an external server. If using a test double is not feasible, another option is to use a hermetic instance of a server, which has its life cycle controlled by the test. Hermetic instances are discussed in more detail in the next chapter.
+A common cause of nondeterminism is code that is not [hermetic](https://oreil.ly/aes\_\_); that is, it has dependencies on external services that are outside the control of a test. For example, a test that tries to read the contents of a web page from an HTTP server might fail if the server is overloaded or if the web page contents change. Instead, a test double should be used to prevent the test from depending on an external server. If using a test double is not feasible, another option is to use a hermetic instance of a server, which has its life cycle controlled by the test. Hermetic instances are discussed in more detail in the next chapter.
 
 不确定性的一个常见原因是代码不够封闭；也就是说，它依赖于测试无法控制的外部服务。例如，如果服务器过载或网页内容更改，尝试从HTTP服务器读取网页内容的测试可能会失败。相反，应该使用测试替代来防止测试依赖于外部服务器。如果使用测试工具不可行，另一种选择是使用服务器的封闭实例，其生命周期由测试控制。下一章将更详细地讨论封闭实例。
 
@@ -449,7 +450,7 @@ Another example of nondeterminism is code that relies on the system clock given 
 
 不确定性的另一个例子是依赖于系统时钟的代码，因为被测系统的输出可能因当前时间而异。测试可以使用硬编码特定时间的测试替代，而不是依赖于系统时钟。
 
-#### Dependency construction 依赖关系的构建
+**Dependency construction 依赖关系的构建**
 
 When using a real implementation, you need to construct all of its dependencies. For example, an object needs its entire dependency tree to be constructed: all objects that it depends on, all objects that these dependent objects depend on, and so on. A test double often has no dependencies, so constructing a test double can be much simpler compared to constructing a real implementation.
 
@@ -480,13 +481,13 @@ Rather than manually constructing the object in tests, the ideal solution is to 
 
 与其在测试中手动构建对象，理想的解决方案是使用生产代码中使用的相同的对象构建代码，如工厂方法或自动依赖注入。为了支持测试的使用情况，对象构造代码需要有足够的灵活性，能够使用测试替代，而不是硬编码将用于生产的实现。
 
-## Faking 伪造测试
+### Faking 伪造测试
 
-If using a real implementation is not feasible within a test, the best option is often to use a fake in its place. A fake is preferred over other test double techniques because it behaves similarly to the real implementation: the system under test shouldn’t even be able to tell whether it is interacting with a real implementation or a fake. Example 13-11illustrates a fake file system. 
+If using a real implementation is not feasible within a test, the best option is often to use a fake in its place. A fake is preferred over other test double techniques because it behaves similarly to the real implementation: the system under test shouldn’t even be able to tell whether it is interacting with a real implementation or a fake. Example 13-11illustrates a fake file system.
 
 如果在测试中使用真实实现是不可行的，那么最好的选择通常是使用伪造实现。与其他测试替代技术相比，伪造测试技术更受欢迎，因为它的行为类似于真实实现：被测试的系统甚至不能判断它是与真实实现交互还是与伪造实现交互。示例13-11演示了一个伪造文件系统。
 
-*Example* *13-11.* *A* *fake* *file* *system*
+_Example_ _13-11._ _A_ _fake_ _file_ _system_
 
 ```java
 // This fake implements the FileSystem interface. This interface is also
@@ -515,7 +516,7 @@ public class FakeFileSystem implements FileSystem {
 }
 ```
 
-### Why Are Fakes Important? 为什么伪造测试很重要？
+#### Why Are Fakes Important? 为什么伪造测试很重要？
 
 Fakes can be a powerful tool for testing: they execute quickly and allow you to effectively test your code without the drawbacks of using real implementations.
 
@@ -529,7 +530,7 @@ At the other end of the spectrum, in a software organization where fakes are rar
 
 另一方面，在一个使用伪造测试很少的软件组织中，速度会慢一些，因为工程师最终会在使用真正实现时遇到困难，从而导致测试缓慢和不稳定。或者工程师可能会求助于其他测试替代技术，如打桩或交互测试，正如我们将在本章后面讨论的那样，这些技术可能会导致测试不清晰、脆弱且效率较低。
 
-### When Should Fakes Be Written? 什么时候应该写伪造测试？
+#### When Should Fakes Be Written? 什么时候应该写伪造测试？
 
 A fake requires more effort and more domain experience to create because it needs to behave similarly to the real implementation. A fake also requires maintenance: whenever the behavior of the real implementation changes, the fake must also be updated to match this behavior. Because of this, the team that owns the real implementation should write and maintain a fake.
 
@@ -547,11 +548,11 @@ Maintaining a fake can be burdensome if its implementation needs to be duplicate
 
 如果需要跨编程语言复制伪造实现代码的实现，例如对于具有允许从不同语言调用服务的客户端库的服务，则维护伪造实现代码可能会很麻烦。这种情况下的一个解决方案是创建一个伪造服务实现，并让测试配置客户端库以向该伪造服务发送请求。与将伪造实现代码完全写入内存相比，这种方法更为重要，因为它需要测试跨进程进行通信。但是，只要测试仍然可以快速执行，那么这是一个合理的权衡。
 
-### The Fidelity of Fakes 伪造测试的仿真度
+#### The Fidelity of Fakes 伪造测试的仿真度
 
-Perhaps the most important concept surrounding the creation of fakes is *fidelity*; in other words, how closely the behavior of a fake matches the behavior of the real implementation. If the behavior of a fake doesn’t match the behavior of the real implementation, a test using that fake is not useful—a test might pass when the fake is used, but this same code path might not work properly in the real implementation.
+Perhaps the most important concept surrounding the creation of fakes is _fidelity_; in other words, how closely the behavior of a fake matches the behavior of the real implementation. If the behavior of a fake doesn’t match the behavior of the real implementation, a test using that fake is not useful—a test might pass when the fake is used, but this same code path might not work properly in the real implementation.
 
-也许围绕着创建伪造测试的最重要的概念是*仿真度*；换句话说，伪造测试的行为与真实实现的行为的匹配程度。如果伪造测试的行为与真实实现的行为不匹配，那么使用该伪造测试就没有用处——当使用该伪造测试时，测试可能会通过，但同样的代码路径在真实实现中可能无法正常工作。
+也许围绕着创建伪造测试的最重要的概念是_仿真度_；换句话说，伪造测试的行为与真实实现的行为的匹配程度。如果伪造测试的行为与真实实现的行为不匹配，那么使用该伪造测试就没有用处——当使用该伪造测试时，测试可能会通过，但同样的代码路径在真实实现中可能无法正常工作。
 
 Perfect fidelity is not always feasible. After all, the fake was necessary because the real implementation wasn’t suitable in one way or another. For example, a fake database would usually not have fidelity to a real database in terms of hard drive storage because the fake would store everything in memory.
 
@@ -561,7 +562,7 @@ Primarily, however, a fake should maintain fidelity to the API contracts of the 
 
 然而，主要的是，伪造测试应该保持对真实实现的API契约的完整性。对于API的任何给定的输入，伪造测试应该返回相同的输出，并对其相应的实际实现执行相同的状态更改。例如，对于数据库.save(itemId)的真实实现，如果一个项目在其ID不存在的情况下被成功保存，但在ID已经存在的情况下会产生一个错误，伪造数据库必须符合这个相同的行为。
 
-One way to think about this is that the fake must have perfect fidelity to the real implementation, but *only from the perspective of the test*. For example, a fake for a hashing API doesn’t need to guarantee that the hash value for a given input is exactly the same as the hash value that is generated by the real implementation—tests likely don’t care about the specific hash value, only that the hash value is unique for a given input. If the contract of the hashing API doesn’t make guarantees of what specific hash values will be returned, the fake is still conforming to the contract even if it doesn’t have perfect fidelity to the real implementation.
+One way to think about this is that the fake must have perfect fidelity to the real implementation, but _only from the perspective of the test_. For example, a fake for a hashing API doesn’t need to guarantee that the hash value for a given input is exactly the same as the hash value that is generated by the real implementation—tests likely don’t care about the specific hash value, only that the hash value is unique for a given input. If the contract of the hashing API doesn’t make guarantees of what specific hash values will be returned, the fake is still conforming to the contract even if it doesn’t have perfect fidelity to the real implementation.
 
 一种思考方式是，伪造测试必须对真正的实现有完美的仿真度，但只能从测试的角度来看。例如，一个伪造hash API不需要保证给定输入的hash值与真实实现产生的hash值完全相同——测试可能不关心具体的hash值，只关心给定输入的hash值是唯一的。如果hash API的契约没有保证将返回哪些特定的hash值，那么伪造函数仍然符合契约，即使它与真实实现没有完美的仿真度。
 
@@ -573,17 +574,17 @@ A fake might not need to have 100% of the functionality of its corresponding rea
 
 伪造实现代码可能不需要拥有其对应的真实实现的100%功能，尤其是在大多数测试不需要这种行为的情况下（例如，罕见边缘情况下的错误处理代码）。在这种情况下，最好让伪造测试快速失效；例如，如果执行了不受支持的代码路径，则引发错误。该故障告知工程师，在这种情况下，伪造测试是不合适的。
 
-### Fakes Should Be Tested  伪造测试应当被测试
+#### Fakes Should Be Tested 伪造测试应当被测试
 
-A fake must have its *own* tests to ensure that it conforms to the API of its corresponding real implementation. A fake without tests might initially provide realistic behavior, but without tests, this behavior can diverge over time as the real implementation evolves.
+A fake must have its _own_ tests to ensure that it conforms to the API of its corresponding real implementation. A fake without tests might initially provide realistic behavior, but without tests, this behavior can diverge over time as the real implementation evolves.
 
-伪造测试必须有自己的*测试*，以确保它符合其相应的真实实现的API。没有测试的伪造最初可能会提供真实的行为，但如果没有测试，随着时间的推移，这种行为会随着真实实现的发展而发生变化。
+伪造测试必须有自己的_测试_，以确保它符合其相应的真实实现的API。没有测试的伪造最初可能会提供真实的行为，但如果没有测试，随着时间的推移，这种行为会随着真实实现的发展而发生变化。
 
-One approach to writing tests for fakes involves writing tests against the API’s public interface and running those tests against both the real implementation and the fake (these are known as [*contract tests*](https://oreil.ly/yuVlX)). The tests that run against the real implementation will likely be slower, but their downside is minimized because they need to be run only by the owners of the fake.
+One approach to writing tests for fakes involves writing tests against the API’s public interface and running those tests against both the real implementation and the fake (these are known as [_contract tests_](https://oreil.ly/yuVlX)). The tests that run against the real implementation will likely be slower, but their downside is minimized because they need to be run only by the owners of the fake.
 
-为伪造测试编写测试的一种方法是针对API的公共接口编写测试，并针对真实实现和伪造测试运行这些测试（这些被称为[*合同测试*](https://oreil.ly/yuVlX)）。针对真实实现运行的测试可能会更慢，但它们的缺点会被最小化，因为它们只需要由伪造实现代码的所有者运行。
+为伪造测试编写测试的一种方法是针对API的公共接口编写测试，并针对真实实现和伪造测试运行这些测试（这些被称为[_合同测试_](https://oreil.ly/yuVlX)）。针对真实实现运行的测试可能会更慢，但它们的缺点会被最小化，因为它们只需要由伪造实现代码的所有者运行。
 
-### What to Do If a Fake Is Not Available 如果没有伪造测试怎么办？
+#### What to Do If a Fake Is Not Available 如果没有伪造测试怎么办？
 
 If a fake is not available, first ask the owners of the API to create one. The owners might not be familiar with the concept of fakes, or they might not realize the benefit they provide to users of an API.
 
@@ -601,13 +602,13 @@ In some cases, you can think of a fake as an optimization: if tests are too slow
 
 在某些情况下，可以将伪造实现代码视为优化：如果使用真实实现的测试太慢，可以创建伪代码以使它们运行得更快。但是，如果伪造实现代码的加速比不超过创建和维护伪造实现代码所需的工作量，那么最好还是坚持使用真实实现。
 
-## Stubbing 打桩
+### Stubbing 打桩
 
-As discussed earlier in this chapter, stubbing is a way for a test to hardcode behavior for a function that otherwise has no behavior on its own. It is often a quick and easy way to replace a real implementation in a test. For example, the code in [Example 13-12 ](#_bookmark1144)uses stubbing to simulate the response from a credit card server.
+As discussed earlier in this chapter, stubbing is a way for a test to hardcode behavior for a function that otherwise has no behavior on its own. It is often a quick and easy way to replace a real implementation in a test. For example, the code in [Example 13-12 ](Chapter-13\_Test\_Doubles.md#\_bookmark1144)uses stubbing to simulate the response from a credit card server.
 
 正如本章前面所讨论的，打桩是一种测试函数硬编码行为的方法，否则函数本身就没有行为。它通常是一种快速而简单的方法来替代测试中的真实实现。例如，例13-12中的代码使用打桩来模拟信用卡服务器的响应。
 
-*Example* *13-12.* *Using* *stubbing* *to* *simulate* *responses*
+_Example_ _13-12._ _Using_ _stubbing_ _to_ _simulate_ _responses_
 
 ```java
 @Test public void getTransactionCount() {
@@ -618,13 +619,13 @@ assertThat(transactionCounter.getTransactionCount()).isEqualTo(3);
 }
 ```
 
-### The Dangers of Overusing Stubbing  过度使用打桩的危害
+#### The Dangers of Overusing Stubbing 过度使用打桩的危害
 
 Because stubbing is so easy to apply in tests, it can be tempting to use this technique anytime it’s not trivial to use a real implementation. However, overuse of stubbing can result in major losses in productivity for engineers who need to maintain these tests.
 
 因为打桩在测试中很容易应用，所以在使用真实实现不容易的情况下，使用这种技术是很诱惑力的。然而，过度使用打桩会导致需要维护这些测试的工程师的生产力的重大损失。
 
-#### Tests become unclear 测试变得不清晰
+**Tests become unclear 测试变得不清晰**
 
 Stubbing involves writing extra code to define the behavior of the functions being stubbed. Having this extra code detracts from the intent of the test, and this code can be difficult to understand if you’re not familiar with the implementation of the system under test.
 
@@ -634,17 +635,17 @@ A key sign that stubbing isn’t appropriate for a test is if you find yourself 
 
 打桩不适用于测试的一个关键标志是，如果你发现自己为了理解为什么测试中的某些功能是打桩的，而在思路已经跃出了被测系统。
 
-#### Tests become brittle 测试变得脆弱
+**Tests become brittle 测试变得脆弱**
 
 Stubbing leaks implementation details of your code into your test. When implementation details in your production code change, you’ll need to update your tests to reflect these changes. Ideally, a good test should need to change only if user-facing behavior of an API changes; it should remain unaffected by changes to the API’s implementation.
 
 打桩测试将你的代码的实现细节泄露给你的测试。当生产代码中的实现细节改变时，你需要更新你的测试以反映这些变化。理想情况下，一个好的测试应该只在API面向用户的行为发生变化时才需要改变；它应该不受API实现变化的影响。
 
-#### Tests become less effective 测试有效性降低
+**Tests become less effective 测试有效性降低**
 
-With stubbing, there is no way to ensure the function being stubbed behaves like the real implementation, such as in a statement like that shown in the following snippet that hardcodes part of the contract of the add() method (*“If 1 and 2 are passed in, 3* *will be returned”*):
+With stubbing, there is no way to ensure the function being stubbed behaves like the real implementation, such as in a statement like that shown in the following snippet that hardcodes part of the contract of the add() method (_“If 1 and 2 are passed in, 3_ _will be returned”_):
 
-在打桩的情况下，没有办法确保被打桩的函数表现得像真实实现，比如像下面这个片段中的语句，硬编码了add()方法的部分契约（*"如果传入1和2，3将被返回 "*）。
+在打桩的情况下，没有办法确保被打桩的函数表现得像真实实现，比如像下面这个片段中的语句，硬编码了add()方法的部分契约（_"如果传入1和2，3将被返回 "_）。
 
 ```java
 when(stubCalculator.add(1, 2)).thenReturn(3);
@@ -666,7 +667,7 @@ Example 13-13 illustrates a test that overuses stubbing.
 
 例13-13说明了一个过度使用打桩的测试。
 
-*Example* *13-13.* *Overuse* *of* *stubbing*
+_Example_ _13-13._ _Overuse_ _of_ _stubbing_
 
 ```java
 @Test
@@ -692,7 +693,7 @@ Example 13-14 rewrites the same test but avoids using stubbing. Notice how the t
 
 例13-14重写了同样的测试，但避免了使用打桩测试方式。注意这个测试是如何精简的，并且在测试中没有暴露实现细节（比如如何使用交易处理器）。不需要特别的设置，因为信用卡服务器知道如何操作。
 
-*Example* *13-14.* *Refactoring* *a* *test* *to* *avoid* *stubbing*
+_Example_ _13-14._ _Refactoring_ _a_ _test_ _to_ _avoid_ _stubbing_
 
 ```java
 @Test
@@ -709,7 +710,7 @@ We obviously don’t want such a test to talk to an external credit card server,
 
 显然，我们不希望这样的测试与外部信用卡服务器交互，因此更适合使用假信用卡服务器。如果一个伪造不可用，另一个选择是使用一个真实实现，与一个封闭的信用卡服务器交互，尽管这会增加测试的执行时间。（我们将在下一章中探讨封闭服务器。）
 
-### When Is Stubbing Appropriate? 什么情况下才适合使用打桩测试？
+#### When Is Stubbing Appropriate? 什么情况下才适合使用打桩测试？
 
 Rather than a catch-all replacement for a real implementation, stubbing is appropriate when you need a function to return a specific value to get the system under test into a certain state, such as Example 13-12 that requires the system under test to return a non-empty list of transactions. Because a function’s behavior is defined inline in the test, stubbing can simulate a wide variety of return values or errors that might not be possible to trigger from a real implementation or a fake.
 
@@ -723,7 +724,7 @@ Note that even when stubbing is appropriate, real implementations or fakes are s
 
 请注意，即使打桩测试是合适的，真实实现或伪造测试仍然是首选，因为它们不会暴露实现的细节，与打桩测试相比，它们能给你更多关于代码的正确性的保证。但打桩可以是一种合理的技术，只要它的使用受到限制，使测试不会变得过于复杂。
 
-## Interaction Testing  交互测试
+### Interaction Testing 交互测试
 
 As discussed earlier in this chapter, interaction testing is a way to validate how a function is called without actually calling the implementation of the function.
 
@@ -733,35 +734,35 @@ Mocking frameworks make it easy to perform interaction testing. However, to keep
 
 模拟框架使执行交互测试变得容易。然而，为了保持测试的有用性、可读性和应变能力，只在必要时执行交互测试是很重要的。
 
-### Prefer State Testing Over Interaction Testing 推荐状态测试而非交互测试
+#### Prefer State Testing Over Interaction Testing 推荐状态测试而非交互测试
 
-In contrast to interaction testing, it is preferred to test code through [*state* *testing*](https://oreil.ly/k3hSR).
+In contrast to interaction testing, it is preferred to test code through [_state_ _testing_](https://oreil.ly/k3hSR).
 
-与交互测试相比，最好是通过[*状态测试*](https://oreil.ly/k3hSR)来测试代码。
+与交互测试相比，最好是通过[_状态测试_](https://oreil.ly/k3hSR)来测试代码。
 
 With state testing, you call the system under test and validate that either the correct value was returned or that some other state in the system under test was properly changed. Example 13-15 presents an example of state testing.
 
 通过状态测试，你可以调用被测系统，并验证返回的值是否正确，或者被测系统中的其他状态是否已正确更改。示例13-15给出了一个状态测试示例。
 
-*Example 13-15. State testing*
+_Example 13-15. State testing_
 
- ```java
- @Test
- public void sortNumbers() {
-     NumberSorter numberSorter = new NumberSorter(quicksort, bubbleSort);
-     // Call the system under test.
-     List sortedList = numberSorter.sortNumbers(newList(3, 1, 2));
-     // Validate that the returned list is sorted. It doesn’t matter which
-     // sorting algorithm is used, as long as the right result was returned.
-     assertThat(sortedList).isEqualTo(newList(1, 2, 3));
- }
- ```
+```java
+@Test
+public void sortNumbers() {
+    NumberSorter numberSorter = new NumberSorter(quicksort, bubbleSort);
+    // Call the system under test.
+    List sortedList = numberSorter.sortNumbers(newList(3, 1, 2));
+    // Validate that the returned list is sorted. It doesn’t matter which
+    // sorting algorithm is used, as long as the right result was returned.
+    assertThat(sortedList).isEqualTo(newList(1, 2, 3));
+}
+```
 
 Example 13-16 illustrates a similar test scenario but instead uses interaction testing. Note how it’s impossible for this test to determine that the numbers are actually sorted, because the test doubles don’t know how to sort the numbers—all it can tell you is that the system under test tried to sort the numbers.
 
- 示例13-16说明了一个类似的测试场景，但使用了交互测试。请注意，此测试无法确定数字是否实际已排序，因为测试替代不知道如何对数字进行排序——它所能告诉你的是，被测试系统尝试对数字进行排序。
+示例13-16说明了一个类似的测试场景，但使用了交互测试。请注意，此测试无法确定数字是否实际已排序，因为测试替代不知道如何对数字进行排序——它所能告诉你的是，被测试系统尝试对数字进行排序。
 
-*Example* *13-16.* *Interaction* *testing*
+_Example_ _13-16._ _Interaction_ _testing_
 
 ```java
 @Test 
@@ -781,25 +782,25 @@ At Google, we’ve found that emphasizing state testing is more scalable; it red
 
 在谷歌，我们发现强调状态测试更具可扩展性；它降低了测试的脆弱性，使得随着时间的推移更容易变更和维护代码。
 
-The primary issue with interaction testing is that it can’t tell you that the system under test is working properly; it can only validate that certain functions are called as expected. It requires you to make an assumption about the behavior of the code; for example, “*If* *database.save(item) is called, we assume the item will be saved to the database.*” State testing is preferred because it actually validates this assumption (such as by saving an item to a database and then querying the database to validate that the item exists).
+The primary issue with interaction testing is that it can’t tell you that the system under test is working properly; it can only validate that certain functions are called as expected. It requires you to make an assumption about the behavior of the code; for example, “_If_ _database.save(item) is called, we assume the item will be saved to the database._” State testing is preferred because it actually validates this assumption (such as by saving an item to a database and then querying the database to validate that the item exists).
 
-交互测试的主要问题是它不能告诉你被测试的系统是否正常工作；它只能验证是否按预期调用了某些函数。它要求你对代码的行为做出假设；例如，首选“如果”状态测试，因为它实际上验证了该假设（例如，将项目保存到数据库，然后查询数据库以验证该项目是否存在）。如果调用了*database.save(item)*，则假定该项将保存到数据库中。
+交互测试的主要问题是它不能告诉你被测试的系统是否正常工作；它只能验证是否按预期调用了某些函数。它要求你对代码的行为做出假设；例如，首选“如果”状态测试，因为它实际上验证了该假设（例如，将项目保存到数据库，然后查询数据库以验证该项目是否存在）。如果调用了_database.save(item)_，则假定该项将保存到数据库中。
 
-Another downside of interaction testing is that it utilizes implementation details of the system under test—to validate that a function was called, you are exposing to the test that the system under test calls this function. Similar to stubbing, this extra code makes tests brittle because it leaks implementation details of your production code into tests. Some people at Google jokingly refer to tests that overuse interaction testing as [*change-detector* *tests* ](https://oreil.ly/zkMDu)because they fail in response to any change to the production code, even if the behavior of the system under test remains unchanged.
+Another downside of interaction testing is that it utilizes implementation details of the system under test—to validate that a function was called, you are exposing to the test that the system under test calls this function. Similar to stubbing, this extra code makes tests brittle because it leaks implementation details of your production code into tests. Some people at Google jokingly refer to tests that overuse interaction testing as [_change-detector_ _tests_ ](https://oreil.ly/zkMDu)because they fail in response to any change to the production code, even if the behavior of the system under test remains unchanged.
 
-交互测试的另一个缺点是，它利用被测系统的实现细节——验证某个函数是否被调用，你向测试暴露了被测系统调用这个函数。与打桩类似，这个额外的代码使测试变得脆弱，因为它将生产代码的实现细节泄漏到测试中。谷歌的一些人开玩笑地把过度使用交互测试的测试称为[*变更检测器测试*](https://oreil.ly/zkMDu)，因为它们对生产代码的任何改变都会失败，即使被测系统的行为保持不变。
+交互测试的另一个缺点是，它利用被测系统的实现细节——验证某个函数是否被调用，你向测试暴露了被测系统调用这个函数。与打桩类似，这个额外的代码使测试变得脆弱，因为它将生产代码的实现细节泄漏到测试中。谷歌的一些人开玩笑地把过度使用交互测试的测试称为[_变更检测器测试_](https://oreil.ly/zkMDu)，因为它们对生产代码的任何改变都会失败，即使被测系统的行为保持不变。
 
-### When Is Interaction Testing Appropriate? 什么时候适合进行交互测试？
+#### When Is Interaction Testing Appropriate? 什么时候适合进行交互测试？
 
 There are some cases for which interaction testing is warranted:
 
-- You cannot perform state testing because you are unable to use a real implementation or a fake (e.g., if the real implementation is too slow and no fake exists). As a fallback, you can perform interaction testing to validate that certain functions are called. Although not ideal, this does provide some basic level of confidence that the system under test is working as expected.
-- Differences in the number or order of calls to a function would cause undesired behavior. Interaction testing is useful because it could be difficult to validate this behavior with state testing. For example, if you expect a caching feature to reduce the number of calls to a database, you can verify that the database object is not accessed more times than expected. Using Mockito, the code might look similar to this:
+* You cannot perform state testing because you are unable to use a real implementation or a fake (e.g., if the real implementation is too slow and no fake exists). As a fallback, you can perform interaction testing to validate that certain functions are called. Although not ideal, this does provide some basic level of confidence that the system under test is working as expected.
+* Differences in the number or order of calls to a function would cause undesired behavior. Interaction testing is useful because it could be difficult to validate this behavior with state testing. For example, if you expect a caching feature to reduce the number of calls to a database, you can verify that the database object is not accessed more times than expected. Using Mockito, the code might look similar to this:
 
 在某些情况下，交互测试是有必要的：
 
-- 你不能进行状态测试，因为你无法使用真实实现或伪造实现（例如，如果真实实现太慢，而且没有伪造测试存在）。作为备用方案，你可以进行交互测试以验证某些函数被调用。虽然不是很理想，但这确实提供了一些基本的功能，即被测系统正在按照预期工作。
-- 对一个函数的调用数量或顺序的不同会导致不在预期内的行为。交互测试是有用的，因为用状态测试可能很难验证这种行为。例如，如果你期望一个缓存功能能减少对数据库的调用次数，你可以验证数据库对象的访问次数没有超过预期。使用Mockito，代码可能看起来类似于这样：
+* 你不能进行状态测试，因为你无法使用真实实现或伪造实现（例如，如果真实实现太慢，而且没有伪造测试存在）。作为备用方案，你可以进行交互测试以验证某些函数被调用。虽然不是很理想，但这确实提供了一些基本的功能，即被测系统正在按照预期工作。
+* 对一个函数的调用数量或顺序的不同会导致不在预期内的行为。交互测试是有用的，因为用状态测试可能很难验证这种行为。例如，如果你期望一个缓存功能能减少对数据库的调用次数，你可以验证数据库对象的访问次数没有超过预期。使用Mockito，代码可能看起来类似于这样：
 
 ```java
 verify(databaseReader, atMostOnce()).selectRecords();
@@ -809,39 +810,37 @@ Interaction testing is not a complete replacement for state testing. If you are 
 
 交互测试不能完全替代状态测试。如果无法在单元测试中执行状态测试，请强烈考虑用更大范围的执行状态测试的范围测试来补充测试套件。例如，如果你有一个单元测试，通过交互测试来验证数据库的使用，考虑添加一个集成测试，可以对真实数据库进行状态测试。更大范围的测试是减轻风险的重要策略，我们将在下一章中讨论它。
 
-#### Best Practices for Interaction Testing 交互测试的最佳实践
+**Best Practices for Interaction Testing 交互测试的最佳实践**
 
 When performing interaction testing, following these practices can reduce some of the impact of the aforementioned downsides.
 
 在进行交互测试时，遵循这些做法可以减少上述弊端的一些影响。
 
-#### Prefer to perform interaction testing only for state-changing functions 倾向于只对状态改变的功能进行交互测试
+**Prefer to perform interaction testing only for state-changing functions 倾向于只对状态改变的功能进行交互测试**
 
 When a system under test calls a function on a dependency, that call falls into one of two categories:
-- *State-changing*
-    Functions that have side effects on the world outside the system under test. Examples: 
+
+* _State-changing_ Functions that have side effects on the world outside the system under test. Examples:
 
 ```java
 sendEmail(), saveRecord(), logAccess().
 ```
 
-- *Non-state-changing*
-Functions that don’t have side effects; they return information about the world outside the system under test and don’t modify anything. Examples: 
+* _Non-state-changing_ Functions that don’t have side effects; they return information about the world outside the system under test and don’t modify anything. Examples:
+
 ```java
 getUser(), findResults(), readFile().
 ```
 
 当被测系统调用一个依赖关系上的函数时，该调用属于两类中的一类：
 
-*改变状态*
-	对被测系统以外的范围有副作用的函数。例子：
+_改变状态_ 对被测系统以外的范围有副作用的函数。例子：
 
 ```java
 sendEmail(), saveRecord(), logAccess().
 ```
 
-- *不改变状态*
-没有副作用的函数；它们返回关于被测系统以外的范围的信息，不修改任何东西。例如：
+* _不改变状态_ 没有副作用的函数；它们返回关于被测系统以外的范围的信息，不修改任何东西。例如：
 
 ```java
 getUser(), findResults(), readFile()。
@@ -859,7 +858,7 @@ Example 13-17 demonstrates interaction testing on both state-changing and non- s
 
 例13-17展示了对状态变化和非状态变化函数的交互测试。
 
-*Example 13-17. State-changing and non-state-changing interactions*  *例13-17. 状态改变和非状态改变的相互作用*
+_Example 13-17. State-changing and non-state-changing interactions_ _例13-17. 状态改变和非状态改变的相互作用_
 
 ```java
 @Test
@@ -878,7 +877,7 @@ public void grantUserPermission() {
 }
 ```
 
-#### Avoid overspecification 避免过度规范化
+**Avoid overspecification 避免过度规范化**
 
 In Chapter 12, we discuss why it is useful to test behaviors rather than methods. This means that a test method should focus on verifying one behavior of a method or class rather than trying to verify multiple behaviors in a single test.
 
@@ -892,7 +891,7 @@ Example 13-18 illustrates interaction testing with overspecification. The intent
 
 示例13-18说明了过度规范的交互测试。测试的目的是验证用户名是否包含在问候语提示中，但如果不相关的行为发生更改，测试将失败。
 
- *Example* *13-18.* *Overspecified* *interaction* *tests*
+_Example_ _13-18._ _Overspecified_ _interaction_ _tests_
 
 ```java
 @Test public void displayGreeting_renderUserName() {
@@ -908,11 +907,11 @@ Example 13-18 illustrates interaction testing with overspecification. The intent
 }
 ```
 
-[Example 13-19](#_bookmark1176) illustrates interaction testing with more care in specifying relevant arguments and functions. The behaviors being tested are split into separate tests, and each test validates the minimum amount necessary for ensuring the behavior it is testing is correct.
+[Example 13-19](Chapter-13\_Test\_Doubles.md#\_bookmark1176) illustrates interaction testing with more care in specifying relevant arguments and functions. The behaviors being tested are split into separate tests, and each test validates the minimum amount necessary for ensuring the behavior it is testing is correct.
 
 例13-19说明了交互测试在指定相关参数和函数时更加谨慎。被测试的行为被分成独立的测试，每个测试都验证了确保它所测试的行为是正确的所需的最小量。
 
- *Example 13-19. Well-specified interaction tests*  *例13-19.指向明确的交互检验*
+_Example 13-19. Well-specified interaction tests_ _例13-19.指向明确的交互检验_
 
 ```java
 @Test 
@@ -931,7 +930,7 @@ public void displayGreeting_timeIsMorning_useMorningSettings() {
 }
 ```
 
-## Conclusion 总结
+### Conclusion 总结
 
 We’ve learned that test doubles are crucial to engineering velocity because they can help comprehensively test your code and ensure that your tests run fast. On the other hand, misusing them can be a major drain on productivity because they can lead to tests that are unclear, brittle, and less effective. This is why it’s important for engineers to understand the best practices for how to effectively apply test doubles.
 
@@ -945,14 +944,13 @@ Although test doubles are great for working around dependencies that are difficu
 
 尽管测试替代对于处理测试中难以使用的依赖项非常有用，但如果你想最大限度地提高代码的可信度，在某些时候你仍然希望在测试中使用这些依赖项。下一章将介绍更大范围的测试，对于这些测试，不管它们是否适合单元测试，都将使用这些依赖关系；例如，即使它们很慢或不确定。
 
-## TL;DRs  内容提要
+### TL;DRs 内容提要
 
-- A real implementation should be preferred over a test double.
-- A fake is often the ideal solution if a real implementation can’t be used in a test.
-- Overuse of stubbing leads to tests that are unclear and brittle.
-- Interaction testing should be avoided when possible: it leads to tests that are brittle because it exposes implementation details of the system under test.
-
-- 真实实现应优先于测试替代。
-- 如果在测试中不能使用真实实现，那么伪造实现通常是理想的解决方案。
-- 过度使用打桩会导致测试不明确和变脆。
-- 在可能的情况下，应避免交互测试：因为交互测试会暴露被测系统的实现细节，所以会导致测试不连贯。
+* A real implementation should be preferred over a test double.
+* A fake is often the ideal solution if a real implementation can’t be used in a test.
+* Overuse of stubbing leads to tests that are unclear and brittle.
+* Interaction testing should be avoided when possible: it leads to tests that are brittle because it exposes implementation details of the system under test.
+* 真实实现应优先于测试替代。
+* 如果在测试中不能使用真实实现，那么伪造实现通常是理想的解决方案。
+* 过度使用打桩会导致测试不明确和变脆。
+* 在可能的情况下，应避免交互测试：因为交互测试会暴露被测系统的实现细节，所以会导致测试不连贯。

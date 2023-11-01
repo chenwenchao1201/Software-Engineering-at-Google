@@ -1,43 +1,44 @@
+# Chapter-12\_Unit\_Testing
 
 **CHAPTER 12**
 
-# Unit Testing
+## Unit Testing
 
-# 第十二章 单元测试
+## 第十二章 单元测试
 
 **Written by Erik Kuefler**
 
 **Edited by Tom Manshreck**
 
-The previous chapter introduced two of the main axes along which Google classifies tests: *size* and *scope*. To recap, size refers to the resources consumed by a test and what it is allowed to do, and scope refers to how much code a test is intended to validate. Though Google has clear definitions for test size, scope tends to be a little fuzzier. We use the term *unit test* to refer to tests of relatively narrow scope, such as of a single class or method. Unit tests are usually small in size, but this isn’t always the case.
+The previous chapter introduced two of the main axes along which Google classifies tests: _size_ and _scope_. To recap, size refers to the resources consumed by a test and what it is allowed to do, and scope refers to how much code a test is intended to validate. Though Google has clear definitions for test size, scope tends to be a little fuzzier. We use the term _unit test_ to refer to tests of relatively narrow scope, such as of a single class or method. Unit tests are usually small in size, but this isn’t always the case.
 
-上一章介绍了谷歌对测试进行分类的两个主要轴线：*大小*和*范围*。简而言之，大小是指测试所消耗的资源和允许做的事情，范围是指测试要验证多少代码。虽然谷歌对测试规模有明确的定义，但范围往往是比较模糊的。我们使用术语*单元测试*指的是范围相对较窄的测试，如单个类或方法的测试。单元测试通常是小规模的，但并不总是如此。
+上一章介绍了谷歌对测试进行分类的两个主要轴线：_大小_和_范围_。简而言之，大小是指测试所消耗的资源和允许做的事情，范围是指测试要验证多少代码。虽然谷歌对测试规模有明确的定义，但范围往往是比较模糊的。我们使用术语_单元测试_指的是范围相对较窄的测试，如单个类或方法的测试。单元测试通常是小规模的，但并不总是如此。
 
 After preventing bugs, the most important purpose of a test is to improve engineers’ productivity. Compared to broader-scoped tests, unit tests have many properties that make them an excellent way to optimize productivity:
 
-- They tend to be small according to Google’s definitions of test size. Small tests are fast and deterministic, allowing developers to run them frequently as part of their workflow and get immediate feedback.
-- They tend to be easy to write at the same time as the code they’re testing, allowing engineers to focus their tests on the code they’re working on without having to set up and understand a larger system.
-- They promote high levels of test coverage because they are quick and easy to write. High test coverage allows engineers to make changes with confidence that they aren’t breaking anything.
-- They tend to make it easy to understand what’s wrong when they fail because each test is conceptually simple and focused on a particular part of the system.
-- They can serve as documentation and examples, showing engineers how to use the part of the system being tested and how that system is intended to work.
+* They tend to be small according to Google’s definitions of test size. Small tests are fast and deterministic, allowing developers to run them frequently as part of their workflow and get immediate feedback.
+* They tend to be easy to write at the same time as the code they’re testing, allowing engineers to focus their tests on the code they’re working on without having to set up and understand a larger system.
+* They promote high levels of test coverage because they are quick and easy to write. High test coverage allows engineers to make changes with confidence that they aren’t breaking anything.
+* They tend to make it easy to understand what’s wrong when they fail because each test is conceptually simple and focused on a particular part of the system.
+* They can serve as documentation and examples, showing engineers how to use the part of the system being tested and how that system is intended to work.
 
 在实现防止bug之后，测试最重要的目的是提高工程师的生产效率。与范围更广的测试相比，单元测试有许多特性，使其成为优化生产效率的绝佳方式:
 
-- 根据谷歌对测试规模的定义，它们往往是小型的。小型测试是快速和确定的，允许开发人员频繁地运行它们，作为他们工作流程的一部分，并获得即时反馈。
-- 单元测试往往很容易与正在测试的代码同时编写，允许工程师将他们的测试集中在他们正在工作的代码上，而不需要建立和理解一个更大的系统。
-- 单元测试促进高水平的测试覆盖率，因为它们快速且易于编写。高测试覆盖率使工程师能够满怀信心地进行更改，确保他们不会破坏任何东西。
-- 由于每个单元测试在概念上都很简单，并且都集中在系统的特定部分，因此，它们往往会使人们很容易理解失败时的错误。
-- 它们可以作为文档和例子，向工程师展示如何使用被测试的系统部分，以及该系统的预期工作方式。
+* 根据谷歌对测试规模的定义，它们往往是小型的。小型测试是快速和确定的，允许开发人员频繁地运行它们，作为他们工作流程的一部分，并获得即时反馈。
+* 单元测试往往很容易与正在测试的代码同时编写，允许工程师将他们的测试集中在他们正在工作的代码上，而不需要建立和理解一个更大的系统。
+* 单元测试促进高水平的测试覆盖率，因为它们快速且易于编写。高测试覆盖率使工程师能够满怀信心地进行更改，确保他们不会破坏任何东西。
+* 由于每个单元测试在概念上都很简单，并且都集中在系统的特定部分，因此，它们往往会使人们很容易理解失败时的错误。
+* 它们可以作为文档和例子，向工程师展示如何使用被测试的系统部分，以及该系统的预期工作方式。
 
-Due to their many advantages, most tests written at Google are unit tests, and as a rule of thumb, we encourage engineers to aim for a mix of about 80% unit tests and 20% broader-scoped tests. This advice, coupled with the ease of writing unit tests and the speed with which they run, means that engineers run a *lot* of unit tests—it’s not at all unusual for an engineer to execute thousands of unit tests (directly or indirectly) during the average workday.
+Due to their many advantages, most tests written at Google are unit tests, and as a rule of thumb, we encourage engineers to aim for a mix of about 80% unit tests and 20% broader-scoped tests. This advice, coupled with the ease of writing unit tests and the speed with which they run, means that engineers run a _lot_ of unit tests—it’s not at all unusual for an engineer to execute thousands of unit tests (directly or indirectly) during the average workday.
 
-由于单元测试有很多优点，在谷歌写的大多数测试都是单元测试，作为经验法则，我们鼓励工程师把80%的单元测试和20%的范围更广的测试混合起来。这个建议，再加上编写单元测试的简易性和运行速度，意味着工程师要运行*多个*单元测试——一个工程师在平均工作日中执行数千个单元测试（直接或间接）是很正常的。
+由于单元测试有很多优点，在谷歌写的大多数测试都是单元测试，作为经验法则，我们鼓励工程师把80%的单元测试和20%的范围更广的测试混合起来。这个建议，再加上编写单元测试的简易性和运行速度，意味着工程师要运行_多个_单元测试——一个工程师在平均工作日中执行数千个单元测试（直接或间接）是很正常的。
 
-Because they make up such a big part of engineers’ lives, Google puts a lot of focus on *test maintainability*. Maintainable tests are ones that “just work”: after writing them, engineers don’t need to think about them again until they fail, and those failures indicate real bugs with clear causes. The bulk of this chapter focuses on exploring the idea of maintainability and techniques for achieving it.
+Because they make up such a big part of engineers’ lives, Google puts a lot of focus on _test maintainability_. Maintainable tests are ones that “just work”: after writing them, engineers don’t need to think about them again until they fail, and those failures indicate real bugs with clear causes. The bulk of this chapter focuses on exploring the idea of maintainability and techniques for achieving it.
 
-因为测试在工程师的生活中占了很大一部分，所以谷歌非常重视*测试*的可维护性。可维护的测试是那些 "正常工作 "的测试：在写完测试后，工程师不需要再考虑它们，直到它们失败，而这些失败表明有明确原因的真正错误。本章的主要内容是探讨可维护性的概念和实现它的技术。
+因为测试在工程师的生活中占了很大一部分，所以谷歌非常重视_测试_的可维护性。可维护的测试是那些 "正常工作 "的测试：在写完测试后，工程师不需要再考虑它们，直到它们失败，而这些失败表明有明确原因的真正错误。本章的主要内容是探讨可维护性的概念和实现它的技术。
 
-## The Importance of Maintainability  可维护性的重要性
+### The Importance of Maintainability 可维护性的重要性
 
 Imagine this scenario: Mary wants to add a simple new feature to the product and is able to implement it quickly, perhaps requiring only a couple dozen lines of code. But when she goes to check in her change, she gets a screen full of errors back from the automated testing system. She spends the rest of the day going through those failures one by one. In each case, the change introduced no actual bug, but broke some of the assumptions that the test made about the internal structure of the code, requiring those tests to be updated. Often, she has difficulty figuring out what the tests were trying to do in the first place, and the hacks she adds to fix them make those tests even more difficult to understand in the future. Ultimately, what should have been a quick job ends up taking hours or even days of busywork, killing Mary’s productivity and sapping her morale.
 
@@ -47,62 +48,55 @@ Here, testing had the opposite of its intended effect by draining productivity r
 
 在这里，测试产生了与预期相反的效果，它消耗了生产力，而不是提高生产效率，同时没有显著提高被测试代码的质量。这种情况太普遍了，谷歌工程师每天都在与之斗争。没有什么灵丹妙药，但谷歌的许多工程师一直在努力开发一套模式和实践来缓解这些问题，我们鼓励公司的其他人效仿。
 
-The problems Mary ran into weren’t her fault, and there was nothing she could have done to avoid them: bad tests must be fixed before they are checked in, lest they impose a drag on future engineers. Broadly speaking, the issues she encountered fall into two categories. First, the tests she was working with were *brittle*: they broke in response to a harmless and unrelated change that introduced no real bugs. Second, the tests were *unclear*: after they were failing, it was difficult to determine what was wrong, how to fix it, and what those tests were supposed to be doing in the first place.
+The problems Mary ran into weren’t her fault, and there was nothing she could have done to avoid them: bad tests must be fixed before they are checked in, lest they impose a drag on future engineers. Broadly speaking, the issues she encountered fall into two categories. First, the tests she was working with were _brittle_: they broke in response to a harmless and unrelated change that introduced no real bugs. Second, the tests were _unclear_: after they were failing, it was difficult to determine what was wrong, how to fix it, and what those tests were supposed to be doing in the first place.
 
 Mary遇到的问题不是她的错，而且她也没有办法避免这些问题：糟糕的测试必须在出现之前被修复，以免它们给未来的工程师带来阻力。概括地说，她遇到的问题分为两类。首先，她所使用的测试是很脆弱的：它们在应对一个无害的、不相关的变化时，没有引入真正的bug而损坏。第二，测试不明确：在测试失败后，很难确定哪里出了问题，如何修复它，以及这些测试最初应该做什么。
 
-## Preventing Brittle Tests  预防脆性测试
+### Preventing Brittle Tests 预防脆性测试
 
-As just defined, a brittle test is one that fails in the face of an unrelated change to production code that does not introduce any real bugs.[^1] Such tests must be diagnosed and fixed by engineers as part of their work. In small codebases with only a few engineers, having to tweak a few tests for every change might not be a big problem. But if a team regularly writes brittle tests, test maintenance will inevitably consume a larger and larger proportion of the team’s time as they are forced to comb through an increasing number of failures in an ever-growing test suite. If a set of tests needs to be manually tweaked by engineers for each change, calling it an “automated test suite” is a bit of a stretch!
+As just defined, a brittle test is one that fails in the face of an unrelated change to production code that does not introduce any real bugs. Such tests must be diagnosed and fixed by engineers as part of their work. In small codebases with only a few engineers, having to tweak a few tests for every change might not be a big problem. But if a team regularly writes brittle tests, test maintenance will inevitably consume a larger and larger proportion of the team’s time as they are forced to comb through an increasing number of failures in an ever-growing test suite. If a set of tests needs to be manually tweaked by engineers for each change, calling it an “automated test suite” is a bit of a stretch!
 
 正如刚才所定义的，脆性测试是指在面对不相关的程序代码变化时失败的测试，这些变化不会引入任何真正的错误。在只有几个工程师的小型代码库中，每次修改都要调整一些测试，这可能不是一个大问题。但是，如果一个团队经常写脆弱测试，测试维护将不可避免地消耗团队越来越多的时间，因为他们不得不在不断增长的测试套件中梳理越来越多的失败。如果一套测试需要工程师为每一个变化进行手动调整，称其为 "自动化测试套件"就有点牵强了！
 
-Brittle tests cause pain in codebases of any size, but they become particularly acute at Google’s scale. An individual engineer might easily run thousands of tests in a single day during the course of their work, and a single large-scale change (see [Chapter 22](#_bookmark1935)) can trigger hundreds of thousands of tests. At this scale, spurious breakages that affect even a small percentage of tests can waste huge amounts of engineering time. Teams at Google vary quite a bit in terms of how brittle their test suites are, but we’ve identified a few practices and patterns that tend to make tests more robust to change.
+Brittle tests cause pain in codebases of any size, but they become particularly acute at Google’s scale. An individual engineer might easily run thousands of tests in a single day during the course of their work, and a single large-scale change (see [Chapter 22](Chapter-12\_Unit\_Testing.md#\_bookmark1935)) can trigger hundreds of thousands of tests. At this scale, spurious breakages that affect even a small percentage of tests can waste huge amounts of engineering time. Teams at Google vary quite a bit in terms of how brittle their test suites are, but we’ve identified a few practices and patterns that tend to make tests more robust to change.
 
 脆弱测试在任何规模的代码库中都会造成痛苦，但在谷歌的规模中，它们变得尤为严重。一个单独的工程师在工作过程中，可能在一天内就会轻易地运行数千个测试，而一个大规模的变化（见第22章）可能会引发数十万个测试。在这种规模下，即使是影响一小部分测试的误报故障也会浪费大量的工程时间。谷歌的团队在测试套件的脆弱性方面存在很大差异，但我们已经确定了一些实践和模式，这些实践和模式倾向于使测试变得更健壮，更易于更改。
 
-> [^1]: Note that this is slightly different from a flaky test, which fails nondeterministically without any change to production code./
-> 1  注意，这与不稳定测试略有不同，不稳定测试是在不改变生产代码的情况下非确定性地失败。
+>
 
-### Strive for Unchanging Tests  力求稳定的测试
+#### Strive for Unchanging Tests 力求稳定的测试
 
-Before talking about patterns for avoiding brittle tests, we need to answer a question: just how often should we expect to need to change a test after writing it? Any time spent updating old tests is time that can’t be spent on more valuable work. Therefore, *the ideal test is unchanging*: after it’s written, it never needs to change unless the requirements of the system under test change.
+Before talking about patterns for avoiding brittle tests, we need to answer a question: just how often should we expect to need to change a test after writing it? Any time spent updating old tests is time that can’t be spent on more valuable work. Therefore, _the ideal test is unchanging_: after it’s written, it never needs to change unless the requirements of the system under test change.
 
-在讨论避免脆性测试的模式之前，我们需要回答一个问题：编写测试后，我们应该多久更改一次测试？任何花在更新旧测试上的时间都不能花在更有价值的工作上。因此，*理想的测试是不变的：*在编写之后，它永远不需要更改，除非被测系统的需求发生变化。
+在讨论避免脆性测试的模式之前，我们需要回答一个问题：编写测试后，我们应该多久更改一次测试？任何花在更新旧测试上的时间都不能花在更有价值的工作上。因此，\*理想的测试是不变的：\*在编写之后，它永远不需要更改，除非被测系统的需求发生变化。
 
 What does this look like in practice? We need to think about the kinds of changes that engineers make to production code and how we should expect tests to respond to those changes. Fundamentally, there are four kinds of changes:
 
-- *Pure refactorings*  
-	When an engineer refactors the internals of a system without modifying its interface, whether for performance, clarity, or any other reason, the system’s tests shouldn’t need to change. The role of tests in this case is to ensure that the refactoring didn’t change the system’s behavior. Tests that need to be changed during a refactoring indicate that either the change is affecting the system’s behavior and isn’t a pure refactoring, or that the tests were not written at an appropriate level of abstraction. Google’s reliance on large-scale changes (described in Chapter 22) to do such refactorings makes this case particularly important for us.
-
-- *New features*  
-	When an engineer adds new features or behaviors to an existing system, the system’s existing behaviors should remain unaffected. The engineer must write new tests to cover the new behaviors, but they shouldn’t need to change any existing tests. As with refactorings, a change to existing tests when adding new features suggest unintended consequences of that feature or inappropriate tests.
-
-- *Bug fixes*  
-	Fixing a bug is much like adding a new feature: the presence of the bug suggests that a case was missing from the initial test suite, and the bug fix should include that missing test case. Again, bug fixes typically shouldn’t require updates to existing tests.
-
-- *Behavior changes*  
-	Changing a system’s existing behavior is the one case when we expect to have to make updates to the system’s existing tests. Note that such changes tend to be significantly more expensive than the other three types. A system’s users are likely to rely on its current behavior, and changes to that behavior require coordination with those users to avoid confusion or breakages. Changing a test in this case indicates that we’re breaking an explicit contract of the system, whereas changes in the previous cases indicate that we’re breaking an unintended contract. Low- level libraries will often invest significant effort in avoiding the need to ever make a behavior change so as not to break their users.
+* _Pure refactorings_\
+  When an engineer refactors the internals of a system without modifying its interface, whether for performance, clarity, or any other reason, the system’s tests shouldn’t need to change. The role of tests in this case is to ensure that the refactoring didn’t change the system’s behavior. Tests that need to be changed during a refactoring indicate that either the change is affecting the system’s behavior and isn’t a pure refactoring, or that the tests were not written at an appropriate level of abstraction. Google’s reliance on large-scale changes (described in Chapter 22) to do such refactorings makes this case particularly important for us.
+* _New features_\
+  When an engineer adds new features or behaviors to an existing system, the system’s existing behaviors should remain unaffected. The engineer must write new tests to cover the new behaviors, but they shouldn’t need to change any existing tests. As with refactorings, a change to existing tests when adding new features suggest unintended consequences of that feature or inappropriate tests.
+* _Bug fixes_\
+  Fixing a bug is much like adding a new feature: the presence of the bug suggests that a case was missing from the initial test suite, and the bug fix should include that missing test case. Again, bug fixes typically shouldn’t require updates to existing tests.
+* _Behavior changes_\
+  Changing a system’s existing behavior is the one case when we expect to have to make updates to the system’s existing tests. Note that such changes tend to be significantly more expensive than the other three types. A system’s users are likely to rely on its current behavior, and changes to that behavior require coordination with those users to avoid confusion or breakages. Changing a test in this case indicates that we’re breaking an explicit contract of the system, whereas changes in the previous cases indicate that we’re breaking an unintended contract. Low- level libraries will often invest significant effort in avoiding the need to ever make a behavior change so as not to break their users.
 
 这在实践中是什么样子的呢？我们需要考虑工程师对生产代码所做的各种修改，以及我们应该如何期望测试对这些修改做出反应。从根本上说，有四种更改：
 
-- *纯粹的重构*  
+* _纯粹的重构_\
   当工程师在不修改系统接口的情况下重构系统内部时，无论是出于性能、清晰度还是任何其他原因，系统的测试都不需要更改。在这种情况下，测试的作用是确保重构没有改变系统的行为。在重构过程中需要改变的测试表明，要么变化影响了系统的行为，不是纯粹的重构，要么测试没有写在适当的抽象水平上。Google依靠大规模的变化（在第22章中描述）来做这样的重构，使得这种情况对我们特别重要。
-
-- *新功能*  
+* _新功能_\
   当工程师向现有系统添加新的功能或行为时，系统的现有行为应该不受影响。工程师必须编写新的测试来覆盖新的行为，但他们不应该需要改变任何现有的测试。与重构一样，在添加新功能时，对现有测试的改变表明该功能的非预期后果或不适当的测试。
-
-- *Bug修复*  
+* _Bug修复_\
   修复bug与添加新功能很相似：bug的存在表明初始测试套件中缺少一个案例，bug修复应该包括缺少的测试案例。同样，错误修复通常不需要对现有的测试进行更新。
-
-- *行为改变*  
+* _行为改变_\
   当我们期望必须对系统的现有测试进行更新时，更改系统的现有行为就是一种情况。请注意，这种变化往往比其他三种类型的测试代价要高得多。系统的用户可能依赖于其当前行为，而对该行为的更改需要与这些用户进行协调，以避免混淆或中断。在这种情况下改变测试表明我们正在破坏系统的一个明确的契约，而在前面的情况下改变则表明我们正在破坏一个非预期的契约。基础类库往往会投入大量的精力来避免需要进行行为的改变，以免破坏他们的用户。
 
 The takeaway is that after you write a test, you shouldn’t need to touch that test again as you refactor the system, fix bugs, or add new features. This understanding is what makes it possible to work with a system at scale: expanding it requires writing only a small number of new tests related to the change you’re making rather than potentially having to touch every test that has ever been written against the system. Only breaking changes in a system’s behavior should require going back to change its tests, and in such situations, the cost of updating those tests tends to be small relative to the cost of updating all of the system’s users.
 
 启示是，在编写测试之后，在重构系统、修复bug或添加新功能时，不需要再次接触该测试。这种理解使大规模使用系统成为可能：扩展系统只需要写少量的与你所做的改变有关的新测试，而不是可能要触动所有针对该系统写过的测试。只有对系统行为的破坏性更改才需要返回以更改其测试，在这种情况下，更新这些测试的成本相对于更新所有系统用户的成本往往很小。
 
-### Test via Public APIs  通过公共API进行测试
+#### Test via Public APIs 通过公共API进行测试
 
 Now that we understand our goal, let’s look at some practices for making sure that tests don’t need to change unless the requirements of the system being tested change. By far the most important way to ensure this is to write tests that invoke the system being tested in the same way its users would; that is, make calls against its public API [rather than its implementation details](https://oreil.ly/ijat0). If tests work the same way as the system’s users, by definition, change that breaks a test might also break a user. As an additional bonus, such tests can serve as useful examples and documentation for users.
 
@@ -112,9 +106,9 @@ Consider Example 12-1, which validates a transaction and saves it to a database.
 
 考虑例12-1，它验证了一个事务并将其保存到数据库中。
 
-*Example* *12-1.* *A transaction API *  *实例12-1.事务API*
+_Example_ _12-1._ \*A transaction API \* _实例12-1.事务API_
 
-```java 
+```java
 public void processTransaction(Transaction transaction) {
     if(isValid(transaction)) {
         saveToDatabase(transaction);
@@ -139,7 +133,7 @@ A tempting way to test this code would be to remove the “private” visibility
 
 测试这段代码的一个诱人的方法是去掉 "私有 "可见修饰符，直接测试实现逻辑，如例12-2所示。
 
-*Example 12-2. A naive test of a transaction API’s implementation*  *例12-2.事务 API 实现的简单测试*
+_Example 12-2. A naive test of a transaction API’s implementation_ _例12-2.事务 API 实现的简单测试_
 
 ```java
 @Test
@@ -159,11 +153,11 @@ This test interacts with the transaction processor in a much different way than 
 
 此测试与事务处理器的交互方式与其实际用户的交互方式大不相同：它窥视系统的内部状态并调用系统API中未公开的方法。因此，测试是脆弱的，几乎任何对被测系统的重构（例如重命名其方法、将其分解为辅助类或更改序列化格式）都会导致测试中断，即使此类更改对类的实际用户是不可见的。
 
-Instead, the same test coverage can be achieved by testing only against the class’s public API, as shown in Example 12-3.[^2]
+Instead, the same test coverage can be achieved by testing only against the class’s public API, as shown in Example 12-3.
 
 相反，同样的测试覆盖率可以通过只测试类的公共 API 来实现，如例 12-3.2 所示。
 
-*Example 12-3. Testing the public API*  *例12-3. 测试公共API*
+_Example 12-3. Testing the public API_ _例12-3. 测试公共API_
 
 ```java
 @Test
@@ -190,9 +184,7 @@ Tests using only public APIs are, by definition, accessing the system under test
 
 根据定义，仅使用公共API的测试是以与用户相同的方式访问被测系统。这样的测试更现实，也不那么脆弱，因为它们形成了明确的契约：如果这样的测试失败，它意味着系统的现有用户也将失败。只测试这些契约意味着你可以自由地对系统进行任何内部重构，而不必担心对测试进行繁琐的更改。
 
-> [^2]:	This is sometimes called the "Use the front door first principle.”
->
-> 2   这有时被称为“使用前门优先原则”
+> 2 这有时被称为“使用前门优先原则”
 
 It’s not always clear what constitutes a “public API,” and the question really gets to the heart of what a “unit” is in unit testing. Units can be as small as an individual function or as broad as a set of several related packages/modules. When we say “public API” in this context, we’re really talking about the API exposed by that unit to third parties outside of the team that owns the code. This doesn’t always align with the notion of visibility provided by some programming languages; for example, classes in Java might define themselves as “public” to be accessible by other packages in the same unit but are not intended for use by other parties outside of the unit. Some languages like Python have no built-in notion of visibility (often relying on conventions like prefixing private method names with underscores), and build systems like Bazel can further restrict who is allowed to depend on APIs declared public by the programming language.
 
@@ -200,33 +192,31 @@ It’s not always clear what constitutes a “public API,” and the question re
 
 Defining an appropriate scope for a unit and hence what should be considered the public API is more art than science, but here are some rules of thumb:
 
-- If a method or class exists only to support one or two other classes (i.e., it is a “helper class”), it probably shouldn’t be considered its own unit, and its functionality should be tested through those classes instead of directly.
-- If a package or class is designed to be accessible by anyone without having to consult with its owners, it almost certainly constitutes a unit that should be tested directly, where its tests access the unit in the same way that the users would.
-- If a package or class can be accessed only by the people who own it, but it is designed to provide a general piece of functionality useful in a range of contexts (i.e., it is a “support library”), it should also be considered a unit and tested directly. This will usually create some redundancy in testing given that the support library’s code will be covered both by its own tests and the tests of its users. However, such redundancy can be valuable: without it, a gap in test coverage could be introduced if one of the library’s users (and its tests) were ever removed.
+* If a method or class exists only to support one or two other classes (i.e., it is a “helper class”), it probably shouldn’t be considered its own unit, and its functionality should be tested through those classes instead of directly.
+* If a package or class is designed to be accessible by anyone without having to consult with its owners, it almost certainly constitutes a unit that should be tested directly, where its tests access the unit in the same way that the users would.
+* If a package or class can be accessed only by the people who own it, but it is designed to provide a general piece of functionality useful in a range of contexts (i.e., it is a “support library”), it should also be considered a unit and tested directly. This will usually create some redundancy in testing given that the support library’s code will be covered both by its own tests and the tests of its users. However, such redundancy can be valuable: without it, a gap in test coverage could be introduced if one of the library’s users (and its tests) were ever removed.
 
 为一个单元定义一个合适的范围，因此应该将其视为公共API，这与其说是科学，不如说是艺术，但这里有一些经验法则：
 
-- 如果一个方法或类的存在只是为了支持一两个其他的类（即，它是一个 "辅助类"），它可能不应该被认为是自己的单元，它的功能测试应该通过这些类进行，而不是直接测试它。
-
-- 如果一个包或类被设计成任何人都可以访问，而不需要咨询其所有者，那么它几乎肯定构成了一个应该直接测试的单元，它的测试以用户的方式访问该单元。
-
-- 如果一个包或类只能由拥有它的人访问，但它的设计目的是提供在各种上下文中有用的通用功能（即，它是一个“支持库”），也应将其视为一个单元并直接进行测试。这通常会在测试中产生一些冗余，因为支持库的代码会被它自己的测试和用户的测试所覆盖。然而，这种冗余可能是有价值的：如果没有它，如果库的一个用户（和它的测试）被删除，测试覆盖率就会出现缺口。
+* 如果一个方法或类的存在只是为了支持一两个其他的类（即，它是一个 "辅助类"），它可能不应该被认为是自己的单元，它的功能测试应该通过这些类进行，而不是直接测试它。
+* 如果一个包或类被设计成任何人都可以访问，而不需要咨询其所有者，那么它几乎肯定构成了一个应该直接测试的单元，它的测试以用户的方式访问该单元。
+* 如果一个包或类只能由拥有它的人访问，但它的设计目的是提供在各种上下文中有用的通用功能（即，它是一个“支持库”），也应将其视为一个单元并直接进行测试。这通常会在测试中产生一些冗余，因为支持库的代码会被它自己的测试和用户的测试所覆盖。然而，这种冗余可能是有价值的：如果没有它，如果库的一个用户（和它的测试）被删除，测试覆盖率就会出现缺口。
 
 At Google, we’ve found that engineers sometimes need to be persuaded that testing via public APIs is better than testing against implementation details. The reluctance is understandable because it’s often much easier to write tests focused on the piece of code you just wrote rather than figuring out how that code affects the system as a whole. Nevertheless, we have found it valuable to encourage such practices, as the extra upfront effort pays for itself many times over in reduced maintenance burden. Testing against public APIs won’t completely prevent brittleness, but it’s the most important thing you can do to ensure that your tests fail only in the event of meaningful changes to your system.
 
 在谷歌，我们发现工程师有时需要被说服，通过公共API进行测试比针对实现细节进行测试要好。这种不情愿的态度是可以理解的，因为写测试的重点往往是你刚刚写的那段代码，而不是弄清楚这段代码是如何影响整个系统的。然而，我们发现鼓励这种做法是很有价值的，因为额外的前期努力在减少维护负担方面得到了许多倍的回报。针对公共API的测试并不能完全防止脆弱性，但这是你能做的最重要的事情，以确保你的测试只在系统发生有意义的变化时才失败。
 
-### Test State, Not Interactions  测试状态，而不是交互
+#### Test State, Not Interactions 测试状态，而不是交互
 
-Another way that tests commonly depend on implementation details involves not which methods of the system the test calls, but how the results of those calls are verified. In general, there are two ways to verify that a system under test behaves as expected. With *state testing*, you observe the system itself to see what it looks like after invoking with it. With *interaction testing*, you instead check that the system took an expected sequence of actions on its collaborators [in response to invoking it](https://oreil.ly/3S8AL). Many tests will perform a combination of state and interaction validation.
+Another way that tests commonly depend on implementation details involves not which methods of the system the test calls, but how the results of those calls are verified. In general, there are two ways to verify that a system under test behaves as expected. With _state testing_, you observe the system itself to see what it looks like after invoking with it. With _interaction testing_, you instead check that the system took an expected sequence of actions on its collaborators [in response to invoking it](https://oreil.ly/3S8AL). Many tests will perform a combination of state and interaction validation.
 
-测试通常依赖于实现细节的另一种方法不是测试调用系统的哪些方法，而是如何验证这些调用的结果。通常，有两种方法可以验证被测系统是否按预期运行。通过*状态测试*，你观察系统本身，看它在调用后是什么样子。通过*交互测试*，你要检查系统是否对其合作者采取了预期的行动序列[以响应调用它](https://oreil.ly/3S8AL)。许多测试将执行状态和交互验证的组合。
+测试通常依赖于实现细节的另一种方法不是测试调用系统的哪些方法，而是如何验证这些调用的结果。通常，有两种方法可以验证被测系统是否按预期运行。通过_状态测试_，你观察系统本身，看它在调用后是什么样子。通过_交互测试_，你要检查系统是否对其合作者采取了预期的行动序列[以响应调用它](https://oreil.ly/3S8AL)。许多测试将执行状态和交互验证的组合。
 
-Interaction tests tend to be more brittle than state tests for the same reason that it’s more brittle to test a private method than to test a public method: interaction tests check *how* a system arrived at its result, whereas usually you should care only *what* the result is. [Example 12-4 ](#_bookmark971)illustrates a test that uses a test double (explained further in [Chapter 13](#_bookmark1056)) to verify how a system interacts with a database.
+Interaction tests tend to be more brittle than state tests for the same reason that it’s more brittle to test a private method than to test a public method: interaction tests check _how_ a system arrived at its result, whereas usually you should care only _what_ the result is. [Example 12-4 ](Chapter-12\_Unit\_Testing.md#\_bookmark971)illustrates a test that uses a test double (explained further in [Chapter 13](Chapter-12\_Unit\_Testing.md#\_bookmark1056)) to verify how a system interacts with a database.
 
-交互测试往往比状态测试更脆弱，测试一个私有方法比测试一个公共方法更脆的原因相同：交互测试检查系统是*如何*得到结果的，而通常你只应该关心结果是*什么*。例12-4展示了一个测试，它使用一个测试替换（在第13章中进一步解释）来验证一个系统如何与数据库交互。
+交互测试往往比状态测试更脆弱，测试一个私有方法比测试一个公共方法更脆的原因相同：交互测试检查系统是_如何_得到结果的，而通常你只应该关心结果是_什么_。例12-4展示了一个测试，它使用一个测试替换（在第13章中进一步解释）来验证一个系统如何与数据库交互。
 
-*Example  12-4. A brittle interaction test*  *例12-4.  脆弱性相互作用测试*
+_Example 12-4. A brittle interaction test_ _例12-4. 脆弱性相互作用测试_
 
 ```java
 @Test
@@ -237,20 +227,20 @@ public void shouldWriteToDatabase() {
 ```
 
 The test verifies that a specific call was made against a database API, but there are a couple different ways it could go wrong:
-- If a bug in the system under test causes the record to be deleted from the database shortly after it was written, the test will pass even though we would have wanted it to fail.
 
-- If the system under test is refactored to call a slightly different API to write an equivalent record, the test will fail even though we would have wanted it to pass.
+* If a bug in the system under test causes the record to be deleted from the database shortly after it was written, the test will pass even though we would have wanted it to fail.
+* If the system under test is refactored to call a slightly different API to write an equivalent record, the test will fail even though we would have wanted it to pass.
 
 该测试验证了对数据库API的特定调用，但有两种不同的方法可能会出错：
 
-- 如果被测系统中的错误导致记录在写入后不久从数据库中删除，那么即使我们希望它失败，测试也会通过。
-- 如果对被测系统进行重构，以调用稍有不同的API来编写等效记录，那么即使我们希望测试通过，测试也会失败。
+* 如果被测系统中的错误导致记录在写入后不久从数据库中删除，那么即使我们希望它失败，测试也会通过。
+* 如果对被测系统进行重构，以调用稍有不同的API来编写等效记录，那么即使我们希望测试通过，测试也会失败。
 
 It’s much less brittle to directly test against the state of the system, as demonstrated in Example 12-5.
 
 如例12-5所示，直接对系统的状态进行测试就不那么脆弱了。
 
-*Example 12-5. Testing against state*  *例12-5. 针对状态的测试*
+_Example 12-5. Testing against state_ _例12-5. 针对状态的测试_
 
 ```java
 @Test
@@ -268,19 +258,17 @@ The most common reason for problematic interaction tests is an over reliance on 
 
 交互测试出现问题的最常见原因是过度依赖mocking框架。这些框架可以很容易地创建测试替换，记录并验证针对它们的每个调用，并在测试中使用这些替换来代替真实对象。这种策略直接导致了脆弱的交互测试，因此我们倾向于使用真实对象而不是模拟对象，只要真实对象是快速和确定的。
 
-## Writing Clear Tests  编写清晰的测试
+### Writing Clear Tests 编写清晰的测试
 
-Sooner or later, even if we’ve completely avoided brittleness, our tests will fail. Failure is a good thing—test failures provide useful signals to engineers, and are one of the main ways that a unit test provides value.
-Test failures happen for one of two reasons:[^3]
+Sooner or later, even if we’ve completely avoided brittleness, our tests will fail. Failure is a good thing—test failures provide useful signals to engineers, and are one of the main ways that a unit test provides value. Test failures happen for one of two reasons:
 
-- The system under test has a problem or is incomplete. This result is exactly what tests are designed for: alerting you to bugs so that you can fix them.
-- The test itself is flawed. In this case, nothing is wrong with the system under test, but the test was specified incorrectly. If this was an existing test rather than one that you just wrote, this means that the test is brittle. The previous section discussed how to avoid brittle tests, but it’s rarely possible to eliminate them entirely.
+* The system under test has a problem or is incomplete. This result is exactly what tests are designed for: alerting you to bugs so that you can fix them.
+* The test itself is flawed. In this case, nothing is wrong with the system under test, but the test was specified incorrectly. If this was an existing test rather than one that you just wrote, this means that the test is brittle. The previous section discussed how to avoid brittle tests, but it’s rarely possible to eliminate them entirely.
 
-总有一天，即使我们已经完全避免了脆弱性，我们的测试也会失败。失败是一件好事——测试失败为工程师提供了有用的信号，也是单元测试提供价值的主要方式之一。
-测试失败有两个原因：
+总有一天，即使我们已经完全避免了脆弱性，我们的测试也会失败。失败是一件好事——测试失败为工程师提供了有用的信号，也是单元测试提供价值的主要方式之一。 测试失败有两个原因：
 
-- 被测系统有问题或不完整。这个结果正是测试的设计目的：提醒你注意bug，以便你能修复它们。
-- 测试本身是有缺陷的。在这种情况下，被测系统没有任何问题，但测试的指定是不正确的。如果这是一个现有的测试，而不是你刚写的测试，这意味着测试是脆弱的。上一节讨论了如何避免脆性测试，但很少有可能完全消除它们。
+* 被测系统有问题或不完整。这个结果正是测试的设计目的：提醒你注意bug，以便你能修复它们。
+* 测试本身是有缺陷的。在这种情况下，被测系统没有任何问题，但测试的指定是不正确的。如果这是一个现有的测试，而不是你刚写的测试，这意味着测试是脆弱的。上一节讨论了如何避免脆性测试，但很少有可能完全消除它们。
 
 When a test fails, an engineer’s first job is to identify which of these cases the failure falls into and then to diagnose the actual problem. The speed at which the engineer can do so depends on the test’s clarity. A clear test is one whose purpose for existing and reason for failing is immediately clear to the engineer diagnosing a failure. Tests fail to achieve clarity when their reasons for failure aren’t obvious or when it’s difficult to figure out why they were originally written. Clear tests also bring other benefits, such as documenting the system under test and more easily serving as a basis for new tests.
 
@@ -298,17 +286,15 @@ For a test suite to scale and be useful over time, it’s important that each in
 
 为了使测试套件能够随时间扩展并变得有用，套件中的每个测试都尽可能清晰是很重要的。本节探讨了为实现清晰性而考虑测试的技术和方法。
 
-> [^3]: These are also the same two reasons that a test can be “flaky.” Either the system under test has a nondeterministic fault, or the test is flawed such that it sometimes fails when it should pass.
->
-> 3   这也是测试可能“不稳定”的两个原因。要么被测系统存在不确定性故障，要么测试存在缺陷，以至于在通过测试时有时会失败。
+> 3 这也是测试可能“不稳定”的两个原因。要么被测系统存在不确定性故障，要么测试存在缺陷，以至于在通过测试时有时会失败。
 
-### Make Your Tests Complete and Concise  确保你的测试完整和简明
+#### Make Your Tests Complete and Concise 确保你的测试完整和简明
 
 Two high-level properties that help tests achieve clarity are completeness and conciseness. A test is complete when its body contains all of the information a reader needs in order to understand how it arrives at its result. A test is concise when it contains no other distracting or irrelevant information. Example 12-6 shows a test that is neither complete nor concise:
 
 帮助测试实现清晰的两个高级属性是完整性和简洁性。一个测试是完整的，当它的主体包含读者需要的所有信息，以了解它是如何得出结果的。当一个测试不包含其他分散注意力的或不相关的信息时，它就是简洁的。例12-6显示了一个既不完整也不简洁的测试：
 
-*Example 12-6. An incomplete and cluttered test*   *例12-6. 一个不完整且杂乱的测试*
+_Example 12-6. An incomplete and cluttered test_ _例12-6. 一个不完整且杂乱的测试_
 
 ```java
 @Test
@@ -323,7 +309,7 @@ The test is passing a lot of irrelevant information into the constructor, and th
 
 测试将大量不相关的信息传递给构造函数，测试的实际重要部分隐藏在辅助方法中。通过澄清辅助方法的输入，可以使测试更加完整，通过使用另一个辅助隐藏构建计算器的无关细节，可以使测试更加简洁，如示例12-7所示。
 
-*Example 12-7. A complete, concise test*  *实例 12-7. A. 完整且简洁的测验*
+_Example 12-7. A complete, concise test_ _实例 12-7. A. 完整且简洁的测验_
 
 ```java
 @Test
@@ -338,13 +324,13 @@ Ideas we discuss later, especially around code sharing, will tie back to complet
 
 我们稍后讨论的观点，特别是围绕代码共享，将与完整性和简洁性挂钩。需要注意的是，如果能使测试更清晰，违反DRY（不要重复自己）原则通常是值得的。记住：**一个测试的主体应该包含理解它所需要的所有信息，而不包含任何无关或分散的信息**。
 
-### Test Behaviors, Not Methods  测试行为，而不是方法
+#### Test Behaviors, Not Methods 测试行为，而不是方法
 
 The first instinct of many engineers is to try to match the structure of their tests to the structure of their code such that every production method has a corresponding test method. This pattern can be convenient at first, but over time it leads to problems: as the method being tested grows more complex, its test also grows in complexity and becomes more difficult to reason about. For example, consider the snippet of code in Example 12-8, which displays the results of a transaction.
 
 许多工程师的第一直觉是试图将他们的测试结构与他们的代码结构相匹配，这样每个产品方法都有一个相应的测试方法。这种模式一开始很方便，但随着时间的推移，它会导致问题：随着被测试的方法越来越复杂，它的测试也越来越复杂，变得越来越难以理解。例如，考虑例12-8中的代码片段，它显示了一个事务的结果。
 
-*Example 12-8. A transaction snippet*  *例12-8. 一个事务片段*
+_Example 12-8. A transaction snippet_ _例12-8. 一个事务片段_
 
 ```java
 public void displayTransactionResults(User user, Transaction transaction) {
@@ -354,11 +340,12 @@ public void displayTransactionResults(User user, Transaction transaction) {
     }
 }
 ```
+
 It wouldn’t be uncommon to find a test covering both of the messages that might be shown by the method, as presented in Example 12-9.
 
 如例12-9所示，一个测试涵盖了该方法可能显示的两个信息，这并不罕见。
 
-*Example 12-9. A method-driven test*   *例12-9. 方法驱动的测试*
+_Example 12-9. A method-driven test_ _例12-9. 方法驱动的测试_
 
 ```java
 @Test
@@ -374,11 +361,11 @@ With such tests, it’s likely that the test started out covering only the first
 
 对于这样的测试，很可能一开始测试只包括第一个方法。后来，当第二条信息被添加进来时，工程师扩展了测试（违反了我们前面讨论的稳定的测试理念）。这种修改开创了一个不好的先例：随着被测方法变得越来越复杂，实现的功能越来越多，其单元测试也会变得越来越复杂，越来越难以使用。
 
-The problem is that framing tests around methods can naturally encourage unclear tests because a single method often does a few different things under the hood and might have several tricky edge and corner cases. There’s a better way: rather than writing a test for each method, write a test for each behavior.[^4] A behavior is any guarantee that a system makes about how it will respond to a series of inputs while in a particular state.[^5] Behaviors can often be expressed using the words “given,” “when,” and “then”: “Given that a bank account is empty, when attempting to withdraw money from it, then the transaction is rejected.” The mapping between methods and behaviors is many-to-many: most nontrivial methods implement multiple behaviors, and some behaviors rely on the interaction of multiple methods. The previous example can be rewritten using behavior-driven tests, as presented in Example 12-10.
+The problem is that framing tests around methods can naturally encourage unclear tests because a single method often does a few different things under the hood and might have several tricky edge and corner cases. There’s a better way: rather than writing a test for each method, write a test for each behavior. A behavior is any guarantee that a system makes about how it will respond to a series of inputs while in a particular state. Behaviors can often be expressed using the words “given,” “when,” and “then”: “Given that a bank account is empty, when attempting to withdraw money from it, then the transaction is rejected.” The mapping between methods and behaviors is many-to-many: most nontrivial methods implement multiple behaviors, and some behaviors rely on the interaction of multiple methods. The previous example can be rewritten using behavior-driven tests, as presented in Example 12-10.
 
 问题是，围绕方法测试框架自然会鼓励不清晰测试，因为单个方法经常在背后下做一些不同的事情，可能有几个棘手的边缘和角落的情况。有一个更好的方法：与其为每个方法写一个测试，不如为每个行为写一个测试。 行为是一个系统对它在特定状态下如何响应一系列输入的任何保障。"鉴于一个银行账户是空的，当试图从该账户中取钱时，该交易被拒绝。" 方法和行为之间的映射是多对多的：大多数不重要的方法实现了多个行为，一些行为依赖于多个方法的交互。前面的例子可以用行为驱动的测试来重写，如例12-10所介绍。
 
-*Example 12-10. A behavior-driven test*   *例12-10. 行为驱动的测试*
+_Example 12-10. A behavior-driven test_ _例12-10. 行为驱动的测试_
 
 ```java
 @Test
@@ -399,23 +386,19 @@ The extra boilerplate required to split apart the single test is more than worth
 
 拆分单个测试所需的额外模板文件非常值得，并且最终的测试比原来测试更清晰。行为驱动测试往往比面向方法的测试更清晰，原因有几个。首先，它们阅读起来更像自然语言，让人们自然地理解它们，而不需要语言繁琐的心理分析。其次，它们更清楚地表达了因果关系，因为每个测试的范围都更有限。最后，每个测试都很短且描述性强，这一事实使我们更容易看到已经测试了哪些功能，并鼓励工程师添加新的简洁测试方法，而不是堆积在现有方法上。
 
-> [^4]:	See `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` and `https://dannorth.net/introducing-bdd`.
->
 > 4 见 `https://testing.googleblog.com/2014/04/testing-on-toilet-test-behaviors-not.html` 和 `https://dannorth.net/introducing-bdd`。
->
-> [^5]: Furthermore, a feature (in the product sense of the word) can be expressed as a collection of behaviors.
 >
 > 5 此外，一个特征（在这个词的产品意义上）可以被表达为一组行为。
 
-#### Structure tests to emphasize behaviors  强调行为的结构测试
+**Structure tests to emphasize behaviors 强调行为的结构测试**
 
-Thinking about tests as being coupled to behaviors instead of methods significantly affects how they should be structured. Remember that every behavior has three parts: a “given” component that defines how the system is set up, a “when” component that defines the action to be taken on the system, and a “then” component that validates the result.[^6] Tests are clearest when this structure is explicit. Some frameworks like Cucumber and Spock directly bake in given/when/then. Other languages can use whitespace and optional comments to make the structure stand out, such as that shown in Example 12-11.
+Thinking about tests as being coupled to behaviors instead of methods significantly affects how they should be structured. Remember that every behavior has three parts: a “given” component that defines how the system is set up, a “when” component that defines the action to be taken on the system, and a “then” component that validates the result. Tests are clearest when this structure is explicit. Some frameworks like Cucumber and Spock directly bake in given/when/then. Other languages can use whitespace and optional comments to make the structure stand out, such as that shown in Example 12-11.
 
 将测试视为与行为而非方法相耦合会显著影响测试的结构。请记住，每个行为都有三个部分：一个是定义系统如何设置的 "given"组件，一个是定义对系统采取的行动的 "when"组件，以及一个验证结果的 "then"组件。当此结构是显式的时，测试是最清晰的。一些框架（如Cucumber和Spock）直接加入了given/when/then的功能支持。其他语言可以使用空格和可选注释使结构突出，如示例12-11所示。
 
-*Example 12-11. A well-structured test*  *例12-11. 一个结构良好的测试*
+_Example 12-11. A well-structured test_ _例12-11. 一个结构良好的测试_
 
-```java  
+```java
 @Test
 public void transferFundsShouldMoveMoneyBetweenAccounts() {
     // Given two accounts with initial balances of $150 and $20
@@ -450,7 +433,7 @@ When a test does want to validate each step in a multistep process, it’s accep
 
 当一个测试确实想验证一个多步骤过程中的每个步骤时，定义when/then块的交替序列是可以接受的。长的区块也可以用 "and"字来分割，使其更具描述性。例12-12显示了一个相对复杂的、行为驱动的测试是什么样子的。
 
-*Example 12-12. Alternating when/then blocks within a test*   *例12-12. 在一个测试中交替使用when/then块*
+_Example 12-12. Alternating when/then blocks within a test_ _例12-12. 在一个测试中交替使用when/then块_
 
 ```java
 @Test
@@ -480,11 +463,9 @@ When writing such tests, be careful to ensure that you’re not inadvertently te
 
 在编写这种测试时，要注意确保你不会无意中同时测试多个行为。每个测试应该只覆盖一个行为，绝大多数的单元测试只需要一个 "when"和一个 "then"块。
 
-> [^6]: These components are sometimes referred to as “arrange,” “act,” and “assert.”
->
 > 6 这些组成部分有时被称为 "安排"、"行动 "和 "断言"。
 
-#### Name tests after the behavior being tested  以被测试的行为命名测试
+**Name tests after the behavior being tested 以被测试的行为命名测试**
 
 Method-oriented tests are usually named after the method being tested (e.g., a test for the updateBalance method is usually called testUpdateBalance). With more focused behavior-driven tests, we have a lot more flexibility and the chance to convey useful information in the test’s name. The test name is very important: it will often be the first or only token visible in failure reports, so it’s your best opportunity to communicate the problem when the test breaks. It’s also the most straightforward way to express the intent of the test.
 
@@ -494,7 +475,7 @@ A test’s name should summarize the behavior it is testing. A good name describ
 
 测试的名字应该概括它所测试的行为。一个好的名字既能描述在系统上采取的行动，又能描述预期的结果。测试名称有时会包括额外的信息，如系统或其环境的状态。一些语言和框架允许测试相互嵌套，并使用字符串命名，例如例12-13，其中使用了Jasmine，这样做比其他语言和框架更容易。
 
-*Example 12-13. Some sample nested naming patterns*  *例12-1. 一些嵌套命名模式的例子*
+_Example 12-13. Some sample nested naming patterns_ _例12-1. 一些嵌套命名模式的例子_
 
 ```java
 describe("multiplication", function() {
@@ -524,13 +505,13 @@ Other languages require us to encode all of this information in a method name, l
 
 其他语言要求我们在方法名中编码所有这些信息，导致方法的命名模式如例12-14所示。
 
-*Example 12-14. Some sample method naming patterns*  例12-14. 一些示例方法的命名模式
+_Example 12-14. Some sample method naming patterns_ 例12-14. 一些示例方法的命名模式
 
 ```Java
 multiplyingTwoPositiveNumbersShouldReturnAPositiveNumber 
 multiply_postiveAndNegative_returnsNegative 
 divide_byZero_throwsException
-````
+```
 
 Names like this are much more verbose than we’d normally want to write for methods in production code, but the use case is different: we never need to write code that calls these, and their names frequently need to be read by humans in reports. Hence, the extra verbosity is warranted.
 
@@ -540,7 +521,7 @@ Many different naming strategies are acceptable so long as they’re used consis
 
 许多不同的命名策略是可以接受的，只要它们在一个测试类中使用一致。如果你陷入困境，一个好的技巧是尝试用 "应当"这个词来开始测试名称。当与被测类的名称一起使用时，这种命名方案允许将测试名称作为一个句子来阅读。例如，一个名为shouldNotAllowWithdrawalsWhenBalanceIsEmpty的BankAccount类的测试可以被理解为 "BankAccount不应该允许在余额为空时提款"。通过阅读套件中所有测试方法的名称，你应该对被测系统实现的行为有一个很好的了解。这样的名字也有助于确保测试集中在单个行为上：如果你需要在测试名称中使用 "and"这个词，很有可能你实际上是在测试多个行为，应该写多个测试!
 
-### Don’t Put Logic in Tests  不要把逻辑放进测试中
+#### Don’t Put Logic in Tests 不要把逻辑放进测试中
 
 Clear tests are trivially correct upon inspection; that is, it is obvious that a test is doing the correct thing just from glancing at it. This is possible in test code because each test needs to handle only a particular set of inputs, whereas production code must be generalized to handle any input. For production code, we’re able to write tests that ensure complex logic is correct. But test code doesn’t have that luxury—if you feel like you need to write a test to verify your test, something has gone wrong!
 
@@ -550,7 +531,7 @@ Complexity is most often introduced in the form of logic. Logic is defined via t
 
 复杂性最常以逻辑的形式引入。逻辑是通过编程语言的指令部分来定义的，如运算符、循环和条件。当一段代码包含逻辑时，你需要做一些心理预期来确定其结果，而不是仅仅从屏幕上读出来。不需要太多的逻辑就可以使一个测试变得更难理解。例如，例12-15中的测试在你看来是否正确？
 
-*Example 12-15. Logic concealing a bug*  *例12-15. 掩盖bug的逻辑*
+_Example 12-15. Logic concealing a bug_ _例12-15. 掩盖bug的逻辑_
 
 ```java
 @Test
@@ -566,7 +547,7 @@ There’s not much logic here: really just one string concatenation. But if we s
 
 这里没有什么逻辑：实际上只是一个字符串连接。但是，如果我们通过删除这一点逻辑来简化测试，一个错误就会立即变得清晰，如例12-16所示。
 
-*Example 12-16. A test without logic reveals the bug*  *例12-16. 没有逻辑的测试揭示了bug*
+_Example 12-16. A test without logic reveals the bug_ _例12-16. 没有逻辑的测试揭示了bug_
 
 ```java
 @Test
@@ -585,7 +566,7 @@ If humans are bad at spotting bugs from string concatenation, we’re even worse
 
 如果人类不善于发现来自字符串连接的错误，那么我们更不善于发现来自更复杂的编程结构的错误，如循环和条件。这个教训很清晰：在测试代码中，坚持使用直线代码而不是复杂的逻辑，并在测试更具描述性的时候考虑容忍一些重复。我们将在本章后面讨论关于重复和代码共享的想法。
 
-### Write Clear Failure Messages  给出清晰的失败信息
+#### Write Clear Failure Messages 给出清晰的失败信息
 
 One last aspect of clarity has to do not with how a test is written, but with what an engineer sees when it fails. In an ideal world, an engineer could diagnose a problem just from reading its failure message in a log or report without ever having to look at the test itself. A good failure message contains much the same information as the test’s name: it should clearly express the desired outcome, the actual outcome, and any relevant parameters.
 
@@ -612,7 +593,7 @@ Good libraries can help make it easier to write useful failure messages. Conside
 
 好的库可以帮助我们更容易写出有用的失败信息。考虑一下例12-17中Java测试中的断言，第一个断言使用了经典的JUnit断言，第二个断言使用了Truth，一个由Google开发的断言库：
 
-*Example 12-17. An assertion using the Truth library*   *例12-17.  使用Truth库的断言*
+_Example 12-17. An assertion using the Truth library_ _例12-17. 使用Truth库的断言_
 
 ```java
 Set<String> colors = ImmutableSet.of("red", "green", "blue"); 
@@ -620,15 +601,15 @@ assertTrue(colors.contains("orange")); // JUnit
 assertThat(colors).contains("orange"); // Truth
 ```
 
-Because the first assertion only receives a Boolean value, it is only able to give a generic error message like “expected `true` but was `false`,” which isn’t very informative in a failing test output. Because the second assertion explicitly receives the subject of the assertion, it is able to give a much more useful error message: AssertionError: <[red, green, blue]> should have contained `orange`.”
+Because the first assertion only receives a Boolean value, it is only able to give a generic error message like “expected `true` but was `false`,” which isn’t very informative in a failing test output. Because the second assertion explicitly receives the subject of the assertion, it is able to give a much more useful error message: AssertionError: <\[red, green, blue]> should have contained `orange`.”
 
-因为第一个断言只接收一个布尔值，所以它只能给出一个通用的错误信息，如 "预期`true`，但得到的是`false`"，这在失败的测试输出中不是很有意义。因为第二个断言明确地接收断言的主题，它能够给出一个更有用的错误信息。AssertionError: <[red, green, blue]>应该包含`orange`"。
+因为第一个断言只接收一个布尔值，所以它只能给出一个通用的错误信息，如 "预期`true`，但得到的是`false`"，这在失败的测试输出中不是很有意义。因为第二个断言明确地接收断言的主题，它能够给出一个更有用的错误信息。AssertionError: <\[red, green, blue]>应该包含`orange`"。
 
 Not all languages have such helpers available, but it should always be possible to manually specify the important information in the failure message. For example, test assertions in Go conventionally look like Example 12-18.
 
 并非所有的语言都有这样的辅助工具，但总是可以手动指定失败信息中的重要信息。例如，Go中的测试断言通常看起来像例12-18。
 
-*Example 12-18. A test assertion in Go*   *例12-18. Go中的测试断言*
+_Example 12-18. A test assertion in Go_ _例12-18. Go中的测试断言_
 
 ```golang
 result: = Add(2, 3)
@@ -637,7 +618,7 @@ if result != 5 {
 }
 ```
 
-## Tests and Code Sharing: DAMP, Not DRY  测试和代码共享：DAMP，而不是DRY
+### Tests and Code Sharing: DAMP, Not DRY 测试和代码共享：DAMP，而不是DRY
 
 One final aspect of writing clear tests and avoiding brittleness has to do with code sharing. Most software attempts to achieve a principle called DRY—“Don’t Repeat Yourself.” DRY states that software is easier to maintain if every concept is canonically represented in one place and code duplication is kept to a minimum. This approach is especially valuable in making changes easier because an engineer needs to update only one piece of code rather than tracking down multiple references. The downside to such consolidation is that it can make code unclear, requiring readers to follow chains of references to understand what the code is doing.
 
@@ -651,7 +632,7 @@ Instead of being completely DRY, test code should often strive to be DAMP—that
 
 与其说是完全的DRY，不如说测试代码应该经常努力做到DAMP——也就是提倡 "描述性和有意义的短语"。在测试中，一点点的重复是可以的，只要这种重复能使测试更简单、更清晰。为了说明这一点，例12-19介绍了一些过于DRY的测试。
 
-*Example 12-19. A test that is too DRY*   *例12-19. 一个过于DRY的测试*
+_Example 12-19. A test that is too DRY_ _例12-19. 一个过于DRY的测试_
 
 ```java
 @Test
@@ -699,9 +680,9 @@ The problems in this code should be apparent based on the previous discussion of
 
 基于前面对清晰度的讨论，这段代码中的问题应该是显而易见的。首先，尽管测试主体非常简洁，但它们并不完整：重要的细节被隐藏在辅助方法中，读者如果不滚动到文件的完全不同部分就看不到这些方法。那些辅助方法也充满了逻辑，使它们更难以一目了然地验证（你发现了这个错误吗？） 当它被改写成使用DAMP时，测试就变得清晰多了，如例12-20所示。
 
-*Example 12-20. Tests should be DAMP*   *例12-20. 测试应该是DAMP*
+_Example 12-20. Tests should be DAMP_ _例12-20. 测试应该是DAMP_
 
-```java  
+```java
 @Test
 public void shouldAllowMultipleUsers() {
     User user1 = newUser().setState(State.NORMAL).build();
@@ -736,13 +717,13 @@ DAMP is not a replacement for DRY; it is complementary to it. Helper methods and
 
 DAMP不是DRY的替代品；它是对DRY的补充。辅助方法和测试基础设施仍然可以帮助使测试更清晰，使其更简洁，剔除重复的步骤，其细节与被测试的特定行为不相关。重要的一点是，这样的重构应该着眼于使测试更有描述性和意义，而不是仅仅以减少重复的名义进行。本节的其余部分将探讨跨测试共享代码的常见模式。
 
-### Shared  Values  共享值
+#### Shared Values 共享值
 
 Many tests are structured by defining a set of shared values to be used by tests and then by defining the tests that cover various cases for how these values interact. Example 12-21 illustrates what such tests look like.
 
 许多测试的结构是通过定义一组测试使用的共享值，然后通过定义测试来涵盖这些值如何交互的各种情况。例12-21说明了此类测试的模样。
 
-*Example 12-21. Shared values with ambiguous names*  *例12-21. 名称不明确的共享值*
+_Example 12-21. Shared values with ambiguous names_ _例12-21. 名称不明确的共享值_
 
 ```java
 private static final Account ACCOUNT_1 = Account.newBuilder()
@@ -767,15 +748,15 @@ public void canBuyItem_returnsFalseWhenBalanceInsufficient() {
 }
 ```
 
-This strategy can make tests very concise, but it causes problems as the test suite grows. For one, it can be difficult to understand why a particular value was chosen for a test. In Example 12-21, the test names fortunately clarify which scenarios are being tested, but you still need to scroll up to the definitions to confirm that ACCOUNT_1 and ACCOUNT_2 are appropriate for those scenarios. More descriptive constant names (e.g.,CLOSED_ACCOUNT and ACCOUNT_WITH_LOW_BALANCE) help a bit, but they still make it more difficult to see the exact details of the value being tested, and the ease of reusing these values can encourage engineers to do so even when the name doesn’t exactly describe what the test needs.
+This strategy can make tests very concise, but it causes problems as the test suite grows. For one, it can be difficult to understand why a particular value was chosen for a test. In Example 12-21, the test names fortunately clarify which scenarios are being tested, but you still need to scroll up to the definitions to confirm that ACCOUNT\_1 and ACCOUNT\_2 are appropriate for those scenarios. More descriptive constant names (e.g.,CLOSED\_ACCOUNT and ACCOUNT\_WITH\_LOW\_BALANCE) help a bit, but they still make it more difficult to see the exact details of the value being tested, and the ease of reusing these values can encourage engineers to do so even when the name doesn’t exactly describe what the test needs.
 
-此策略可以使测试非常简洁，但随着测试套件的增长，它会导致问题。首先，很难理解为什么选择某个特定值进行测试。在示例12-21中，幸运的是，测试名称澄清了正在测试的场景，但你仍然需要向上滚动到定义，以确认ACCOUNT_1和ACCOUNT_2适用于这些场景。更具描述性的常量名称（例如，CLOSED_ACCOUNT 和 ACCOUNT_WITH_LOW_BALANCE）有一些帮助，但它们仍然使查看被测试值的确切细节变得更加困难，并且重用这些值的方便性可以鼓励工程师这样做，即使名称不能准确描述测试需要什么。
+此策略可以使测试非常简洁，但随着测试套件的增长，它会导致问题。首先，很难理解为什么选择某个特定值进行测试。在示例12-21中，幸运的是，测试名称澄清了正在测试的场景，但你仍然需要向上滚动到定义，以确认ACCOUNT\_1和ACCOUNT\_2适用于这些场景。更具描述性的常量名称（例如，CLOSED\_ACCOUNT 和 ACCOUNT\_WITH\_LOW\_BALANCE）有一些帮助，但它们仍然使查看被测试值的确切细节变得更加困难，并且重用这些值的方便性可以鼓励工程师这样做，即使名称不能准确描述测试需要什么。
 
 Engineers are usually drawn to using shared constants because constructing individual values in each test can be verbose. A better way to accomplish this goal is to construct data using helper methods (see Example 12-22) that require the test author to specify only values they care about, and setting reasonable defaults7 for all other values. This construction is trivial to do in languages that support named parameters, but languages without named parameters can use constructs such as the Builder pattern to emulate them (often with the assistance of tools such as AutoValue):
 
 工程师通常倾向于使用共享常量，因为在每个测试中构造单独的值可能会很冗长。实现此目标的更好方法是使用辅助方法（参见示例12-22）构造数据，该方法要求测试作者仅指定他们关心的值，并为所有其他值设置合理的默认值。在支持命名参数的语言中，这种构造非常简单，但是没有命名参数的语言可以使用构建器模式等构造来模拟它们（通常需要AutoValue等工具的帮助）：
 
-*Example 12-22. Shared values using helper methods*   *例12-22. 使用辅助方法的共享值*
+_Example 12-22. Shared values using helper methods_ _例12-22. 使用辅助方法的共享值_
 
 ```java
 # A helper method wraps a constructor by defining arbitrary defaults for 
@@ -814,11 +795,9 @@ Using helper methods to construct these values allows each test to create the ex
 
 使用辅助方法来构建这些值，允许每个测试创建它所需要的精确值，而不必担心指定不相关的信息或与其他测试冲突。
 
-> [^7]: In many cases, it can even be useful to slightly randomize the default values returned for fields that aren’t explicitly set. This helps to ensure that two different instances won’t accidentally compare as equal, and makes it more difficult for engineers to hardcode dependencies on the defaults.
->
 > 7 在许多情况下，甚至可以对未显式设置的字段返回的默认值进行轻微的随机化。这有助于确保两个不同的实例不会意外地比较为相等，并使工程师更难硬编码对默认值的依赖关系。
 
-### Shared Setup  共享设置
+#### Shared Setup 共享设置
 
 A related way that tests shared code is via setup/initialization logic. Many test frameworks allow engineers to define methods to execute before each test in a suite is run. Used appropriately, these methods can make tests clearer and more concise by obviating the repetition of tedious and irrelevant initialization logic. Used inappropriately, these methods can harm a test’s completeness by hiding important details in a separate initialization method.
 
@@ -832,7 +811,7 @@ One risk in using setup methods is that they can lead to unclear tests if those 
 
 使用设置方法的一个风险是，如果这些测试开始依赖于设置中使用的特定值，它们可能导致测试不明确。例如，例12-23中的测试似乎不完整，因为测试的读者需要去寻找字符串“Donald Knuth”的来源。
 
-*Example 12-23. Dependencies on values in setup methods*   *例12-23. 设置方法中对数值的依赖性*
+_Example 12-23. Dependencies on values in setup methods_ _例12-23. 设置方法中对数值的依赖性_
 
 ```java
 private NameService nameService;
@@ -858,7 +837,7 @@ Tests like these that explicitly care about particular values should state those
 
 像这样明确关心特定值的测试应该直接说明这些值，如果需要的话，可以覆盖setup方法中定义的默认值。如例12-24所示，所产生的测试包含了稍多的重复，但其结果是更有描述性和意义的。
 
-*Example 12-24. Overriding values in setup Methods*   *例12-24. 重写设置方法中的值*
+_Example 12-24. Overriding values in setup Methods_ _例12-24. 重写设置方法中的值_
 
 ```java
 private NameService nameService;
@@ -879,7 +858,7 @@ public void shouldReturnNameFromService() {
 }
 ```
 
-### Shared  Helpers  and  Validation  共享辅助和验证
+#### Shared Helpers and Validation 共享辅助和验证
 
 The last common way that code is shared across tests is via “helper methods” called from the body of the test methods. We already discussed how helper methods can be a useful way for concisely constructing test values—this usage is warranted, but other types of helper methods can be dangerous.
 
@@ -893,7 +872,7 @@ More focused validation methods can still be useful, however. The best validatio
 
 然而，更有针对性的验证方法仍然是有用的。最好的验证辅助方法只断言其输入的一个概念性事实，与涵盖一系列条件的通用验证方法相反。当他们验证的条件在概念上很简单，但需要循环或条件逻辑来实现，如果将其包含在测试方法的主体中，就会降低清晰度，这样的方法特别有用。例如，例12-25中的辅助方法在测试中可能很有用，它涵盖了围绕账户访问的几种不同情况。
 
-*Example 12-25. A conceptually simple test*   *例12-25. 概念上简单的测试*
+_Example 12-25. A conceptually simple test_ _例12-25. 概念上简单的测试_
 
 ```java
 private void assertUserHasAccessToAccount(User user, Account account) {
@@ -906,7 +885,7 @@ private void assertUserHasAccessToAccount(User user, Account account) {
 }
 ```
 
-### Defining Test Infrastructure  界定测试基础框架
+#### Defining Test Infrastructure 界定测试基础框架
 
 The techniques we’ve discussed so far cover sharing code across methods in a single test class or suite. Sometimes, it can also be valuable to share code across multiple test suites. We refer to this sort of code as test infrastructure. Though it is usually more valuable in integration or end-to-end tests, carefully designed test infrastructure can make unit tests much easier to write in some circumstances.
 
@@ -920,7 +899,7 @@ Of course, most of the test infrastructure that most engineers use comes in the 
 
 当然，大多数工程师使用的测试基础框架都是以知名的第三方库的形式出现的，如JUnit。有大量这样的库可以使用，在一个组织内对它们进行标准化应该尽可能早地和普遍地发生。例如，Google多年前规定Mockito是新的Java测试中唯一应该使用的模拟框架，并禁止新的测试使用其他模拟框架。这一规定在当时引起了一些对其他框架感到满意的人的不满，但今天，人们普遍认为这是一个好的举措，使我们的测试更容易理解和使用。
 
-## Conclusion
+### Conclusion
 
 Unit tests are one of the most powerful tools that we as software engineers have to make sure that our systems keep working over time in the face of unanticipated changes. But with great power comes great responsibility, and careless use of unit testing can result in a system that requires much more effort to maintain and takes much more effort to change without actually improving our confidence in said system.
 
@@ -930,44 +909,25 @@ Unit tests at Google are far from perfect, but we’ve found tests that follow t
 
 谷歌的单元测试远非完美，但我们发现遵循本章所述做法的测试比那些不遵循的测试要有价值得多。我们希望它们能帮助你提高你自己的测试的质量。
 
-## TL;DRs  内容提要
+### TL;DRs 内容提要
 
-- Strive for unchanging tests.
-
-- Test via public APIs.
-
-- Test state, not interactions.
-
-- Make your tests complete and concise.
-
-- Test behaviors, not methods.
-
-- Structure tests to emphasize behaviors.
-
-- Name tests after the behavior being tested.
-
-- Don’t put logic in tests.
-
-- Write clear failure messages.
-
-- Follow DAMP over DRY when sharing code for tests.
-
-- 努力实现稳定的测试。
-
-- 通过公共API进行测试。
-
-- 测试状态，而不是交互。
-
-- 使你的测试完整和简明。
-
-- 测试行为，而不是方法。
-
-- 强调行为的结构测试。
-
-- 使用被测试的行为来命名测试。
-
-- 不要把逻辑放在测试中。
-
-- 编写清晰的失败信息。
-
-- 在共享测试的代码时，遵循DAMP而不是DRY。
+* Strive for unchanging tests.
+* Test via public APIs.
+* Test state, not interactions.
+* Make your tests complete and concise.
+* Test behaviors, not methods.
+* Structure tests to emphasize behaviors.
+* Name tests after the behavior being tested.
+* Don’t put logic in tests.
+* Write clear failure messages.
+* Follow DAMP over DRY when sharing code for tests.
+* 努力实现稳定的测试。
+* 通过公共API进行测试。
+* 测试状态，而不是交互。
+* 使你的测试完整和简明。
+* 测试行为，而不是方法。
+* 强调行为的结构测试。
+* 使用被测试的行为来命名测试。
+* 不要把逻辑放在测试中。
+* 编写清晰的失败信息。
+* 在共享测试的代码时，遵循DAMP而不是DRY。
